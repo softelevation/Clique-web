@@ -1,6 +1,7 @@
 <?php
 
-Route::get('/', 'HomeController@index')->name('home');
+// Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('home');
 Route::get('about-us', 'PagesController@aboutus')->name('aboutus');
 Route::get('contact-us', 'PagesController@contactus')->name('aboutus');
 Route::post('contact-us', 'PagesController@contactstore')->name('contact-store');
