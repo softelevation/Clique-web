@@ -34,7 +34,7 @@
                     <div class="download-app-alert">
                         <div class="download-app-holder">
                             <!--<a class="download-app-link" href="{{ url($url.'?param='.$user->id) }}" target="_blank">Open Profile With Clique App</a>-->
-                            <a class="download-app-link" href="{{ url('thewebtual://clique/user/profile'.'?userid='.$user->id) }}" target="_blank">Open Profile With Clique App</a>
+                            <a class="download-app-link" href="{{ url('socialclique://clique/user/profile'.'?userid='.$user->id) }}" target="_blank">Open Profile With Clique App</a>
                         </div>
                     </div>
                     

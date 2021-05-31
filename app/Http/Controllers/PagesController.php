@@ -8,6 +8,7 @@ use App\Orders;
 use App\Contacts;
 use App\User;
 use App\Company;
+use App\Profile;
 use App\SocialNetwork;
 use App\TempSocialNetwork;
 use Illuminate\Support\Facades\Storage;
@@ -168,7 +169,9 @@ class PagesController extends Controller
         if($request->has('param') && $request->filled('param')){
             $id = $request['param'];
         }
-       
+		
+        $profiles = Profile::find($id);
+		$id = $profiles->user_id;
         $user = User::find($id);
         
         if($user->is_temp == 1){
