@@ -243,6 +243,101 @@ class LoginController extends Controller
             }
     }
 
+    public function newRegister(Request $request){
+		$errors = "";
+		$is_exits = User::whereemail($request->email)->get()->count();
+		if($is_exits == 0)
+        {
+			// $mobile_new = $request['countrycode'].'-'. str_replace(' ', '', $request['mobile']);
+			$mobile = User::where('mobile',$request->mobile)->first();
+			if($mobile)
+            {
+                $status = false;
+                $errorCode = $status ? 200 : 422;
+                $errors = "";
+                $result = [
+                    "message" => "Mobile already registerd",
+                    "status" => false,
+                    "errors" => $errors
+                ];
+                return response()->json($result,$errorCode);
+            }else{
+			$role = 4;
+			
+			$user = new User;
+            $user->name = $request['name'];
+            $user->email = $request['email'];
+            $user->mobile = $request->mobile;
+            $user->password = Hash::make($request['password']);
+            $user->email_verified_at = Hash::make($request['password']);
+            $user->status = 1;
+            if(!empty($request['avatar'])){
+                $avatarExt = request()->avatar->getClientOriginalExtension();
+                if($avatarExt == "jpg" || $avatarExt == "png" || $avatarExt == "jpeg"){
+                }else{
+	    		    return response()->json(['status' => 401, 'message' => 'The avatar must be a file of type: jpg, png, jpeg.']);
+	    	    }
+            }
+            $user->save();
+            $user_id = $user->id;
+			$user->roles()->attach($role); //User role
+			if(!empty($user_id)){
+                $profile = new Profile;
+                $profile->user_id = $user_id;
+                $profile->privacy = 0;
+                if(!empty($request['avatar'])){
+                    //$avatarName = $user->id.'_avatar'.request()->avatar->getClientOriginalExtension();
+                    $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
+                    $request->avatar->storeAs('avatars',$avatarName);
+                    $profile->avatar = '/avatars/'.$avatarName;
+                    $companylogo = '/avatars/'.$avatarName;
+                }
+                else
+                {
+                    $companylogo = $profile->avatar;
+                }
+                $profile->save();
+
+                        if($request['typeuser'] == 4)
+                        {
+                                $res_company = Company::whereuser_id($request['companyid'])->first()->toArray();
+                                $companyusers = new Companyusers;
+                                $companyusers->user_id = $user_id;
+                                $companyusers->company_id = $res_company['id'];
+                                $companyusers->job_position = $request['jobposition'];
+                                $companyusers->save();
+                        }
+                        if($request['typeuser'] == 3)
+                        {
+                                $company = new Company;
+                                $company->user_id = $user_id;
+                                $company->name = $request['name'];
+                                $company->phone = $mobile_new;
+                                $company->number = $mobile_new;
+                                $company->email = $request['email'];
+                                $company->logo = $companylogo;
+                                $company->save();
+                        }
+
+            }
+                return response()->json([
+                    'status' => 200,
+                    'message' =>'User has been successfully created.']);
+			
+			}
+
+			// print_r($request->all());
+			
+		}else{
+            $message = "This is invalid email";
+            $status = false;
+            $data = (object)[];
+            return $this->sendResult($message,$data,$errors,$status);
+        }
+		
+	}
+	
+	
     public function ragisterwithotp(Request $request){
         //Log::info($request);
         $mob = explode('-',$request['mobile']);

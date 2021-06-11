@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'Api\Auth\LoginController@login');
 Route::post('loginotp', 'Api\Auth\LoginController@loginotp');
 Route::post('register', 'Api\Auth\LoginController@register');
+Route::post('new-register', 'Api\Auth\LoginController@newRegister');
 
 
 Route::post('ragisterwithotp', 'Api\Auth\LoginController@ragisterwithotp');
