@@ -1238,8 +1238,16 @@ class LoginController extends Controller
         $token = JWTAuth::fromUser($user1);
         $result1 = $user1->toArray();
 
-        $result2 = TempProfile::whereuser_id($user_id)->first()->toArray();
-        $res = array_merge($result1, $result2);
+        $result2 = TempProfile::whereuser_id($user_id)->first();
+		if($result2){
+			$res = array_merge($result1, $result2->toArray());
+		}else{
+			$res = array_merge($result1, array("user_id"=>$result1['id'],"bio"=>"","avatar"=>"","gender"=>"","is_read"=>"","is_view"=>"",
+							"is_sharing"=>"","is_card_active"=>"","current_lat"=>"","current_long"=>"","privacy"=>"","resume_file"=>"",
+							"resume_file_status"=>"","resume_link"=>"","resume_link_status"=>"","deleted_at"=>""
+			));
+		}
+        
         //$result3 = TempSocialNetwork::whereuser_id($user_id)->where('status', 1)->where('media_value', '!=', '')->get()->toArray();
         $result3 = TempSocialNetwork::whereuser_id($user_id)->where('media_value', '!=', '')->get()->toArray();
         $arr3 = array("social_data" => $result3);
