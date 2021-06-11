@@ -249,53 +249,62 @@ class LoginController extends Controller
 		if($is_exits == 0)
         {
 			// $mobile_new = $request['countrycode'].'-'. str_replace(' ', '', $request['mobile']);
-			$mobile = User::where('mobile',$request->mobile)->first();
-			if($mobile)
-            {
-                $status = false;
-                $errorCode = $status ? 200 : 422;
-                $errors = "";
-                $result = [
-                    "message" => "Mobile already registerd",
-                    "status" => false,
-                    "errors" => $errors
-                ];
-                return response()->json($result,$errorCode);
-            }else{
+			// $mobile = User::where('mobile',$request->mobile)->first();
+			// if($mobile)
+            // {
+                // $status = false;
+                // $errorCode = $status ? 200 : 422;
+                // $errors = "";
+                // $result = [
+                    // "message" => "Mobile already registerd",
+                    // "status" => false,
+                    // "errors" => $errors
+                // ];
+                // return response()->json($result,$errorCode);
+            // }else{
 			$role = 4;
 			
 			$user = new User;
             $user->name = $request['name'];
             $user->email = $request['email'];
-            $user->mobile = $request->mobile;
+            // $user->mobile = $request->mobile;
             $user->password = Hash::make($request['password']);
             $user->email_verified_at = Hash::make($request['password']);
             $user->status = 1;
-            if(!empty($request['avatar'])){
-                $avatarExt = request()->avatar->getClientOriginalExtension();
-                if($avatarExt == "jpg" || $avatarExt == "png" || $avatarExt == "jpeg"){
-                }else{
-	    		    return response()->json(['status' => 401, 'message' => 'The avatar must be a file of type: jpg, png, jpeg.']);
-	    	    }
-            }
+            // if(!empty($request['avatar'])){
+                // $avatarExt = request()->avatar->getClientOriginalExtension();
+                // if($avatarExt == "jpg" || $avatarExt == "png" || $avatarExt == "jpeg"){
+                // }else{
+	    		    // return response()->json(['status' => 401, 'message' => 'The avatar must be a file of type: jpg, png, jpeg.']);
+	    	    // }
+            // }
             $user->save();
             $user_id = $user->id;
 			$user->roles()->attach($role); //User role
 			if(!empty($user_id)){
                 $profile = new Profile;
                 $profile->user_id = $user_id;
+                $profile->bio = ($request['bio']) ? $request['bio'] : '';
                 $profile->privacy = 0;
-                if(!empty($request['avatar'])){
-                    //$avatarName = $user->id.'_avatar'.request()->avatar->getClientOriginalExtension();
-                    $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
-                    $request->avatar->storeAs('avatars',$avatarName);
-                    $profile->avatar = '/avatars/'.$avatarName;
-                    $companylogo = '/avatars/'.$avatarName;
-                }
-                else
-                {
-                    $companylogo = $profile->avatar;
-                }
+                // if(!empty($request['avatar'])){
+                    // $avatarName = $user->id.'_avatar'.time().'.'.request()->avatar->getClientOriginalExtension();
+                    // $request->avatar->storeAs('avatars',$avatarName);
+                    // $profile->avatar = '/avatars/'.$avatarName;
+                    // $companylogo = '/avatars/'.$avatarName;
+                // }else{
+                    // $companylogo = $profile->avatar;
+                // }
+				if(!empty($request['avatar'])){
+					$image = $request['avatar'];  // your base64 encoded
+					$image = str_replace('data:image/png;base64,', '', $image);
+					$image = str_replace(' ', '+', $image);
+					$companylogo = '/avatars/'.$user_id.'_avatar'.time().'.'.'png';
+					Storage::disk('public')->put($companylogo, base64_decode($image));
+				}else{
+					$companylogo = '/user/default.png';
+				}
+				$profile->avatar = $companylogo;
+			
                 $profile->save();
 
                         if($request['typeuser'] == 4)
@@ -324,7 +333,7 @@ class LoginController extends Controller
                     'status' => 200,
                     'message' =>'User has been successfully created.']);
 			
-			}
+			
 
 			// print_r($request->all());
 			
