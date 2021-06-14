@@ -1358,7 +1358,7 @@ class LoginController extends Controller
         $message = "";
         $user_id = $request['user_id'];
 		$data = User::where('id','=',$user_id)->first();
-		if(count($request->all()) == 1){
+		if(count($request->all()) == 2){
 			if($request->type == 'social'){
 				$data = Icone::whereNotIn('id',explode(",",$data->profile->icone_social))->get();
 			}else{
