@@ -1317,7 +1317,7 @@ class LoginController extends Controller
         $token = JWTAuth::fromUser($user1);
         $result1 = $user1->toArray();
 
-        $result2 = TempProfile::whereuser_id($user_id)->first();
+        $result2 = Profile::whereuser_id($user_id)->first();
 		if($result2){
 			$res = array_merge($result1, $result2->toArray());
 		}else{
