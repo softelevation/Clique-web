@@ -44,6 +44,8 @@ Route::post('tempactiveinactive', 'Api\Auth\LoginController@tempactiveinactive')
 Route::post('gettempprofile', 'Api\Auth\LoginController@gettempprofile');
 Route::post('tempprofileupdate', 'Api\Auth\LoginController@tempprofileupdate');
 
+Route::post('gettempicone', 'Api\Auth\LoginController@gettempIcone');
+
 Route::post('qrgenerated', 'Api\Auth\LoginController@qrgenerated');
 /************************************************************************************
      * API for Corporate Users
