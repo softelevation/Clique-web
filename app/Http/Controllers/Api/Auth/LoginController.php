@@ -1799,7 +1799,11 @@ class LoginController extends Controller
 				
 				$profile = new Profile;
 				$profile->user_id = $user->id;
-				$profile->icone_social = 7;
+				if($request['social_type'] == 'g'){
+					$profile->icone_social = 7;
+				}else if($request['social_type'] == 'g'){
+					$profile->icone_social = 16;
+				}
 				$profile->save();
 				SocialNetwork::insert(array('user_id'=>$user->id,'media_type'=>'google','media_value'=>$email,'status'=>1));
 			}
