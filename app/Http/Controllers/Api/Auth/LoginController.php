@@ -1717,76 +1717,131 @@ class LoginController extends Controller
         $current_long = $request['current_long'];
         
         $email = $request['email'];
-        $user = User::where('email',$email)->first();
-        if($user == null){
-            $status = false;
-            $errorCode = $status ? 200 : 422;
-            $errors = "";
-            $result = [
-                "message" => "Member not found.",
-                "status" => false,
-                "errors" => $errors
-            ];
-            return response()->json($result,$errorCode);   
-        }else{
-            $status = Hash::check($request['password'], $user->password);
-            if($status == true){
-                
-                $errors = "";
-                $result1 = $user->toArray();
-                $user_id = $result1['id'];
-                
-                
-                $profile = Profile::whereuser_id($user_id)->first();
-                $profile->current_lat = $current_lat;
-                $profile->current_long = $current_long;
-                $profile->save();
-                                        
-                
-                $token = JWTAuth::fromUser($user);
-                $result2 = Profile::whereuser_id($user_id)->first()->toArray(); //Profile::find($user_id);
-                $res = array_merge($result1, $result2);
-                
-                
-                
-                
-                
-                $result3 = SocialNetwork::whereuser_id($user_id)->get()->toArray();
-                $arr3 = array("social_data" => $result3);
-                $res2 = array_merge($res, $arr3);
-                $company_data = Company::select('company.*','company_users.job_position');
-                $company_data->leftJoin('company_users', 'company_users.company_id', '=', 'company.id');
-                $company_data->where('company_users.user_id', $user_id);
-                $company_data = $company_data->orderBy('company.id', 'ASC')->get()->toArray();
-                $arr4 = array("company_data" => $company_data);
-                $res3 = array_merge($res2, $arr4);
-        
-                
-                
-                $message = "Login Successfull";
-                $status = true;
-                $data = [
-                'access_token' => $token,
-                'token_type' => 'bearer',
-                'asset_url' => url()->to('/public/storage'),
-                'user' => $res3,
-                ];
-                
-                return $this->sendResult($message,$data,$errors,$status);
+		if($request['social_type'] == 'n'){
+			$user = User::where('email',$email)->first();
+			if($user == null){
+				$status = false;
+				$errorCode = $status ? 200 : 422;
+				$errors = "";
+				$result = [
+					"message" => "Member not found.",
+					"status" => false,
+					"errors" => $errors
+				];
+				return response()->json($result,$errorCode);   
+			}else{
+				$status = Hash::check($request['password'], $user->password);
+				if($status == true){
+					
+					$errors = "";
+					$result1 = $user->toArray();
+					$user_id = $result1['id'];
+					
+					
+					$profile = Profile::whereuser_id($user_id)->first();
+					$profile->current_lat = $current_lat;
+					$profile->current_long = $current_long;
+					$profile->save();
+											
+					
+					$token = JWTAuth::fromUser($user);
+					$result2 = Profile::whereuser_id($user_id)->first()->toArray(); //Profile::find($user_id);
+					$res = array_merge($result1, $result2);
+					
+					
+					
+					
+					
+					$result3 = SocialNetwork::whereuser_id($user_id)->get()->toArray();
+					$arr3 = array("social_data" => $result3);
+					$res2 = array_merge($res, $arr3);
+					$company_data = Company::select('company.*','company_users.job_position');
+					$company_data->leftJoin('company_users', 'company_users.company_id', '=', 'company.id');
+					$company_data->where('company_users.user_id', $user_id);
+					$company_data = $company_data->orderBy('company.id', 'ASC')->get()->toArray();
+					$arr4 = array("company_data" => $company_data);
+					$res3 = array_merge($res2, $arr4);
+			
+					
+					
+					$message = "Login Successfull";
+					$status = true;
+					$data = [
+					'access_token' => $token,
+					'token_type' => 'bearer',
+					'asset_url' => url()->to('/public/storage'),
+					'user' => $res3,
+					];
+					
+					return $this->sendResult($message,$data,$errors,$status);
 
-                
-            }else{
-                $status = false;
-                $errorCode = $status ? 200 : 422;
-                $errors = "";
-                $result = [
-                    "message" => "Your email & password not match.",
-                    "status" => false,
-                    "errors" => $errors
-                ];
-                return response()->json($result,$errorCode);   
-            }
-        }
+					
+				}else{
+					$status = false;
+					$errorCode = $status ? 200 : 422;
+					$errors = "";
+					$result = [
+						"message" => "Your email & password not match.",
+						"status" => false,
+						"errors" => $errors
+					];
+					return response()->json($result,$errorCode);   
+				}
+			}
+		}else{
+			$user = User::where('email',$email)->first();
+			if(!$user){
+				$user = new User;
+				$user->name = $request['name'];
+				$user->email = $email;
+				$user->password = '';
+				$user->save();
+				
+				$profile = new Profile;
+				$profile->user_id = $user->id;
+				$profile->save();
+			}
+			if($user){
+					$errors = "";
+					$result1 = $user->toArray();
+					$user_id = $result1['id'];
+					
+					
+					$profile = Profile::whereuser_id($user_id)->first();
+					$profile->current_lat = $current_lat;
+					$profile->current_long = $current_long;
+					$profile->save();
+											
+					
+					$token = JWTAuth::fromUser($user);
+					$result2 = Profile::whereuser_id($user_id)->first()->toArray(); //Profile::find($user_id);
+					$res = array_merge($result1, $result2);
+					
+					
+					
+					
+					
+					$result3 = SocialNetwork::whereuser_id($user_id)->get()->toArray();
+					$arr3 = array("social_data" => $result3);
+					$res2 = array_merge($res, $arr3);
+					$company_data = Company::select('company.*','company_users.job_position');
+					$company_data->leftJoin('company_users', 'company_users.company_id', '=', 'company.id');
+					$company_data->where('company_users.user_id', $user_id);
+					$company_data = $company_data->orderBy('company.id', 'ASC')->get()->toArray();
+					$arr4 = array("company_data" => $company_data);
+					$res3 = array_merge($res2, $arr4);
+			
+					$message = "Login Successfull";
+					$status = true;
+					$data = [
+					'access_token' => $token,
+					'token_type' => 'bearer',
+					'asset_url' => url()->to('/public/storage'),
+					'user' => $res3,
+					];
+					return $this->sendResult($message,$data,$errors,$status);
+			}
+		}
 
     }
     
