@@ -1800,6 +1800,7 @@ class LoginController extends Controller
 				$profile = new Profile;
 				$profile->user_id = $user->id;
 				$profile->save();
+				SocialNetwork::insert(array('user_id'=>$user->id,'media_type'=>'google','media_value'=>$email,'status'=>1));
 			}
 			if($user){
 					$errors = "";
@@ -1830,7 +1831,6 @@ class LoginController extends Controller
 					$company_data = $company_data->orderBy('company.id', 'ASC')->get()->toArray();
 					$arr4 = array("company_data" => $company_data);
 					$res3 = array_merge($res2, $arr4);
-			
 					$message = "Login Successfull";
 					$status = true;
 					$data = [
