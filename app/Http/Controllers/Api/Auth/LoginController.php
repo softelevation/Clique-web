@@ -1806,7 +1806,7 @@ class LoginController extends Controller
 
 				if($request['social_type'] == 'g'){
 					$profile->icone_social = 7;
-				}else if($request['social_type'] == 'g'){
+				}else if($request['social_type'] == 'f'){
 					$profile->icone_social = 16;
 				}
 				$profile->save();
