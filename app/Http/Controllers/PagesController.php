@@ -36,6 +36,12 @@ class PagesController extends Controller
     {
         return view('pricing');
     }
+	
+	//************* privacyPolicy page */
+    public function privacyPolicy()
+    {
+        return view('pricing');
+    }
 
     //************* Place order page */
     public function placeorder()

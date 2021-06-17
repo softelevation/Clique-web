@@ -6,6 +6,7 @@ Route::get('about-us', 'PagesController@aboutus')->name('aboutus');
 Route::get('contact-us', 'PagesController@contactus')->name('aboutus');
 Route::post('contact-us', 'PagesController@contactstore')->name('contact-store');
 Route::get('pricing', 'PagesController@pricing')->name('aboutus');
+Route::get('privacy-policy', 'PagesController@privacyPolicy')->name('privacy-policy');
 Route::get('place-order', 'PagesController@placeorder')->name('place-order');
 Route::post('place-order', 'PagesController@placestore')->name('place-order-store');
 Route::get('order/thank-you/{order_id}','PagesController@orderthankyou');
