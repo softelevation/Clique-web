@@ -1803,12 +1803,6 @@ class LoginController extends Controller
 					file_put_contents(public_path($user_image), $content);
 					$profile->avatar = $user_image;
 				}
-
-				if($request['social_type'] == 'g'){
-					$profile->icone_social = 7;
-				}else if($request['social_type'] == 'f'){
-					$profile->icone_social = 16;
-				}
 				$profile->save();
 				SocialNetwork::insert(array('user_id'=>$user->id,'media_type'=>'google','media_value'=>$email,'status'=>1));
 			}
@@ -1817,11 +1811,22 @@ class LoginController extends Controller
 					$result1 = $user->toArray();
 					$user_id = $result1['id'];
 					
+					// if($request['social_type'] == 'g'){
+					// $profile->icone_social = 7;
+				// }else if($request['social_type'] == 'f'){
+					// $profile->icone_social = 16;
+				// }
 					
-					// $profile = Profile::whereuser_id($user_id)->first();
-					// $profile->current_lat = $current_lat;
-					// $profile->current_long = $current_long;
-					// $profile->save();
+					
+					$profile = Profile::whereuser_id($user_id)->first();
+					if($request->social_type == 'g'){
+						$profile->icone_social = 7;
+					}else if($request->social_type == 'f'){
+						$profile->icone_social = 16;
+					}
+					$profile->current_lat = $current_lat;
+					$profile->current_long = $current_long;
+					$profile->save();
 											
 					
 					$token = JWTAuth::fromUser($user);
