@@ -1698,7 +1698,6 @@ class LoginController extends Controller
           'password' => 'required|min:8|max:255',
         ]);
         if($validator->fails()){
-            
             $status = false;
             $errorCode = $status ? 200 : 422;
             $errors = "";
@@ -1709,8 +1708,6 @@ class LoginController extends Controller
                 "errors" => $errors
             ];
             return response()->json($result,$errorCode);
-            
-            
         }
         
         $current_lat = $request['current_lat'];
@@ -1799,6 +1796,14 @@ class LoginController extends Controller
 				
 				$profile = new Profile;
 				$profile->user_id = $user->id;
+				
+				if($request->avatar){
+					$content = file_get_contents($request->avatar);
+					$user_image = 'user/img_'.$user->id.time().'.png';
+					file_put_contents($user_image, $content);
+					$profile->avatar = $user_image;
+				}
+
 				if($request['social_type'] == 'g'){
 					$profile->icone_social = 7;
 				}else if($request['social_type'] == 'g'){
