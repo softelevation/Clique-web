@@ -1800,7 +1800,7 @@ class LoginController extends Controller
 				if($request->avatar){
 					$content = file_get_contents($request->avatar);
 					$user_image = 'user/img_'.$user->id.time().'.png';
-					file_put_contents($user_image, $content);
+					file_put_contents(public_path('/'.$user_image), $content);
 					$profile->avatar = $user_image;
 				}
 
