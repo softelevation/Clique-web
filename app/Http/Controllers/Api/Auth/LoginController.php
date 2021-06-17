@@ -1818,10 +1818,10 @@ class LoginController extends Controller
 					$user_id = $result1['id'];
 					
 					
-					$profile = Profile::whereuser_id($user_id)->first();
-					$profile->current_lat = $current_lat;
-					$profile->current_long = $current_long;
-					$profile->save();
+					// $profile = Profile::whereuser_id($user_id)->first();
+					// $profile->current_lat = $current_lat;
+					// $profile->current_long = $current_long;
+					// $profile->save();
 											
 					
 					$token = JWTAuth::fromUser($user);
