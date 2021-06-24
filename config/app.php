@@ -52,9 +52,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://dev.thewebtual.com/clique'),
+    'url' => env('APP_URL', 'http://admin.cliquesocial.co'),
 
-    'asset_url' => env('ASSET_URL', 'https://dev.thewebtual.com/clique/public'),
+    'asset_url' => env('ASSET_URL', 'http://admin.cliquesocial.co/public'),
 
     /*
     |--------------------------------------------------------------------------
