@@ -35,6 +35,7 @@ Route::post('addcontact', 'Api\Auth\LoginController@addcontact');
 Route::post('addcontactlist', 'Api\Auth\LoginController@addcontactlist');
 Route::post('removecontact', 'Api\Auth\LoginController@removecontact');
 Route::post('writecard', 'Api\Auth\LoginController@writecard');
+Route::post('validatecard', 'Api\Auth\LoginController@validatecard');
 Route::post('socialdelete', 'Api\Auth\LoginController@socialdelete');
 Route::post('countrylist', 'Api\Auth\LoginController@countrylist');
 Route::post('putorder', 'Api\Auth\LoginController@putorder');

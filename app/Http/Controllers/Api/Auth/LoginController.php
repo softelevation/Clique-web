@@ -997,7 +997,60 @@ class LoginController extends Controller
 
         }
     }
+	
+	 /************************************************************************************
+     * validatecard card check
+    *************************************************************************************/
+    public function validatecard(Request $request)
+    {
+				$errors = "";
+                $data = [];
+                $message = "";
+                $status = true;
 
+                $validator = Validator::make($request->all(), [
+                    'card_id' => 'required',
+                ]);
+                if($validator->fails()){
+                    $status = false;
+                    $errorCode = $status ? 200 : 422;
+                    $errors = "";
+                    $result = [
+                        "message" => "The card_id is required.",
+                        "status" => false,
+                        "errors" => $errors
+                    ];
+                    return response()->json($result,$errorCode);
+
+                }else{
+					$carddata = Carditems::select("*")
+                                    ->where('card_id', $request['card_id'])
+                                    ->first();
+					if($carddata){
+						if($carddata->assign_user_id){
+							$errors= "";
+							$status=false;
+							$message = "Card id is already use";
+							$data = (object)[];
+							return $this->sendResult($message,$data,$errors,$status);
+						}else{
+							$errors= "";
+							$status = true;// if($carddata['order_id'] == NULL){
+							$message = "This card is valid";
+							$data = (object)[];
+							return $this->sendResult($message,$data,$errors,$status);
+						}
+					}else{
+							$errors= "";
+							$status=false;
+							$message = "Card id not registered";
+							$data = (object)[];
+							return $this->sendResult($message,$data,$errors,$status);
+					}
+                }
+	}
+	
+	
      /************************************************************************************
      * Write in card check
     *************************************************************************************/
@@ -1802,6 +1855,11 @@ class LoginController extends Controller
 					$user_image = '/user/img_'.$user->id.time().'.png';
 					file_put_contents(public_path($user_image), $content);
 					$profile->avatar = $user_image;
+				}
+				if($request->social_type == 'G'){
+					$profile->icone_social = 7;
+				}else if($request->social_type == 'F'){
+					$profile->icone_social = 16;
 				}
 				$profile->save();
 				SocialNetwork::insert(array('user_id'=>$user->id,'media_type'=>'google','media_value'=>$email,'status'=>1));
