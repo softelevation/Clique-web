@@ -269,8 +269,9 @@ class LoginController extends Controller
 					$image = $request['avatar'];  // your base64 encoded
 					$image = str_replace('data:image/png;base64,', '', $image);
 					$image = str_replace(' ', '+', $image);
-					$companylogo = '/avatars/'.$user_id.'_avatar'.time().'.'.'png';
-					Storage::disk('public')->put($companylogo, base64_decode($image));
+					$companylogo = '/user/'.$user_id.'_avatar'.time().'.'.'png';
+					// Storage::disk('public')->put($companylogo, base64_decode($image));
+					file_put_contents(public_path($companylogo), base64_decode($image));
 				}else{
 					$companylogo = '/user/default.png';
 				}
