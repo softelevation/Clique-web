@@ -1,5 +1,4 @@
 /node_modules
-/public/plugins
 /storage/*.key
 /vendor
 .env
