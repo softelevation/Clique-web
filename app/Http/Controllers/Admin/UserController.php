@@ -593,9 +593,9 @@ public function corporateadminindex(Request $request)
             {
                 $profiledata = Profile::whereuser_id($user_id)->first();
                 if($profiledata->avatar == "/user/default.png"  || $profiledata->avatar == "/user/default.png"){
-                    $imagepath = asset('media/users/blank.png');
+                    $imagepath = url('media/users/blank.png');
                 }else{
-                    $imagepath = asset('storage'.$profiledata->avatar);
+                    $imagepath = url($profiledata->avatar);
                 }
                 echo $imagepath;
                 die();
