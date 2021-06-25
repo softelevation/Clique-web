@@ -48,9 +48,9 @@
 								<div class="clique-profile-image-wrapper">
 								    <div class="clique-profile-img">
 								        @if($user->profile != null)
-										    <img src="{{asset(Storage::url($user->profile->avatar))}}" class="img-fluid">
+										    <img src="{{url($user->profile->avatar)}}" class="img-fluid">
 										@else
-										    <img src="{{asset('frontend/images/app-profile-img.png')}}" class="img-fluid">
+										    <img src="{{url('frontend/images/app-profile-img.png')}}" class="img-fluid">
 										@endif
 									</div>
 								</div>
