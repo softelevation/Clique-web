@@ -176,8 +176,8 @@ class PagesController extends Controller
             $id = $request['param'];
         }
 		
-        $profiles = Profile::find($id);
-		$id = $profiles->user_id;
+        // $profiles = Profile::find($id);
+		// $id = $profiles->user_id;
         $user = User::find($id);
         
         if($user->is_temp == 1){
