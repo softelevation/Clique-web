@@ -1768,7 +1768,7 @@ class LoginController extends Controller
         $current_long = $request['current_long'];
         
         $email = $request['email'];
-		if($request['social_type'] == 'n'){
+		if($request['social_type'] == 'N'){
 			$user = User::where('email',$email)->first();
 			if($user == null){
 				$status = false;
@@ -1839,7 +1839,7 @@ class LoginController extends Controller
 					return response()->json($result,$errorCode);   
 				}
 			}
-		}else{
+		}else if($request['social_type'] == 'F' || $request['social_type'] == 'G'){
 			$user = User::where('email',$email)->first();
 			if(!$user){
 				$user = new User;
@@ -1915,6 +1915,16 @@ class LoginController extends Controller
 					];
 					return $this->sendResult($message,$data,$errors,$status);
 			}
+		}else{
+				$status = false;
+				$errorCode = $status ? 200 : 422;
+				$errors = "";
+				$result = [
+					"message" => "Member not found.",
+					"status" => false,
+					"errors" => $errors
+				];
+				return response()->json($result,$errorCode); 
 		}
 
     }
