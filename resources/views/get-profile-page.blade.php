@@ -158,6 +158,7 @@
 			font-size: 15px;
 		}
     }
+	.tap-link-redirect{color: #fff;}
 		</style>
     </head>
     <body>
@@ -167,7 +168,7 @@
 				<div class="clique-app-wrapper">
 					<div class="download-app-alert">
 						<div class="download-app-holder">
-							<div class="main-header">Tap here to get your Clique card</div>
+							<div class="main-header"><a class="tap-link-redirect" href="https://cliquesocial.co">Tap here to get your Clique card</a></div>
 							<div class="container">
 								<div class="rowsicone class-margin">
 									<div class="col-md-4">
