@@ -124,12 +124,30 @@
 	.image-icone{
 		width: 75px;
 	}
-	.row.row-icone-material {margin-top: 15px;}
-	.row.class-margin {margin-top: 10px;}
+	.row.row-icone-material {margin-top: 15px;margin-left: 5px;}
+	.class-margin {margin-top: 25px;}
 	.rows {position: absolute;}
-	.col-mds-4 {width: 30%;float: left;}
-	.col-mds-8 {width: 70%;float: right;}
-	.col-mds-3 {margin: 10px;}
+	.col-mds-4 {width: 40%;float: left;}
+	.col-mds-8 {width: 60%;float: right;}
+	.col-mds-3 {margin: 9px;}
+	.icone-image{width: 110px;}
+	.rowsicone{
+			    margin-top: 25px;
+    content: cornflowerblue;
+    justify-content: space-between;
+    /* flex: 1; */
+    display: flex;
+		}
+	.join_button{margin-left: 70px;}
+	.main-header {
+        background: black;
+		text-align: center;
+		height: 40px;
+		font-size: 24px;
+	}
+	.download-app-body {
+    margin-top: 50px;
+}
 		</style>
     </head>
     <body>
@@ -139,15 +157,22 @@
 				<div class="clique-app-wrapper">
 					<div class="download-app-alert">
 						<div class="download-app-holder">
+							<div class="main-header">Tap here to get your Clique card</div>
 							<div class="container">
-								<center>
-								<div class="row class-margin">
-									<div class="col-md-12">
-									<a class="download-app-link" href="{{ 'socialclique://clique/user/profile?userid='.$user->id }}" target="_blank">Open Profile With Clique App</a>
+								<div class="rowsicone class-margin">
+									<div class="col-md-4">
+										Login
 									</div>
+									<div class="col-md-4">
+										<img src="{{url('/icone.png')}}" class="icone-image">
+									</div>
+									<div class="col-md-4 join_button">
+										Join
+									</div>
+									
 								</div>
-								</center>
-								<div class="rows">
+								
+								<div class="rows class-margin">
 									<div class="col-mds-4">
 										@if($user->profile != null)
 											<img src="{{url($user->profile->avatar)}}" class="rounded-circle">
@@ -156,7 +181,7 @@
 										@endif
 									</div>
 									<div class="col-mds-8">
-									  <p>{{ ucfirst($user->name) }}</p>
+									  <h5>{{ ucfirst($user->name) }}</h5>
 									  <p>{{ ucfirst($user->profile->bio) }}</p>
 									</div>
 								</div>
@@ -168,7 +193,11 @@
 								<center>
 									<div class="row">
 										<div class="col-md-12">
-										<p class="user-contact-email">{{ $user->email }}</p>
+										@if($user->name)
+											<p class="user-contact-email">{{ $user->name.' contacts' }}</p>
+										@else
+											<p class="user-contact-email">{{ $user->email }}</p>
+										@endif
 										</div>
 										<div class="col-md-12">
 										<a class="add-to-contacts" href="{{ 'socialclique://clique/user/profile?userid='.$user->id }}" target="_blank">Add to Contacts</a>
