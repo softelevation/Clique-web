@@ -140,14 +140,24 @@
 		}
 	.join_button{margin-left: 70px;}
 	.main-header {
-        background: black;
-		text-align: center;
-		height: 40px;
-		font-size: 24px;
-	}
-	.download-app-body {
-    margin-top: 50px;
-}
+        background: black;text-align: center;height: 40px;font-size: 24px;}
+	.download-app-body {margin-top: 50px;}
+	.user-info-app{position: absolute;width: 100%;margin-left: 20px;}
+	.user-info-app-name{margin-left: 20px;width: 100%;}
+	
+	@media (max-width: 800px) {
+		.main-header {
+			background: black;
+			text-align: center;
+			/* height: 0px; */
+			font-size: 18px;
+			padding: 7px 0px;
+		}
+		
+		.user-info-app {
+			font-size: 15px;
+		}
+    }
 		</style>
     </head>
     <body>
@@ -181,8 +191,8 @@
 										@endif
 									</div>
 									<div class="col-mds-8">
-									  <h5>{{ ucfirst($user->name) }}</h5>
-									  <p>{{ ucfirst($user->profile->bio) }}</p>
+									  <h5 class="user-info-app-name">{{ ucfirst($user->name) }}</h5>
+									  <p class="user-info-app">{{ ucfirst($user->profile->bio) }}</p>
 									</div>
 								</div>
 							</div>
