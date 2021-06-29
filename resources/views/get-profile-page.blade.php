@@ -144,7 +144,7 @@
 	.download-app-body {margin-top: 50px;}
 	.user-info-app{position: absolute;width: 100%;margin-left: 20px;}
 	.user-info-app-name{margin-left: 20px;width: 100%;}
-	
+	.tap-link-redirect{color: #fff;}
 	@media (max-width: 800px) {
 		.main-header {
 			background: black;
@@ -157,8 +157,10 @@
 		.user-info-app {
 			font-size: 15px;
 		}
+		.join_button {margin-left: 25px;}
     }
-	.tap-link-redirect{color: #fff;}
+	
+	
 		</style>
     </head>
     <body>
