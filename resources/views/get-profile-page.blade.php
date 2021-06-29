@@ -6,348 +6,183 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-      
-       <link href="{{ asset('css/custom-front.css') }}" rel="stylesheet" type="text/css" />
-       <title>Profile | Clique</title>
-       <style>
-           .text-decoration-none-link{
-               text-decoration: none;
-           }
-       </style>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<title>Profile | Clique</title>
+		<style>
+        .content-wrapper {
+			display: block;
+		}
+		.clique-screen {
+    overflow: hidden !important;
+    z-index: 10;
+    transition: all 350ms ease;
+    width: 100%;
+    max-width: 375px;
+    height: 100%;
+    /* max-height: 680px; */
+    background: #fff;
+    display: block;
+    margin: 0 auto;
+}
+.clique-app-wrapper {
+    // background: #251E54;
+    position: relative;
+    /* height: 100%; */
+    height: 100vh;
+}
+.download-app-alert {
+    top: 15px;
+    left: 0;
+    right: 0;
+    display: block;
+    position: fixed;
+	background: linear-gradient(265.69deg, #E866B6 -28.53%, #6961FF 127.79%);
+    z-index: 99;
+    color: #ffffff;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    z-index: 999;
+}
+		
+	.download-app-holder {
+		position: absolute;
+		width: 414px;
+		height: 286px;
+		left: 0px;
+		top: 0px;
+		/* Button Gradient */
+		background: linear-gradient(265.69deg, #E866B6 -28.53%, #6961FF 127.79%);
+		box-shadow: 5px 5px 45px rgba(0, 0, 0, 0.15);
+	}
+.download-app-link {
+    /* background: rgba(255,255,255,0.4); */
+	margin-top: 10px;
+    background: #20ad96;
+    display: inline-block;
+    /* margin-left: 20px; */
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 2px;
+    font-weight: bold;
+    /* border: 1px solid rgba(255,255,255,0.5); */
+    font-size: 14px;
+    width: auto;
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+    /* border: none; */
+    box-shadow: 0px 0px 20px rgb(0 0 0 / 30%);
+    border-radius: 40px;
+}
+	.rounded-circle{width: 100px;}
+		
+	.download-app-body{
+		position: absolute;
+		width: 414px;
+		height: 693px;
+		left: 0px;
+		top: 203px;
+		background: #F3EEFA;
+		box-shadow: 0px -8px 12px rgba(86, 40, 164, 0.3);
+		border-radius: 40px 40px 0px 0px;
+	}
+	.add-to-contacts{
+		background: linear-gradient(265.69deg, #E866B6 -28.53%, #6961FF 127.79%);
+		display: inline-block;
+		padding: 15px 20px;
+		text-decoration: none;
+		color: #fff;
+		border-radius: 2px;
+		font-weight: bold;
+		font-size: 14px;
+		width: auto;
+		text-align: center;
+		max-width: 80%;
+		margin: 0 auto;
+		box-shadow: 0px 0px 20px rgb(0 0 0 / 30%);
+		border-radius: 40px;
+	}
+	.user-contact-email{
+		// background: linear-gradient(265.69deg, #E866B6 -28.53%, #6961FF 127.79%);
+		display: inline-block;
+		padding: 15px 20px;
+		text-decoration: none;
+		color: #fff;
+		border-radius: 2px;
+		font-weight: bold;
+		font-size: 14px;
+		width: auto;
+		text-align: center;
+		max-width: 80%;
+		margin: 0 auto;
+		color: #707070;
+	}
+	.image-icone{
+		width: 75px;
+	}
+	.row.row-icone-material {margin-top: 15px;}
+	.row.class-margin {margin-top: 10px;}
+		</style>
     </head>
     <body>
         
         <div class="content-wrapper">
-            <div class="clique-screen">               
-                
-                
-                <div class="clique-app-wrapper">
-                    
-                    @php
-                        if(\Request::route()->getName() == "corporate.main"){
-                            $url = "corporate_profile";
-                        }else{
-                            $url = "profile";
-                        }
-                    @endphp
-                    
-                    <div class="download-app-alert">
-                        <div class="download-app-holder">
-                            <!--<a class="download-app-link" href="{{ url($url.'?param='.$user->id) }}" target="_blank">Open Profile With Clique App</a>-->
-                            <a class="download-app-link" href="{{ 'socialclique://clique/user/profile?userid='.$user->id }}" target="_blank">Open Profile With Clique App</a>
-                        </div>
-                    </div>
-                    
-                    <div class="clique-app-header">
-                        <h4 class="clique-header-name">{{ ucfirst($user->name) }}</h4>
-                    </div>
-                    <input type="hidden" name="profile_id" id="profile_id" value="{{$id}}">
-                    <div class="clique-app-container clique-app-scroll">
-                        <div class="clique-app-data">
-                            <div class="clique-app-content">
-								<div class="clique-profile-image-wrapper">
-								    <div class="clique-profile-img">
-								        @if($user->profile != null)
-										    <img src="{{url($user->profile->avatar)}}" class="img-fluid">
-										@else
-										    <img src="{{url('frontend/images/app-profile-img.png')}}" class="img-fluid">
-										@endif
+            <div class="clique-screen">
+				<div class="clique-app-wrapper">
+					<div class="download-app-alert">
+						<div class="download-app-holder">
+							<div class="container">
+								<center>
+								<div class="row class-margin">
+									<div class="col-md-12">
+									<a class="download-app-link" href="{{ 'socialclique://clique/user/profile?userid='.$user->id }}" target="_blank">Open Profile With Clique App</a>
 									</div>
 								</div>
-                                <div class="clique-profile-info">
-                                    <h3 class="clique-profile-name">{{ ucfirst($user->name) }}</h3>
-                                    
-                                    @if($company != null)
-                                    <h5 class="clique-profile-designation">Owner at {{ ucfirst($company->name) }}</h5>
-                                    @endif
-                                    
-                                    @if($user->is_temp == 1)
-                                        @if($user->temp_profile != null)
-                                        <p class="clique-profile-bio">{{ $user->temp_profile->bio }}</p>
-                                        @endif
-                                    @endif
-                                    
-                                    @if($user->is_temp == 0)
-                                        @if($user->profile != null)
-                                        <p class="clique-profile-bio">{{ $user->profile->bio }}</p>
-                                        @endif
-                                    @endif
-                                </div>
-                                
-                                <div class="clique-contact-wrapper">
-                                    @if($company != null)
-                                    <div class="clique-contact-col">
-										<label class="clique-contact-label">
-											<figure>
-												<img src="{{asset('frontend/images/briefcase.svg')}}" class="img-fluid">
-											</figure>
-											<span>My Company</span>
-										</label>
-										<div class="clique-contact-group company">
-											<div class="icon">
-												<span>{{ $company->first_two_word($company->name) }}</span>
-											</div>
-											<div class="details">
-												<p>{{ ucfirst($company->name) }}</p>
-												<span>{{ $company->description }}</span>
-											</div>
-										</div>
-                                    </div>
-                                    @endif
-									
-									@if($user->mobile != null)
-									<div class="clique-contact-group">
-										<div class="icon">
-											<img src="{{asset('frontend/images/call-icon.svg')}}" class="img-fluid">
-										</div>
-										<div class="details">
-											<p><a class="text-decoration-none-link" href="tel:{{ $user->mobile }}">{{ $user->mobile }}</a></p>
-										</div>
-									</div>
-									@endif
-									
-									@if($user->email != null)
-									
-									<div class="clique-contact-group">
-										<div class="icon">
-											<img src="{{asset('frontend/images/email-icon.svg')}}" class="img-fluid">
-										</div>
-										<div class="details">
-											<p><a class="text-decoration-none-link" href="mailto:{{ $user->email }}">{{ $user->email }}</a></p>
-										</div>
-									</div>
-									
-									@endif
-									
-                                    <div class="clique-contact-col">
-                                        
-                                        @if( (count($social_mtype_contact_number) != 0) || (count($social_mtype_website) != 0) || (count($social_mtype_mail) != 0) ||  (count($social_mtype_instagram) != 0) || (count($social_mtype_facebook) != 0) || (count($social_mtype_twitter) != 0) || (count($social_mtype_youtube) != 0) || (count($social_mtype_linkedin) != 0)  )
-										<label class="clique-contact-label">
-											<figure>
-												<img src="{{asset('frontend/images/share-icon.svg')}}" class="img-fluid">
-											</figure>
-											<span>Social Networks</span>
-										</label>
+								</center>
+								<div class="row">
+									<div class="col-md-4">
+										@if($user->profile != null)
+											<img src="{{url($user->profile->avatar)}}" class="rounded-circle">
+										@else
+											<img src="{{url('/user/default.png')}}" class="rounded-circle">
 										@endif
-										
-										@forelse($social_mtype_contact_number as $row)
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/call-icon.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a class="text-decoration-none-link" href="tel:{{ $row->media_value }}">{{ $row->media_value }}</a></p>
-											</div>
+									</div>
+									<div class="col-md-8">
+									  <p>{{ ucfirst($user->name) }}</p>
+									  <p>{{ ucfirst($user->profile->bio) }}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="download-app-body">
+							<div class="container">
+								<center>
+									<div class="row">
+										<div class="col-md-12">
+										<p class="user-contact-email">{{ $user->email }}</p>
 										</div>
-										@empty
-										
-										@endforelse
-										
-										
-										@forelse($social_mtype_website as $row)
-										
-    										<?php
-        										if (strpos($row->media_value, 'http://') == 0){
-                                                    $web_url = $row->media_value;
-        										}elseif(strpos($row->media_value, 'http://') == 0){
-                                                    $web_url = $row->media_value;
-                                                }else{
-                                                    $web_url = "https://".$row->media_value;
-                                                }
-    										?>
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/web-icon.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a target="new" class="text-decoration-none-link" href="{{ $web_url }}">{{ $row->media_value }}</a></p>
-											</div>
-										</div>
-										@empty
-										
-										@endforelse
-										
-										
-										@forelse($social_mtype_mail as $row)
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/email-icon.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a class="text-decoration-none-link" href="mailto:{{ $row->media_value }}">{{ $row->media_value }}</a></p>
-											</div>
-										</div>
-										@empty
-										
-										@endforelse
-										
-										
-										@forelse($social_mtype_instagram as $row)
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/instagram-icon.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a target="new" class="text-decoration-none-link" href="https://www.instagram.com/{{ $row->media_value }}">{{ $row->media_value }}</a></p>
-											</div>
-										</div>
-										@empty
-										
-										@endforelse
-										
-										@forelse($social_mtype_facebook as $row)
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/facebook-icon.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a target="new" class="text-decoration-none-link" href="https://www.facebook.com/{{ $row->media_value }}">{{ $row->media_value }}</a></p>
-											</div>
-										</div>
-										@empty
-										
-										@endforelse
-										
-										@forelse($social_mtype_linkedin as $row)
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/linkedin-icon.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a target="new" class="text-decoration-none-link" href="https://www.linkedin.com/in/{{ $row->media_value }}">{{ $row->media_value }}</a></p>
-											</div>
-										</div>
-										@empty
-										
-										@endforelse
-										
-										@forelse($social_mtype_twitter as $row)
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/twitter-icon.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a target="new" class="text-decoration-none-link" href="https://www.twitter.com/{{ $row->media_value }}">{{ $row->media_value }}</a></p>
-											</div>
-										</div>
-										@empty
-										
-										@endforelse
-										
-										
-										@forelse($social_mtype_youtube as $row)
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/youtube-icon.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a target="new" class="text-decoration-none-link" href="https://www.youtube.com/{{ $row->media_value }}">{{ $row->media_value }}</a></p>
-											</div>
-										</div>
-										@empty
-										
-										@endforelse
-										
-                                    </div>
-									
-									
-									@if(count($social_mtype_music) != 0)
-                                    <div class="clique-contact-col">
-										<label class="clique-contact-label">
-											<figure>
-												<img src="{{asset('frontend/images/music-icon.svg')}}" class="img-fluid">
-											</figure>
-											<span>Music</span>
-										</label>
-										@foreach($social_mtype_music as $row)
-										    <?php
-        										if (strpos($row->media_value, 'http://') == 0){
-                                                    $web_url = $row->media_value;
-        										}elseif(strpos($row->media_value, 'http://') == 0){
-                                                    $web_url = $row->media_value;
-                                                }else{
-                                                    $web_url = "https://".$row->media_value;
-                                                }
-    										?>
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/spotify-icon.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a target="new" class="text-decoration-none-link" href="{{ $web_url }}">{{ $row->media_value }}</a></p>
-											</div>
-										</div>
-										@endforeach
-                                    </div>
-                                    @endif
-									
-									@if(count($social_mtype_payment) != 0)
-                                    <div class="clique-contact-col">
-										<label class="clique-contact-label">
-											<figure>
-												<img src="{{asset('frontend/images/wallet-icon.svg')}}" class="img-fluid">
-											</figure>
-											<span>Payment</span>
-										</label>
-										@foreach($social_mtype_payment as $row)
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/picpay-wallet.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a target="new" class="text-decoration-none-link" href="{{ $row->media_value }}">{{ $row->media_value }}</a></p>
-											</div>
-										</div>
-										@endforeach
-                                    </div>
-                                    @endif
-                                    
-                                    
-                                    @if(count($social_mtype_e_link) != 0)
-                                    <div class="clique-contact-col">
-										<label class="clique-contact-label">
-											<figure>
-												<img src="{{asset('frontend/images/title-external_link-icon.svg')}}" class="img-fluid">
-											</figure>
-											<span>External Links</span>
-										</label>
-										@foreach($social_mtype_e_link as $row)
-										    <?php
-        										if (strpos($row->media_value, 'http://') == 0){
-                                                    $web_url = $row->media_value;
-        										}elseif(strpos($row->media_value, 'http://') == 0){
-                                                    $web_url = $row->media_value;
-                                                }else{
-                                                    $web_url = "https://".$row->media_value;
-                                                }
-    										?>
-										<div class="clique-contact-group">
-											<div class="icon">
-												<img src="{{asset('frontend/images/external_link-icon.svg')}}" class="img-fluid">
-											</div>
-											<div class="details">
-												<p><a target="new" class="text-decoration-none-link" href="{{ $web_url }}">{{ $row->media_value }}</a></p>
-											</div>
-										</div>
-										@endforeach
-                                    </div>
-                                    @endif
-									
-									<div class="clique-contact-col">
-										<div class="download-app-holder">
-											<a class="download-app-link" href="{{url('/add-to-contact/?profile_id='.$user->id) }}" target="_blank">Add to Contact</a>
+										<div class="col-md-12">
+										<a class="add-to-contacts" href="{{ 'socialclique://clique/user/profile?userid='.$user->id }}" target="_blank">Add to Contacts</a>
 										</div>
 									</div>
-                                </div>
-                            </div>
-                       
+									
+									<div class="row row-icone-material">
+										@foreach($icone_socials as $icone_social)
+										<div class="col-md-3">
+											<img class="image-icone" src="{{ url($icone_social->url) }}" />
+										</div>
+										@endforeach
+									</div>
+								</center>
+							</div>
+						</div>
 						
-								
-						 </div>
-				   </div>
-					
-					
-                </div>
+						
+					</div>
+				</div>
             </div>
         </div>
         

@@ -8,6 +8,7 @@ use App\Orders;
 use App\Contacts;
 use App\User;
 use App\Company;
+use App\Icone;
 use App\Profile;
 use App\SocialNetwork;
 use App\TempSocialNetwork;
@@ -221,12 +222,12 @@ class PagesController extends Controller
             $social_mtype_e_link = SocialNetwork::where('media_type', 'externalLink')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();   
             
         }
-        
-
-
-
+		
+		$icone_socials = Icone::whereIn('id',explode(',',$user->profile->icone_social))->get();
+		
         
         return view('get-profile-page', compact('id', 'user', 'company', 'social_mtype_website',
+		'icone_socials',
         'social_mtype_mail',
         'social_mtype_instagram',
         'social_mtype_facebook',
