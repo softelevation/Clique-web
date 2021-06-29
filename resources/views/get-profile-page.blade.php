@@ -40,7 +40,7 @@
     z-index: 99;
     color: #ffffff;
     width: 100%;
-    max-width: 375px;
+    max-width: 414px;
     margin: 0 auto;
     z-index: 999;
 }
@@ -80,7 +80,8 @@
 		
 	.download-app-body{
 		position: absolute;
-		width: 414px;
+		// width: 414px;
+		width: 100%;
 		height: 693px;
 		left: 0px;
 		top: 203px;
@@ -125,6 +126,10 @@
 	}
 	.row.row-icone-material {margin-top: 15px;}
 	.row.class-margin {margin-top: 10px;}
+	.rows {position: absolute;}
+	.col-mds-4 {width: 30%;float: left;}
+	.col-mds-8 {width: 70%;float: right;}
+	.col-mds-3 {margin: 10px;}
 		</style>
     </head>
     <body>
@@ -142,15 +147,15 @@
 									</div>
 								</div>
 								</center>
-								<div class="row">
-									<div class="col-md-4">
+								<div class="rows">
+									<div class="col-mds-4">
 										@if($user->profile != null)
 											<img src="{{url($user->profile->avatar)}}" class="rounded-circle">
 										@else
 											<img src="{{url('/user/default.png')}}" class="rounded-circle">
 										@endif
 									</div>
-									<div class="col-md-8">
+									<div class="col-mds-8">
 									  <p>{{ ucfirst($user->name) }}</p>
 									  <p>{{ ucfirst($user->profile->bio) }}</p>
 									</div>
@@ -172,7 +177,7 @@
 									
 									<div class="row row-icone-material">
 										@foreach($icone_socials as $icone_social)
-										<div class="col-md-3">
+										<div class="col-mds-3">
 											<img class="image-icone" src="{{ url($icone_social->url) }}" />
 										</div>
 										@endforeach
