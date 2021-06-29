@@ -396,6 +396,44 @@ class LoginController extends Controller
         }
     }
 
+    public function userprofileupdate(Request $request){
+		$errors = "";
+        $data = [];
+        $message = "";
+        $user_id = $request['user_id'];
+		$user = User::find($user_id);
+		$token = JWTAuth::fromUser($user);
+		if($request->name){
+			$user->name = $request->name;
+            $user->save();
+		}
+		$profile = Profile::whereuser_id($user_id)->first();
+		if($request->bio){
+			$profile->bio = $request->bio;
+		}
+		if($request->avatar){
+			// $profile->avatar = $request->avatar;
+			$image = $request->avatar;
+			$image = str_replace('data:image/png;base64,', '', $image);
+			$image = str_replace(' ', '+', $image);
+			$companylogo = '/user/'.$user_id.'_avatar'.time().'.'.'png';
+			file_put_contents(public_path($companylogo), base64_decode($image));
+			$profile->avatar = $companylogo;
+		}
+		$profile->save();
+		$res3 = array_merge($user->toArray(), $profile->toArray());
+		$message = "Profile update successfully";
+        $status = true;
+        $data = [
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'asset_url' => url()->to('/public/storage'),
+            'user' => $res3,
+        ];
+        return $this->sendResult($message,$data,$errors,$status);
+	}
+	
+	
     public function profileupdate(Request $request){
         $errors = "";
         $data = [];

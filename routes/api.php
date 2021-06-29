@@ -25,6 +25,7 @@ Route::post('new-register', 'Api\Auth\LoginController@newRegister');
 
 Route::post('ragisterwithotp', 'Api\Auth\LoginController@ragisterwithotp');
 Route::post('profileupdate', 'Api\Auth\LoginController@profileupdate');
+Route::post('userprofileupdate', 'Api\Auth\LoginController@userprofileupdate');
 Route::post('loginprofileupdate', 'Api\Auth\LoginController@loginprofileupdate');
 Route::post('emailcheck', 'Api\Auth\LoginController@emailcheck');
 Route::post('nearbyusers', 'Api\Auth\LoginController@nearbyusers');
