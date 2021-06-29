@@ -99,10 +99,11 @@
 		font-size: 14px;
 		width: auto;
 		text-align: center;
-		max-width: 80%;
+		// max-width: 80%;
+		width: 90%;
 		margin: 0 auto;
 		box-shadow: 0px 0px 20px rgb(0 0 0 / 30%);
-		border-radius: 40px;
+		border-radius: 15px;
 	}
 	.user-contact-email{
 		// background: linear-gradient(265.69deg, #E866B6 -28.53%, #6961FF 127.79%);
