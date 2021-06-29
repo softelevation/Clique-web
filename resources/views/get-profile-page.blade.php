@@ -127,8 +127,8 @@
 	.row.row-icone-material {margin-top: 15px;margin-left: 5px;}
 	.class-margin {margin-top: 25px;}
 	.rows {position: absolute;}
-	.col-mds-4 {width: 40%;float: left;}
-	.col-mds-8 {width: 60%;float: right;}
+	.col-mds-4 {float: left;}
+	.col-mds-8 {float: right;margin-top: 10px;}
 	.col-mds-3 {margin: 9px;}
 	.icone-image{width: 110px;}
 	.rowsicone{
