@@ -27,6 +27,7 @@ use App\Companyusers;
 use App\Usercontact;
 use App\Carditems;
 use App\Countries;
+use App\ProfileIcone;
 use App\Orders;
 use App\Icone;
 
@@ -1430,8 +1431,19 @@ class LoginController extends Controller
         $arr4 = array("company_data" => $company_data);
         $res3 = array_merge($res2, $arr4);
 		
-		$res3['social'] = Icone::whereIn('id',explode(",",$user1->profile->icone_social))->get();;
-		$res3['business'] = Icone::whereIn('id',explode(",",$user1->profile->icone_business))->get();;
+		$profile_icones = ProfileIcone::with('icone')->where('profile_id',$result2->id)->get();
+		$social_icone = array();
+		$business_icone = array();
+		foreach($profile_icones as $profile_icone){
+			if($profile_icone->type == 'social'){
+				$social_icone[] = $profile_icone;
+			}
+			if($profile_icone->type == 'business'){
+				$business_icone[] = $profile_icone;
+			}
+		}
+		$res3['social'] = $social_icone;
+		$res3['business'] = $business_icone;
         $message = "Get Profile Successfully";
         $status = true;
         $data = [
@@ -1452,23 +1464,24 @@ class LoginController extends Controller
 		$data = User::where('id','=',$user_id)->first();
 		if(count($request->all()) == 2){
 			if($request->type == 'social'){
-				$data = Icone::whereNotIn('id',explode(",",$data->profile->icone_social))->get();
+				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','social')->pluck('icone_id');
+				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
 			}else{
-				$data = Icone::whereNotIn('id',explode(",",$data->profile->icone_business))->get();
+				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','business')->pluck('icone_id');
+				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
 			}
-			$message = "Icone list";
+			$message = "Icon list";
 		}else{
 			$message = "Icone add successfully";
-			if($request->type == 'social'){
-				$profile_icone = explode(",",$data->profile->icone_social);
-				array_push($profile_icone,$request['id']);
-				Profile::where('user_id',$user_id)->update(['icone_social' => implode(",",$profile_icone)]);
-			}else{
-				$profile_icone = explode(",",$data->profile->icone_business);
-				array_push($profile_icone,$request['id']);
-				Profile::where('user_id',$user_id)->update(['icone_business' => implode(",",$profile_icone)]);
-			}
-			$data = Icone::whereNotIn('id',$profile_icone)->get();
+			// if($request->type == 'social'){
+				ProfileIcone::insert(array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$request->link));
+			// }else{
+				// $profile_icone = explode(",",$data->profile->icone_business);
+				// array_push($profile_icone,$request['id']);
+				// Profile::where('user_id',$user_id)->update(['icone_business' => implode(",",$profile_icone)]);
+			// }
+			$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type',$request->type)->pluck('icone_id');
+			$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
 		}
 		$errors= "";
 		$status = true;

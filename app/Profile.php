@@ -12,5 +12,13 @@ class Profile extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+	
+	public function profile_icone()
+    {
+        /**
+        * The roles that belong to the user.
+        */
+        return $this->hasMany('App\ProfileIcone');
+    }
 
 }
