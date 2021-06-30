@@ -1476,17 +1476,21 @@ class LoginController extends Controller
 				$message = "Icon delete successfully";
 				ProfileIcone::find($request->id)->delete();
 			}else{
-				
 				$Profile_icone = ProfileIcone::where('profile_id',$data->profile->id)->where('icone_id',$request->id)->where('type',$request->type)->first();
+				if($request->id == 16){
+					$link_url = 'https://www.facebook.com/'.$request->link;
+				}else if($request->id == 13){
+					$link_url = 'https://www.instagram.com/'.$request->link;
+				}else{
+					$link_url = $request->link;
+				}
 				if($Profile_icone){
 					$message = "Icon update successfully";
-					$Profile_icone->update(array('link'=>$request->link));
+					$Profile_icone->update(array('link'=>$link_url));
 				}else{
 					$message = "Icon add successfully";
-					ProfileIcone::insert(array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$request->link));
+					ProfileIcone::insert(array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$link_url));
 				}
-				
-				
 			}
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type',$request->type)->pluck('icone_id');
 				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
@@ -1934,17 +1938,20 @@ class LoginController extends Controller
 				// }else if($request['social_type'] == 'f'){
 					// $profile->icone_social = 16;
 				// }
-					
+					if($request->social_type == 'g'){
+						$icone_social = 7;
+					}else if($request->social_type == 'f'){
+						$icone_social = 16;
+					}
 					
 					$profile = Profile::whereuser_id($user_id)->first();
-					if($request->social_type == 'g'){
-						$profile->icone_social = 7;
-					}else if($request->social_type == 'f'){
-						$profile->icone_social = 16;
-					}
+					$profile->icone_social = $icone_social;
 					$profile->current_lat = $current_lat;
 					$profile->current_long = $current_long;
 					$profile->save();
+					
+					
+					ProfileIcone::insert(array('profile_id'=>$profile->id,'icone_id'=>$icone_social,'type'=>'social'));
 											
 					
 					$token = JWTAuth::fromUser($user);
