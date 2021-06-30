@@ -8,6 +8,10 @@ class ProfileIcone extends Model
 {
 
 	protected $table = 'profile_icones';
+	
+	protected $fillable = [
+        'profile_id','icone_id','link','type'
+	];
 
     public function profile(){
         return $this->belongsTo('App\Profile');

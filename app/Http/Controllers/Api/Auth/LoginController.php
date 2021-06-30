@@ -1472,16 +1472,24 @@ class LoginController extends Controller
 			}
 			$message = "Icon list";
 		}else{
-			$message = "Icone add successfully";
-			// if($request->type == 'social'){
-				ProfileIcone::insert(array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$request->link));
-			// }else{
-				// $profile_icone = explode(",",$data->profile->icone_business);
-				// array_push($profile_icone,$request['id']);
-				// Profile::where('user_id',$user_id)->update(['icone_business' => implode(",",$profile_icone)]);
-			// }
-			$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type',$request->type)->pluck('icone_id');
-			$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
+			if($request->action && $request->action == 'delete'){
+				$message = "Icon delete successfully";
+				ProfileIcone::find($request->id)->delete();
+			}else{
+				
+				$Profile_icone = ProfileIcone::where('profile_id',$data->profile->id)->where('icone_id',$request->id)->where('type',$request->type)->first();
+				if($Profile_icone){
+					$message = "Icon update successfully";
+					$Profile_icone->update(array('link'=>$request->link));
+				}else{
+					$message = "Icon add successfully";
+					ProfileIcone::insert(array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$request->link));
+				}
+				
+				
+			}
+				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type',$request->type)->pluck('icone_id');
+				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
 		}
 		$errors= "";
 		$status = true;
