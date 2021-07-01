@@ -214,7 +214,7 @@
 										@endif
 										</div>
 										<div class="col-md-12">
-										<a class="add-to-contacts" href="javascript:void(0)">Add to Contacts</a>
+										<a class="add-to-contacts" href="{{url('/add-to-contact/?profile_id='.$user->id) }}">Add to Contacts</a>
 										</div>
 									</div>
 									
@@ -247,7 +247,7 @@ $(document).ready(function(){
 
   
    // Savaji Rathod 27-04-21 Add to contact Ajax
-   $(".add-to-contacts").click(function(e){
+   $(".add-to-contactsss").click(function(e){
 	   var id = "{{$id}}";
 	  	$.ajax({
 	         url: "{{ url('add-to-contact') }}",

@@ -335,22 +335,20 @@ class PagesController extends Controller
 
             $vcard->addPhoto(public_path($user->profile->avatar));
 			 
+			 return $vcard->download(); 
+			 
+			 
              // return vcard as a string
-             //return $vcard->getOutput();
+             // return $vcard->getOutput();
 
               // return vcard as a download
-			
-              // return $vcard->download(); 
-
-              // save vcard on disk
+			// save vcard on disk
               $storagePath  = public_path('contact/');
-			  
               $vcard->setSavePath($storagePath);
               $vcard->save();
 			
-			
-			$file_url = url('contact/'.implode('-',explode(' ',strtolower($firstname))).'.vcf');
-			return $file_url; 
+			// $file_url = url('contact/'.implode('-',explode(' ',strtolower($firstname))).'.vcf');
+			// return $file_url; 
 
 
     }
