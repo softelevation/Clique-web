@@ -1479,6 +1479,8 @@ class LoginController extends Controller
 				$Profile_icone = ProfileIcone::where('profile_id',$data->profile->id)->where('icone_id',$request->id)->where('type',$request->type)->first();
 				if($request->id == 16){
 					$link_url = 'https://www.facebook.com/'.$request->link;
+				}else if($request->id == 1){
+					$link_url = 'tel:'.$request->link;
 				}else if($request->id == 13){
 					$link_url = 'https://www.instagram.com/'.$request->link;
 				}else{
