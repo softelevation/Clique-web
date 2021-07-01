@@ -220,7 +220,7 @@
 									<div class="row row-icone-material">
 										@foreach($icone_socials as $icone_social)
 										<div class="col-mds-3">
-											<img class="image-icone" src="{{ url($icone_social->url) }}" />
+											<a href="{{$icone_social->link}}" target="_blank"><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
 										</div>
 										@endforeach
 									</div>
