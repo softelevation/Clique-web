@@ -293,7 +293,10 @@ class PagesController extends Controller
             $social_mtype_e_link = SocialNetwork::where('media_type', 'externalLink')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();   
             
         }
-
+			
+			// return $firstname; 
+			
+			
             // define vcard
             $vcard = new VCard();
             // define variables
@@ -302,13 +305,13 @@ class PagesController extends Controller
             $additional = '';
             $prefix = '';
             $suffix = '';
-
+			
             // add personal data
             $vcard->addName($user->name, $firstname, $additional, $prefix, $suffix);
 
             // add work data
-            $vcard->addCompany($company->description);
-            $vcard->addJobtitle($company->name);
+            $vcard->addCompany("");
+            $vcard->addJobtitle("");
             $vcard->addEmail($user->email);
             $vcard->addPhoneNumber($user->mobile, 'PREF;WORK');
             foreach ($social_mtype_contact_number as $key => $row) {
@@ -324,23 +327,30 @@ class PagesController extends Controller
                 }
                 $vcard->addURL($web_url);
             }
+			
             //$vcard->addLabel('Webtual, Testing, workpostcode Belgium,Ahmedabad');
 
             //$vcard->addAddress(null, null, 'street', 'worktown', null, 'workpostcode', 'Belgium');
             // $vcard->addURL('http://www.jeroendesloovere.be');
 
-             $vcard->addPhoto(asset(Storage::url($user->profile->avatar)));
+            $vcard->addPhoto(public_path($user->profile->avatar));
+			 
              // return vcard as a string
              //return $vcard->getOutput();
 
               // return vcard as a download
-              return $vcard->download();
+			
+              // return $vcard->download(); 
 
               // save vcard on disk
-              $storagePath  = Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix();
-              $vcard->setSavePath($storagePath.'/contact/');
+              $storagePath  = public_path('contact/');
+			  
+              $vcard->setSavePath($storagePath);
               $vcard->save();
-
+			
+			
+			$file_url = url('contact/'.implode('-',explode(' ',strtolower($firstname.' '.$firstname))).'.vcf');
+			return $file_url; 
 
 
     }

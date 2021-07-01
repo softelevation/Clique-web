@@ -214,7 +214,7 @@
 										@endif
 										</div>
 										<div class="col-md-12">
-										<a class="add-to-contacts" href="{{ 'socialclique://clique/user/profile?userid='.$user->id }}" target="_blank">Add to Contacts</a>
+										<a class="add-to-contacts" href="javascript:void(0)">Add to Contacts</a>
 										</div>
 									</div>
 									
@@ -247,20 +247,23 @@ $(document).ready(function(){
 
   
    // Savaji Rathod 27-04-21 Add to contact Ajax
-   $("#add_to_contact").click(function(e){
-	   var id = $('#profile_id').val();
-	
+   $(".add-to-contacts").click(function(e){
+	   var id = "{{$id}}";
 	  	$.ajax({
 	         url: "{{ url('add-to-contact') }}",
 	         type: "POST",
 	         data:{profile_id:id},
 	         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-	         dataType: "json",
+	         // dataType: "json",
 	         success: function(response) {
+				
+				// console.log(response);
+				
+				window.open(response, '_blank');
 	         	//alert(response);
-	         	$('#reportsTable').html();
-	         	$('#reportsTable').html(response.table);
-	            //location.reload();
+	         	// $('#reportsTable').html();
+	         	// $('#reportsTable').html(response.table);
+	            // location.reload(response);
 	         }
 	      });
 
