@@ -307,7 +307,7 @@ class PagesController extends Controller
             $suffix = '';
 			
             // add personal data
-            $vcard->addName($user->name, $firstname, $additional, $prefix, $suffix);
+            $vcard->addName($firstname, $additional, $prefix, $suffix);
 
             // add work data
             $vcard->addCompany("");
@@ -349,7 +349,7 @@ class PagesController extends Controller
               $vcard->save();
 			
 			
-			$file_url = url('contact/'.implode('-',explode(' ',strtolower($firstname.' '.$firstname))).'.vcf');
+			$file_url = url('contact/'.implode('-',explode(' ',strtolower($firstname))).'.vcf');
 			return $file_url; 
 
 
