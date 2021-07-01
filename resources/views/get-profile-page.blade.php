@@ -158,6 +158,7 @@
 			font-size: 15px;
 		}
 		.join_button {margin-left: 25px;}
+		.image-icone {width: 62px;}
     }
 	
 	
