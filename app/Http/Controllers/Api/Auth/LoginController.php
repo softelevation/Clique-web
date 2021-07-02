@@ -1498,7 +1498,7 @@ class LoginController extends Controller
 				}
 				if($Profile_icone){
 					$message = "Icon update successfully";
-					$Profile_icone->update(array('link'=>$link_url));
+					// $Profile_icone->update(array('link'=>$link_url));
 				}else{
 					$message = "Icon add successfully";
 					ProfileIcone::insert(array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$link_url));
