@@ -141,7 +141,7 @@
 	.join_button{margin-left: 70px;}
 	.main-header {
         background: black;text-align: center;height: 40px;font-size: 24px;}
-	.download-app-body {margin-top: 50px;}
+	.download-app-body {margin-top: 60px;}
 	.user-info-app{position: absolute;width: 100%;margin-left: 20px;}
 	.user-info-app-name{margin-left: 20px;width: 100%;}
 	.tap-link-redirect{color: #fff;}
@@ -175,13 +175,13 @@
 							<div class="container">
 								<div class="rowsicone class-margin">
 									<div class="col-md-4">
-										Login
+										
 									</div>
 									<div class="col-md-4">
 										<img src="{{url('/icone.png')}}" class="icone-image">
 									</div>
 									<div class="col-md-4 join_button">
-										Join
+										
 									</div>
 									
 								</div>
