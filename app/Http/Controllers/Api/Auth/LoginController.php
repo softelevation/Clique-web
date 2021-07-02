@@ -1064,7 +1064,9 @@ class LoginController extends Controller
                     return response()->json($result,$errorCode);
 
                 }else{
-					$request['card_id'] = $request->tag_id;
+					if($request->tag_id){
+						$request['card_id'] = $request->tag_id;
+					}
 					$carddata = Carditems::select("*")
                                     ->where('card_id', $request['card_id'])
                                     ->first();
