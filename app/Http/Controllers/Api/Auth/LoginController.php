@@ -1482,43 +1482,43 @@ class LoginController extends Controller
 			}else{
 				$Profile_icone = ProfileIcone::where('profile_id',$data->profile->id)->where('icone_id',$request->id)->where('type',$request->type)->first();
 				if($request->id == 16){
-					if(strpos($request->link, 'https')){
+					if(substr_count($request->link, 'https')){
 						$link_url = $request->link;
 					}else{
 						$link_url = 'https://www.facebook.com/'.$request->link;
 					}
 				}else if($request->id == 14){
-					if(strpos($request->link, 'https')){
+					if(substr_count($request->link, 'https')){
 						$link_url = $request->link;
 					}else{
 						$link_url = 'https://www.linkedin.com/in/'.$request->link;
 					}
 				}else if($request->id == 2){
-					if(strpos($request->link, 'mailto')){
+					if(substr_count($request->link, 'mailto')){
 						$link_url = $request->link;
 					}else{
 						$link_url = 'mailto:'.$request->link;
 					}
 				}else if($request->id == 1){
-					if(strpos($request->link, 'tel')){
+					if(substr_count($request->link, 'tel')){
 						$link_url = $request->link;
 					}else{
 						$link_url = 'tel:'.$request->link;
 					}
 				}else if($request->id == 30){
-					if(strpos($request->link, 'https')){
+					if(substr_count($request->link, 'https')){
 						$link_url = $request->link;
 					}else{
 						$link_url = 'https://'.$request->link;
 					}
 				}else if($request->id == 17){
-					if(strpos($request->link, 'https')){
+					if(substr_count($request->link, 'https')){
 						$link_url = $request->link;
 					}else{
 						$link_url = 'https://www.twitter.com/'.$request->link;
 					}
 				}else if($request->id == 13){
-					if(strpos($request->link, 'https')){
+					if(substr_count($request->link, 'https')){
 						$link_url = $request->link;
 					}else{
 						$link_url = 'https://www.instagram.com/'.$request->link;
