@@ -1948,9 +1948,10 @@ class LoginController extends Controller
 				// }else if($request['social_type'] == 'f'){
 					// $profile->icone_social = 16;
 				// }
-					if($request->social_type == 'g'){
+					$icone_social = 7;
+					if($request->social_type == 'G'){
 						$icone_social = 7;
-					}else if($request->social_type == 'f'){
+					}else if($request->social_type == 'F'){
 						$icone_social = 16;
 					}
 					
