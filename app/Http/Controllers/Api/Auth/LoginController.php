@@ -1047,11 +1047,12 @@ class LoginController extends Controller
                 $data = [];
                 $message = "";
                 $status = true;
-
+				
+				// if(!$request->tag_id){
                 $validator = Validator::make($request->all(), [
                     'card_id' => 'required',
                 ]);
-                if($validator->fails()){
+                if(!$request->tag_id && $validator->fails()){
                     $status = false;
                     $errorCode = $status ? 200 : 422;
                     $errors = "";
@@ -1063,6 +1064,7 @@ class LoginController extends Controller
                     return response()->json($result,$errorCode);
 
                 }else{
+					$request['card_id'] = $request->tag_id;
 					$carddata = Carditems::select("*")
                                     ->where('card_id', $request['card_id'])
                                     ->first();
