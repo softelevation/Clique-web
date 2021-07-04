@@ -87,6 +87,6 @@ Route::post('verify-forget-password', 'Api\Auth\LoginController@verify_forget_pa
 
 
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+    // return $request->user();
+// });
