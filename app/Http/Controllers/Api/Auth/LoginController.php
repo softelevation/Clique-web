@@ -2182,6 +2182,22 @@ class LoginController extends Controller
 		 
 	 }
 	 
+	
+	public function testingApiSecond(Request $request)
+     {
+			$status = true;
+            $errorCode = $status ? 200 : 422;
+            $errors = "";
+            $result = [
+                "message" => "testingApiSecond",
+                "status" => true,
+                "input" => $request->all(),
+                "errors" => $errors
+            ];
+            return response()->json($result,$errorCode);
+		 
+	 }
+	 
 	 
 	public function testingApi(Request $request)
      {

@@ -85,7 +85,9 @@ Route::post('login-via-email', 'Api\Auth\LoginController@login_via_email');
 Route::post('forget-password', 'Api\Auth\LoginController@forget_password');
 Route::post('verify-forget-password', 'Api\Auth\LoginController@verify_forget_password');
 
+
 Route::post('testing-api', 'Api\Auth\LoginController@testingApi')->name('testing-api');
+Route::post('/testing-api-second', 'Api\Auth\LoginController@testingApiSecond')->name('testing-api-second');
 Route::get('testing-api-get', 'Api\Auth\LoginController@testingApiGet')->name('testing-api-get');
 
 
