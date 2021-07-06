@@ -2165,6 +2165,26 @@ class LoginController extends Controller
         }
     
     }
+	
+	
+	public function testingApi(Request $request)
+     {
+			$status = true;
+            $errorCode = $status ? 200 : 422;
+            $errors = "";
+            $result = [
+                "message" => "testingApi",
+                "status" => true,
+                "input" => $request->all(),
+                "errors" => $errors
+            ];
+            return response()->json($result,$errorCode);
+		 
+	 }
+	 
+	 
+	
+	
     
     
     
