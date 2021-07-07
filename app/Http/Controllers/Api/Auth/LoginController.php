@@ -1474,6 +1474,25 @@ class LoginController extends Controller
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','business')->pluck('icone_id');
 				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
 			}
+			// $data_array = array();
+			foreach($data as $dat){
+				if($dat->category == 'music'){
+					$data_array['music'][] = $dat;
+				}
+				if($dat->category == 'social_media'){
+					$data_array['social_media'][] = $dat;
+				}
+				if($dat->category == 'contact'){
+					$data_array['contact'][] = $dat;
+				}
+				if($dat->category == 'payment'){
+					$data_array['payment'][] = $dat;
+				}
+				if($dat->category == 'more'){
+					$data_array['more'][] = $dat;
+				}
+			}
+			$data = $data_array;
 			$message = "Icon list";
 		}else{
 			if($request->action && $request->action == 'delete'){
