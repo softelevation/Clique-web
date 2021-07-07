@@ -1953,10 +1953,6 @@ class LoginController extends Controller
 				$user->password = '';
 				$user->save();
 				
-				echo '<pre>';
-					print_r($user);
-					die;
-				
 				$profile = new Profile;
 				$profile->user_id = $user->id;
 				
