@@ -1497,12 +1497,21 @@ class LoginController extends Controller
 					$data_array_more['data'][] = $dat;
 				}	
 			}
-			$data_array[0] = $data_array_social_media;
-			$data_array[1] = $data_array_contact;
-			$data_array[2] = $data_array_music;
-			$data_array[3] = $data_array_payment;
-			$data_array[4] = $data_array_more;
-			
+			if(count($data_array_social_media['data'])){
+				array_push($data_array,$data_array_social_media);
+			}
+			if(count($data_array_contact['data'])){
+				array_push($data_array,$data_array_contact);
+			}
+			if(count($data_array_music['data'])){
+				array_push($data_array,$data_array_music);
+			}
+			if(count($data_array_payment['data'])){
+				array_push($data_array,$data_array_payment);
+			}
+			if(count($data_array_more['data'])){
+				array_push($data_array,$data_array_more);
+			}
 			$data = $data_array;
 			
 			$message = "Icon list";
@@ -1513,10 +1522,10 @@ class LoginController extends Controller
 			}else{
 				$Profile_icone = ProfileIcone::where('profile_id',$data->profile->id)->where('icone_id',$request->id)->where('type',$request->type)->first();
 				if($request->id == 16){
-					if(substr_count($request->link, 'https')){
+					if(substr_count($request->link, 'fb:')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://www.facebook.com/'.$request->link;
+						$link_url = 'fb://'.$request->link;
 					}
 				}else if($request->id == 14){
 					if(substr_count($request->link, 'https')){
@@ -2017,7 +2026,7 @@ class LoginController extends Controller
 						$icone_social = 7;
 					}else if($request->social_type == 'F'){
 						$icone_social = 16;
-						$social_link = 'https://www.facebook.com/'.$request->name;
+						$social_link = 'fb://'.$request->name;
 					}
 					
 					$profile = Profile::whereuser_id($user_id)->first();
