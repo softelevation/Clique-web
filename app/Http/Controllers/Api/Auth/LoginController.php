@@ -1474,25 +1474,37 @@ class LoginController extends Controller
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','business')->pluck('icone_id');
 				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
 			}
-			// $data_array = array();
+			$data_array = array();
+			$data_array_music['title'] = 'music'; 
+			$data_array_social_media['title'] = 'social_media'; 
+			$data_array_contact['title'] = 'contact'; 
+			$data_array_payment['title'] = 'payment'; 
+			$data_array_more['title'] = 'more'; 
 			foreach($data as $dat){
 				if($dat->category == 'music'){
-					$data_array['music'][] = $dat;
+					$data_array_music['data'][] = $dat;
 				}
 				if($dat->category == 'social_media'){
-					$data_array['social_media'][] = $dat;
+					$data_array_social_media['data'][] = $dat;
 				}
 				if($dat->category == 'contact'){
-					$data_array['contact'][] = $dat;
+					$data_array_contact['data'][] = $dat;
 				}
 				if($dat->category == 'payment'){
-					$data_array['payment'][] = $dat;
+					$data_array_payment['data'][] = $dat;
 				}
 				if($dat->category == 'more'){
-					$data_array['more'][] = $dat;
-				}
+					$data_array_more['data'][] = $dat;
+				}	
 			}
+			$data_array[0] = $data_array_music;
+			$data_array[1] = $data_array_social_media;
+			$data_array[2] = $data_array_contact;
+			$data_array[3] = $data_array_payment;
+			$data_array[4] = $data_array_more;
+			
 			$data = $data_array;
+			
 			$message = "Icon list";
 		}else{
 			if($request->action && $request->action == 'delete'){
