@@ -1497,19 +1497,19 @@ class LoginController extends Controller
 					$data_array_more['data'][] = $dat;
 				}	
 			}
-			if(count($data_array_social_media['data'])){
+			if(isset($data_array_social_media['data'])){
 				array_push($data_array,$data_array_social_media);
 			}
-			if(count($data_array_contact['data'])){
+			if(isset($data_array_contact['data'])){
 				array_push($data_array,$data_array_contact);
 			}
-			if(count($data_array_music['data'])){
+			if(isset($data_array_music['data'])){
 				array_push($data_array,$data_array_music);
 			}
-			if(count($data_array_payment['data'])){
+			if(isset($data_array_payment['data'])){
 				array_push($data_array,$data_array_payment);
 			}
-			if(count($data_array_more['data'])){
+			if(isset($data_array_more['data'])){
 				array_push($data_array,$data_array_more);
 			}
 			$data = $data_array;
