@@ -2012,20 +2012,21 @@ class LoginController extends Controller
 					// $profile->icone_social = 16;
 				// }
 					$icone_social = 7;
+					$social_link = null;
 					if($request->social_type == 'G'){
 						$icone_social = 7;
 					}else if($request->social_type == 'F'){
 						$icone_social = 16;
+						$social_link = 'https://www.facebook.com/'.$request->name;
 					}
 					
 					$profile = Profile::whereuser_id($user_id)->first();
-					$profile->icone_social = $icone_social;
+					// $profile->icone_social = $icone_social;
 					$profile->current_lat = $current_lat;
 					$profile->current_long = $current_long;
 					$profile->save();
 					
-					
-					ProfileIcone::insert(array('profile_id'=>$profile->id,'icone_id'=>$icone_social,'type'=>'social'));
+					ProfileIcone::insert(array('profile_id'=>$profile->id,'icone_id'=>$icone_social,'link'=>$social_link,'type'=>'social'));
 											
 					
 					$token = JWTAuth::fromUser($user);
