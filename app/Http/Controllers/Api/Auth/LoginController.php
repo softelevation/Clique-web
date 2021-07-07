@@ -1993,6 +1993,10 @@ class LoginController extends Controller
 					$profile->current_long = $current_long;
 					$profile->save();
 					
+					echo '<pre>';
+					print_r($profile);
+					die;
+					
 					
 					ProfileIcone::insert(array('profile_id'=>$profile->id,'icone_id'=>$icone_social,'type'=>'social'));
 											
