@@ -1953,6 +1953,10 @@ class LoginController extends Controller
 				$user->password = '';
 				$user->save();
 				
+				echo '<pre>';
+					print_r($user);
+					die;
+				
 				$profile = new Profile;
 				$profile->user_id = $user->id;
 				
@@ -1992,10 +1996,6 @@ class LoginController extends Controller
 					$profile->current_lat = $current_lat;
 					$profile->current_long = $current_long;
 					$profile->save();
-					
-					echo '<pre>';
-					print_r($profile);
-					die;
 					
 					
 					ProfileIcone::insert(array('profile_id'=>$profile->id,'icone_id'=>$icone_social,'type'=>'social'));
