@@ -1476,7 +1476,7 @@ class LoginController extends Controller
 			}
 			$data_array = array();
 			$data_array_music['title'] = 'music'; 
-			$data_array_social_media['title'] = 'social_media'; 
+			$data_array_social_media['title'] = 'social media'; 
 			$data_array_contact['title'] = 'contact'; 
 			$data_array_payment['title'] = 'payment'; 
 			$data_array_more['title'] = 'more'; 
