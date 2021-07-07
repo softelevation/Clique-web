@@ -43,7 +43,7 @@
     max-width: 414px;
     margin: 0 auto;
     z-index: 999;
-	height: 558px;
+	height: 660px;
     overflow: scroll;
 }
 		
