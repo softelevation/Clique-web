@@ -1987,11 +1987,13 @@ class LoginController extends Controller
 		}else if($request['social_type'] == 'F' || $request['social_type'] == 'G'){
 			$user = User::where('email',$email)->first();
 			if(!$user){
+				$role = 2;
 				$user = new User;
 				$user->name = $request['name'];
 				$user->email = $email;
 				$user->password = '';
 				$user->save();
+				$user->roles()->attach($role); //User role
 				
 				$profile = new Profile;
 				$profile->user_id = $user->id;
