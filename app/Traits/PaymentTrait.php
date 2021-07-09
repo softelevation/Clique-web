@@ -42,6 +42,13 @@ trait PaymentTrait
 	
 	
 	
+	public function getAllCustomer(){
+		$stripe = $this->stripe_token();
+		$stripeCus = $stripe->customers->all(['limit' => 3]);
+		return $stripeCus;
+    }
+	
+	
 	public function createCustomer($stripe, $data){
 		
 		$customer = $stripe->customers->create([

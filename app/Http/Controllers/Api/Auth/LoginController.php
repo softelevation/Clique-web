@@ -1467,12 +1467,13 @@ class LoginController extends Controller
         $user_id = $request['user_id'];
 		$userdata = User::find($user_id);
 		
-		$result = $this->createCharge(array(
-							'card_no'=>$request['card_no'],'exp_month'=>$request['exp_month']
-							,'exp_year'=>$request['exp_year'],'cvc'=>$request['cvc'],
-							'name'=>$userdata->name,'email'=>$userdata->email
-				));
-		$data = $result;
+		$data = $this->getAllCustomer();
+		// $result = $this->createCharge(array(
+							// 'card_no'=>$request['card_no'],'exp_month'=>$request['exp_month']
+							// ,'exp_year'=>$request['exp_year'],'cvc'=>$request['cvc'],
+							// 'name'=>$userdata->name,'email'=>$userdata->email
+				// ));
+		// $data = $result;
 		$message = "Payment successfully";
 		$errors= "";
 		$status = true;
