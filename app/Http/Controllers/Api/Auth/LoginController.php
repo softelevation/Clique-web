@@ -1471,7 +1471,7 @@ class LoginController extends Controller
 		// $result = $this->createCharge(array(
 							// 'card_no'=>$request['card_no'],'exp_month'=>$request['exp_month']
 							// ,'exp_year'=>$request['exp_year'],'cvc'=>$request['cvc'],
-							// 'name'=>$userdata->name,'email'=>$userdata->email
+							// 'name'=>$request['name'],'email'=>$userdata->email,'amount'=>$request['amount'],
 				// ));
 		// $data = $result;
 		$message = "Payment successfully";

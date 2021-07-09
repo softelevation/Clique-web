@@ -15,11 +15,8 @@ trait PaymentTrait
 
     // Create Stripe API Token
     public function stripe_token(){
-		
 		$stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
 		return $stripe;
-		
-		
     }
 
     // Craete Customer on Stripe
@@ -80,7 +77,7 @@ trait PaymentTrait
 		
 		$stripe_charge = $stripe->charges->create([
 		  'customer' => $inputcreateCustomer,
-		  'amount' => 55,
+		  'amount' => $data['amount'],
 		  'currency' => 'INR',
 		  'description' => 'My First Test Charge (created for API docs)',
 		]);
