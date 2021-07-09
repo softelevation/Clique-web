@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-
+use App\Traits\PaymentTrait;
 use App\User;
 use App\Profile;
 use App\TempProfile;
@@ -39,7 +39,7 @@ use App\Mail\OtpRequest;
 
 class LoginController extends Controller
 {
-
+	use PaymentTrait;
     /************************************************************************************
      * Login API
     *************************************************************************************/
@@ -1458,6 +1458,26 @@ class LoginController extends Controller
         ];
         return $this->sendResult($message,$data,$errors,$status);
     }
+	
+	public function makepayment(Request $request){
+		
+		$errors = "";
+        $data = [];
+        $message = "";
+        $user_id = $request['user_id'];
+		$userdata = User::find($user_id);
+		
+		$result = $this->createCharge(array(
+							'card_no'=>$request['card_no'],'exp_month'=>$request['exp_month']
+							,'exp_year'=>$request['exp_year'],'cvc'=>$request['cvc'],
+							'name'=>$userdata->name,'email'=>$userdata->email
+				));
+		$data = $result;
+		$message = "Payment successfully";
+		$errors= "";
+		$status = true;
+        return $this->sendResult($message,$data,$errors,$status);
+	}
 	
 	
 	public function gettempIcone(Request $request){
