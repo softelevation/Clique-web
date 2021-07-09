@@ -1464,20 +1464,23 @@ class LoginController extends Controller
 		$errors = "";
         $data = [];
         $message = "";
-        $user_id = $request['user_id'];
-		$userdata = User::find($user_id);
-		
-		$data = $this->getAllCustomer();
-		// $result = $this->createCharge(array(
-							// 'card_no'=>$request['card_no'],'exp_month'=>$request['exp_month']
-							// ,'exp_year'=>$request['exp_year'],'cvc'=>$request['cvc'],
-							// 'name'=>$request['name'],'email'=>$userdata->email,'amount'=>$request['amount'],
-				// ));
-		// $data = $result;
-		$message = "Payment successfully";
-		$errors= "";
-		$status = true;
-        return $this->sendResult($message,$data,$errors,$status);
+		try{
+			$user_id = $request['user_id'];
+			$userdata = User::find($user_id);
+			$data = $this->createCharge(array(
+								'card_no'=>$request['card_no'],'exp_month'=>$request['exp_month']
+								,'exp_year'=>$request['exp_year'],'cvc'=>$request['cvc'],
+								'name'=>$request['name'],'email'=>$userdata->email,'amount'=>$request['amount'],
+					));
+			$message = "Payment successfully";
+			$errors= "";
+			$status = true;
+			return $this->sendResult($message,$data,$errors,$status);
+		}catch(\Exception $e){
+			$status = false;
+			$message = $e->getMessage();
+            return $this->sendResult($message,$data,$errors,$status);
+        }
 	}
 	
 	
