@@ -77,7 +77,7 @@ trait PaymentTrait
 		
 		$stripe_charge = $stripe->charges->create([
 		  'customer' => $inputcreateCustomer,
-		  'amount' => $data['amount'],
+		  'amount' => round($data['amount'] * 100),
 		  'currency' => 'INR',
 		  'description' => 'My First Test Charge (created for API docs)',
 		]);
