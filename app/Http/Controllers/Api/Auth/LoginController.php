@@ -30,6 +30,7 @@ use App\Countries;
 use App\ProfileIcone;
 use App\Orders;
 use App\Icone;
+use App\UserPaymentHistory;
 
 use DB;
 
@@ -1472,6 +1473,14 @@ class LoginController extends Controller
 								,'exp_year'=>$request['exp_year'],'cvc'=>$request['cvc'],
 								'name'=>$request['name'],'email'=>$userdata->email,'amount'=>$request['amount'],
 					));
+			if(isset($data->status) && $data->status == 'succeeded'){
+				Profile::where('user_id',$user_id)->update(array('is_pro'=>'1'));
+				UserPaymentHistory::insert(array(
+									'user_id'=>$user_id,'charge_id'=>$data->id,
+									'amount'=>$data->amount,'status'=>$data->status,
+									'is_refund'=>0
+				));
+			}
 			$message = "Payment successfully";
 			$errors= "";
 			$status = true;
@@ -2061,7 +2070,8 @@ class LoginController extends Controller
 					$profile->current_long = $current_long;
 					$profile->save();
 					
-					ProfileIcone::insert(array('profile_id'=>$profile->id,'icone_id'=>$icone_social,'link'=>$social_link,'type'=>'social'));
+					// ProfileIcone::insert(array('profile_id'=>$profile->id,'icone_id'=>$icone_social,'link'=>$social_link,'type'=>'social'));
+					ProfileIcone::updateOrCreate(array('profile_id'=>$profile->id,'icone_id'=>$icone_social),array('profile_id'=>$profile->id,'icone_id'=>$icone_social,'link'=>$social_link,'type'=>'social'));
 											
 					
 					$token = JWTAuth::fromUser($user);
