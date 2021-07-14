@@ -13,6 +13,7 @@ use App\Profile;
 use App\SocialNetwork;
 use App\UserOtp;
 use App\Company;
+use App\ProfileIcone;
 use App\Companyusers;
 use App\Usercontact;
 use App\Carditems;
@@ -377,6 +378,8 @@ class CorporateController extends Controller
         $company_data = $company_data->orderBy('company.id', 'ASC')->get()->toArray();
         $arr4 = array("company_data" => $company_data);
         $res3 = array_merge($res2, $arr4);
+		$profile_icones = ProfileIcone::with('icone')->where('profile_id',$result2['id'])->get();
+		$res3['social'] = $profile_icones;
         $message = "Profile detail Successfully";
         $status = true;
             $data = [
