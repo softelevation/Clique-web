@@ -1561,17 +1561,11 @@ class LoginController extends Controller
 				ProfileIcone::find($request->id)->delete();
 			}else{
 				$Profile_icone = ProfileIcone::where('profile_id',$data->profile->id)->where('icone_id',$request->id)->where('type',$request->type)->first();
-				if($request->id == 16){
-					if(substr_count($request->link, 'fb:')){
+				if($request->id == 1){
+					if(substr_count($request->link, 'tel')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'fb://'.$request->link;
-					}
-				}else if($request->id == 14){
-					if(substr_count($request->link, 'https')){
-						$link_url = $request->link;
-					}else{
-						$link_url = 'https://www.linkedin.com/in/'.$request->link;
+						$link_url = 'tel:'.$request->link;
 					}
 				}else if($request->id == 2){
 					if(substr_count($request->link, 'mailto')){
@@ -1579,17 +1573,77 @@ class LoginController extends Controller
 					}else{
 						$link_url = 'mailto:'.$request->link;
 					}
-				}else if($request->id == 1){
-					if(substr_count($request->link, 'tel')){
+				}else if($request->id == 3){
+					if(substr_count($request->link, 'story.snapchat.com')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'tel:'.$request->link;
+						$link_url = 'https://story.snapchat.com/u/'.$request->link;
 					}
-				}else if($request->id == 30){
+				}else if($request->id == 4){
+					if(substr_count($request->link, 'primevideo.com')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'https://www.primevideo.com/'.$request->link;
+					}
+				}else if($request->id == 5){
+					if(substr_count($request->link, 'paypal.com')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'https://www.paypal.com/'.$request->link;
+					}
+				}else if($request->id == 6){
+					if(substr_count($request->link, 'm.p-y.tm')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'http://m.p-y.tm/'.$request->link;
+					}
+				}else if($request->id == 7){
+					if(substr_count($request->link, 'google.com')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'http://google.com/'.$request->link;
+					}
+				}else if($request->id == 8){
+					if(substr_count($request->link, 'player.vimeo.com')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'http://player.vimeo.com/video/'.$request->link;
+					}
+				}else if($request->id == 11){
+					if(substr_count($request->link, 'zomato.com')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'https://www.zomato.com/'.$request->link;
+					}
+				}else if($request->id == 12){
+					if(substr_count($request->link, 'youtube')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'youtube://'.$request->link;
+					}
+				}else if($request->id == 13){
 					if(substr_count($request->link, 'https')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://'.$request->link;
+						$link_url = 'https://www.instagram.com/'.$request->link;
+					}
+				}else if($request->id == 14){
+					if(substr_count($request->link, 'https')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'https://www.linkedin.com/in/'.$request->link;
+					}
+				}else if($request->id == 15){
+					if(substr_count($request->link, 'spotify')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'spotify:'.$request->link;
+					}
+				}else if($request->id == 16){
+					if(substr_count($request->link, 'fb:')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'fb://'.$request->link;
 					}
 				}else if($request->id == 17){
 					if(substr_count($request->link, 'https')){
@@ -1597,11 +1651,77 @@ class LoginController extends Controller
 					}else{
 						$link_url = 'https://www.twitter.com/'.$request->link;
 					}
-				}else if($request->id == 13){
+				}else if($request->id == 19){
+					if(substr_count($request->link, 'musics')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'musics://'.$request->link;
+					}
+				}else if($request->id == 20){
+					if(substr_count($request->link, 'cash.app/')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'cash.app/'.$request->link;
+					}
+				}else if($request->id == 21){
+					if(substr_count($request->link, 'joinclubhouse.com')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'https://www.joinclubhouse.com/'.$request->link;
+					}
+				}else if($request->id == 22){
+					if(substr_count($request->link, 'apps.apple.com/us/app/facetime')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'https://apps.apple.com/us/app/facetime/'.$request->link;
+					}
+				}else if($request->id == 23){
+					if(substr_count($request->link, 'deezer.com')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'https://www.deezer.com/'.$request->link;
+					}
+				}else if($request->id == 24){
+					if(substr_count($request->link, 'deezer.com')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'https://www.deezer.com/'.$request->link;
+					}
+				}else if($request->id == 25){
+					if(substr_count($request->link, 'files.google.com')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'https://files.google.com/'.$request->link;
+					}
+				}else if($request->id == 26){
+					if(substr_count($request->link, 'pinterest')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'pinterest://'.$request->link;
+					}
+				}else if($request->id == 27){
+					if(substr_count($request->link, 'pcast')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'pcast://'.$request->link;
+					}
+				}else if($request->id == 28){
+					if(substr_count($request->link, 'soundcloud')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'soundcloud://'.$request->link;
+					}
+				}else if($request->id == 29){
+					if(substr_count($request->link, 'tiktok.com')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'https://www.tiktok.com/'.$request->link;
+					}
+				}else if($request->id == 30){
 					if(substr_count($request->link, 'https')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://www.instagram.com/'.$request->link;
+						$link_url = 'https://'.$request->link;
 					}
 				}else{
 					$link_url = $request->link;
