@@ -795,7 +795,14 @@ class LoginController extends Controller
          $errors = "";
          $status = true;
          $message = "";
-         $getUsers = DB::select('CALL GetNearByUsers(?,?,?)',array($lat,$long,$km));
+         // $getUsers = DB::select('CALL GetNearByUsers(?,?,?)',array($lat,$long,$km));
+		 
+         $getUsers = Profile::where('current_lat','!=','')->select(DB::raw("*, 111.111 *
+                    DEGREES(ACOS(LEAST(1.0, COS(RADIANS(".$lat."))
+                    * COS(RADIANS(current_lat))
+                    * COS(RADIANS(".$long." - current_long))
+                    + SIN(RADIANS(".$lat."))
+                    * SIN(RADIANS(current_lat))))) AS distance_in_km"))->having('distance_in_km', '<', $km)->get();
          $data = array();
          if(!empty($getUsers) || isset($getUsers))
          {
