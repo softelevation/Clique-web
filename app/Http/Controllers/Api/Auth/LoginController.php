@@ -803,6 +803,9 @@ class LoginController extends Controller
                     * COS(RADIANS(".$long." - current_long))
                     + SIN(RADIANS(".$lat."))
                     * SIN(RADIANS(current_lat))))) AS distance_in_km"))->having('distance_in_km', '<', $km)->get();
+		if(!$getUsers->toArray()){
+			$getUsers = Profile::where('current_lat','!=','')->get();
+		}
          $data = array();
          if(!empty($getUsers) || isset($getUsers))
          {
