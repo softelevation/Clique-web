@@ -1627,10 +1627,10 @@ class LoginController extends Controller
 						$link_url = 'youtube://'.$request->link;
 					}
 				}else if($request->id == 13){
-					if(substr_count($request->link, 'https')){
+					if(substr_count($request->link, 'instagram')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://www.instagram.com/'.$request->link;
+						$link_url = 'instagram://media?id='.$request->link;
 					}
 				}else if($request->id == 14){
 					if(substr_count($request->link, 'https')){

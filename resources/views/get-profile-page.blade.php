@@ -144,7 +144,7 @@
 	.main-header {
         background: black;text-align: center;height: 40px;font-size: 24px;}
 	.download-app-body {margin-top: 60px;}
-	.user-info-app{position: absolute;width: 100%;margin-left: 20px;}
+	.user-info-app{position: absolute;width: 250px;margin-left: 20px;display: inline-block;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;}
 	.user-info-app-name{margin-left: 20px;width: 100%;}
 	.tap-link-redirect{color: #fff;}
 	@media (max-width: 800px) {
