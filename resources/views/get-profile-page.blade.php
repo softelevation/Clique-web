@@ -133,6 +133,7 @@
 	.col-mds-8 {float: right;margin-top: 10px;}
 	.col-mds-3 {margin: 9px;}
 	.icone-image{width: 110px;}
+	img.pro-icone-img {width: 20px;}
 	.rowsicone{
 			    margin-top: 25px;
     content: cornflowerblue;
@@ -197,7 +198,11 @@
 										@endif
 									</div>
 									<div class="col-mds-8">
-									  <h5 class="user-info-app-name">{{ ucfirst($user->name) }}</h5>
+									  <h5 class="user-info-app-name">{{ ucfirst($user->name) }} 
+										@if($user->profile->is_pro)
+										<img class="pro-icone-img" src="{{url('avatars/check.png')}}" />
+										@endIf
+									  </h5>
 									  <p class="user-info-app">{{ ucfirst($user->profile->bio) }}</p>
 									</div>
 								</div>
