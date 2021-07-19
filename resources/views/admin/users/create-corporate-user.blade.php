@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label>Select Corporate <span class="text-danger">*</span></label>
 						    <select class="form-control form-control-solid" name="companyid" id="companyid">
-                                <option value="">Select compnay</option>
+                                <option value="">Select company</option>
                                 @foreach($c_users as $company)
                             <option value="{{ $company['id'] }}">{{ $company['name'] }}</option>
                                 @endforeach
