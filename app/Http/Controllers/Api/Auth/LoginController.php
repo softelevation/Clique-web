@@ -1626,10 +1626,10 @@ class LoginController extends Controller
 						$link_url = 'https://www.zomato.com/'.$request->link;
 					}
 				}else if($request->id == 12){
-					if(substr_count($request->link, 'youtube')){
+					if(substr_count($request->link, 'https://youtube.com')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'youtube://'.$request->link;
+						$link_url = 'https://youtube.com/'.$request->link;
 					}
 				}else if($request->id == 13){
 					if(substr_count($request->link, 'instagram')){
