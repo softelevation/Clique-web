@@ -1733,6 +1733,12 @@ class LoginController extends Controller
 					}else{
 						$link_url = 'https://'.$request->link;
 					}
+				}else if($request->id == 31){
+					if(substr_count($request->link, 'bitclout')){
+						$link_url = $request->link;
+					}else{
+						$link_url = 'bitclout://'.$request->link;
+					}
 				}else{
 					$link_url = $request->link;
 				}
