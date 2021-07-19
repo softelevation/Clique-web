@@ -1511,6 +1511,7 @@ class LoginController extends Controller
         $message = "";
         $user_id = $request['user_id'];
 		$data = User::where('id','=',$user_id)->first();
+		$data_is_pro = $data->profile->is_pro;
 		if(count($request->all()) == 2){
 			if($request->type == 'social'){
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','social')->pluck('icone_id');
@@ -1524,8 +1525,12 @@ class LoginController extends Controller
 			$data_array_social_media['title'] = 'social media'; 
 			$data_array_contact['title'] = 'contact'; 
 			$data_array_payment['title'] = 'payment'; 
-			$data_array_more['title'] = 'more'; 
+			$data_array_more['title'] = 'more';
+			
 			foreach($data as $dat){
+				if($data_is_pro){
+					$dat->is_pro = 0;
+				}
 				if($dat->category == 'social_media'){
 					$data_array_social_media['data'][] = $dat;
 				}
@@ -1591,10 +1596,10 @@ class LoginController extends Controller
 						$link_url = 'https://www.primevideo.com/'.$request->link;
 					}
 				}else if($request->id == 5){
-					if(substr_count($request->link, 'paypal.com')){
+					if(substr_count($request->link, 'paypal://')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://www.paypal.com/'.$request->link;
+						$link_url = 'paypal://'.$request->link;
 					}
 				}else if($request->id == 6){
 					if(substr_count($request->link, 'm.p-y.tm')){

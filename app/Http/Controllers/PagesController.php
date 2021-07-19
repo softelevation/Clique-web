@@ -323,14 +323,8 @@ class PagesController extends Controller
 			}
 			
             foreach ($icone_socials as $key => $row) {
-                // if (strpos($row->media_value, 'http://') == 0){
 				if($row->link){
 					$web_url = $row->link;
-                // }elseif(strpos($row->media_value, 'http://') == 0){
-                    // $web_url = $row->media_value;
-                // }else{
-                    // $web_url = "https://".$row->media_value;
-                // }
 					$vcard->addURL($web_url);
 				}
             }
