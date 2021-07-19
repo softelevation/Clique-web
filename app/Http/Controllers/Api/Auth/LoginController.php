@@ -1638,10 +1638,10 @@ class LoginController extends Controller
 						$link_url = 'instagram://media?id='.$request->link;
 					}
 				}else if($request->id == 14){
-					if(substr_count($request->link, 'https')){
+					if(substr_count($request->link, 'linkedin://')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://www.linkedin.com/in/'.$request->link;
+						$link_url = 'linkedin://profile/'.$request->link;
 					}
 				}else if($request->id == 15){
 					if(substr_count($request->link, 'spotify')){
