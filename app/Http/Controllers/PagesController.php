@@ -227,7 +227,7 @@ class PagesController extends Controller
         
         return view('get-profile-page', compact('id', 'user', 'company', 
 		// 'social_mtype_website',
-		'icone_socials',
+		'icone_socials'
         // 'social_mtype_mail',
         // 'social_mtype_instagram',
         // 'social_mtype_facebook',
