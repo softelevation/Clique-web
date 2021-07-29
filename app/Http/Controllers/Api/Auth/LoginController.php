@@ -266,6 +266,18 @@ class LoginController extends Controller
                 $profile = new Profile;
                 $profile->user_id = $user_id;
                 $profile->bio = ($request['bio']) ? $request['bio'] : '';
+				if($request->gender){
+					$profile->gender = $request->gender;
+				}
+				if($request->date_of_birth){
+					$profile->date_of_birth = $request->date_of_birth;
+				}
+				if($request->current_lat){
+					$profile->current_lat = $request->current_lat;
+				}
+				if($request->current_long){
+					$profile->current_long = $request->current_long;
+				}
                 $profile->privacy = 0;
 				if(!empty($request['avatar'])){
 					$image = $request['avatar'];  // your base64 encoded
@@ -2114,7 +2126,6 @@ class LoginController extends Controller
 					$errors = "";
 					$result1 = $user->toArray();
 					$user_id = $result1['id'];
-					
 					
 					$profile = Profile::whereuser_id($user_id)->first();
 					$profile->current_lat = $current_lat;
