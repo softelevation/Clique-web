@@ -2441,10 +2441,11 @@ class LoginController extends Controller
 			$status = true;
             $errorCode = $status ? 200 : 422;
             $errors = "";
+			$input = JWTAuth::toUser();
             $result = [
                 "message" => "testingApi",
                 "status" => true,
-                "input" => $request->all(),
+                "input" => $input,
                 "errors" => $errors
             ];
             return response()->json($result,$errorCode);
