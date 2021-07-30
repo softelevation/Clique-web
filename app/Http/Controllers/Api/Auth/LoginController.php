@@ -425,6 +425,12 @@ class LoginController extends Controller
 		if($request->bio){
 			$profile->bio = $request->bio;
 		}
+		if($request->gender){
+			$profile->gender = $request->gender;
+		}
+		if($request->date_of_birth){
+			$profile->date_of_birth = $request->date_of_birth;
+		}
 		if($request->avatar){
 			// $profile->avatar = $request->avatar;
 			$image = $request->avatar;
