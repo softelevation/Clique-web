@@ -828,6 +828,8 @@ class LoginController extends Controller
                         'user_id' => $user_data->id,
                         'name' => $user_data->name,
                         'avatar' => $value->avatar,
+						'current_lat' => $value->current_lat,
+						'current_long' => $value->current_long
                     ];
                 }
             }
