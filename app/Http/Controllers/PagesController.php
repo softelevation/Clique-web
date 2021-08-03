@@ -322,14 +322,12 @@ class PagesController extends Controller
 			if($icone_socials_tel){
 				$vcard->addPhoneNumber(ltrim($icone_socials_tel->link,'tel:'), 'WORK');
 			}
-			
             foreach ($icone_socials as $key => $row) {
 				if($row->link){
 					$web_url = $row->link;
-					$vcard->addURL($web_url);
+					$vcard->addURL($web_url,"TYPE={$row->icone->name}");
 				}
             }
-			
             //$vcard->addLabel('Webtual, Testing, workpostcode Belgium,Ahmedabad');
 
             //$vcard->addAddress(null, null, 'street', 'worktown', null, 'workpostcode', 'Belgium');
