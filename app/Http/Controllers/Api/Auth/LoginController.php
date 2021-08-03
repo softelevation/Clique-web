@@ -1569,11 +1569,11 @@ class LoginController extends Controller
 					$data_array_more['data'][] = $dat;
 				}	
 			}
-			if(isset($data_array_social_media['data'])){
-				array_push($data_array,$data_array_social_media);
-			}
 			if(isset($data_array_contact['data'])){
 				array_push($data_array,$data_array_contact);
+			}
+			if(isset($data_array_social_media['data'])){
+				array_push($data_array,$data_array_social_media);
 			}
 			if(isset($data_array_music['data'])){
 				array_push($data_array,$data_array_music);
