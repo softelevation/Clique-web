@@ -526,32 +526,32 @@ class LoginController extends Controller
                 //Insert TempSocialNetwork Start
                 $socialdata = json_decode($request['socialdata'], true);
                 $user_id_val = $request['user_id'];
-                foreach ($socialdata as $keys => $values) {
-                    $keytexts = $keys;
-                    foreach ($values as $keys => $value1s) {
-                        if($value1s['id'] == "" ||  empty($value1s['id'])){
-                            $tempsocialnetwork_new = new TempSocialNetwork;
-                            $tempsocialnetwork_new->user_id = $user_id_val;
-                            $tempsocialnetwork_new->media_type = $keytexts;
-                            $tempsocialnetwork_new->media_value = $value1s['mediaValue'];
-                            $tempsocialnetwork_new->status = 0;
-                            $tempsocialnetwork_new->save();
-                        }else{
-                            $tempsocialnetwork_update = TempSocialNetwork::select("*")
-                            ->where('user_id', $user_id_val)
-                            ->Where('id', $value1s['id'])
-                            ->first();
+                // foreach ($socialdata as $keys => $values) {
+                    // $keytexts = $keys;
+                    // foreach ($values as $keys => $value1s) {
+                        // if($value1s['id'] == "" ||  empty($value1s['id'])){
+                            // $tempsocialnetwork_new = new TempSocialNetwork;
+                            // $tempsocialnetwork_new->user_id = $user_id_val;
+                            // $tempsocialnetwork_new->media_type = $keytexts;
+                            // $tempsocialnetwork_new->media_value = $value1s['mediaValue'];
+                            // $tempsocialnetwork_new->status = 0;
+                            // $tempsocialnetwork_new->save();
+                        // }else{
+                            // $tempsocialnetwork_update = TempSocialNetwork::select("*")
+                            // ->where('user_id', $user_id_val)
+                            // ->Where('id', $value1s['id'])
+                            // ->first();
                             
-                            if($tempsocialnetwork_update == null){
+                            // if($tempsocialnetwork_update == null){
                             
-                            }else{
-                                $tempsocialnetwork_update->media_value = $value1s['mediaValue'];
-                                $tempsocialnetwork_update->status = 0;
-                                $tempsocialnetwork_update->save();
-                            }
-                        }
-                    }
-                }
+                            // }else{
+                                // $tempsocialnetwork_update->media_value = $value1s['mediaValue'];
+                                // $tempsocialnetwork_update->status = 0;
+                                // $tempsocialnetwork_update->save();
+                            // }
+                        // }
+                    // }
+                // }
                 //Insert TempSocialNetwork End
             }
             //Temp Profile Code End
@@ -560,6 +560,12 @@ class LoginController extends Controller
             
             $profile->bio = $request['bio'];
             $profile->privacy = ($request['privacy'] == null) ? 0 : $request['privacy'];
+			if($request->date_of_birth){
+				$profile->date_of_birth = $request->date_of_birth;
+			}
+			if($request->gender){
+				$profile->gender = $request->gender;
+			}
             $profile->avatar = $image_name;
             $profile->current_lat = $request['current_lat'];
             $profile->current_long = $request['current_long'];
@@ -568,32 +574,32 @@ class LoginController extends Controller
 
             $data = json_decode($request['socialdata'], true);
             $user_id_new = $request['user_id'];
-            foreach ($data as $key => $value) {
-                $keytext = $key;
-                foreach ($value as $key => $value1) {
-                    if($value1['id'] == "" ||  empty($value1['id'])){
-                        $socialnetwork_new = new SocialNetwork;
-                        $socialnetwork_new->user_id = $user_id_new;
-                        $socialnetwork_new->media_type = $keytext;
-                        $socialnetwork_new->media_value = $value1['mediaValue'];
-                        $socialnetwork_new->status = $value1['status'];
-                        $socialnetwork_new->save();
-                    }else{
-                        $socialnetwork_update = SocialNetwork::select("*")
-                        ->where('user_id', $user_id_new)
-                        ->Where('id', $value1['id'])
-                        ->first();
+            // foreach ($data as $key => $value) {
+                // $keytext = $key;
+                // foreach ($value as $key => $value1) {
+                    // if($value1['id'] == "" ||  empty($value1['id'])){
+                        // $socialnetwork_new = new SocialNetwork;
+                        // $socialnetwork_new->user_id = $user_id_new;
+                        // $socialnetwork_new->media_type = $keytext;
+                        // $socialnetwork_new->media_value = $value1['mediaValue'];
+                        // $socialnetwork_new->status = $value1['status'];
+                        // $socialnetwork_new->save();
+                    // }else{
+                        // $socialnetwork_update = SocialNetwork::select("*")
+                        // ->where('user_id', $user_id_new)
+                        // ->Where('id', $value1['id'])
+                        // ->first();
                         
-                        if($socialnetwork_update == null){
+                        // if($socialnetwork_update == null){
                             
-                        }else{
-                            $socialnetwork_update->media_value = $value1['mediaValue'];
-                            $socialnetwork_update->status = $value1['status'];
-                            $socialnetwork_update->save();
-                        }
-                    }
-                }
-            }
+                        // }else{
+                            // $socialnetwork_update->media_value = $value1['mediaValue'];
+                            // $socialnetwork_update->status = $value1['status'];
+                            // $socialnetwork_update->save();
+                        // }
+                    // }
+                // }
+            // }
             
             //Profile Code End
             
