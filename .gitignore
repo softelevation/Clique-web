@@ -1,5 +1,5 @@
 /node_modules
-/storage/*.key
+/storage
 /vendor
 .env
 .env.backup
