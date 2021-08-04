@@ -560,12 +560,8 @@ class LoginController extends Controller
             
             $profile->bio = $request['bio'];
             $profile->privacy = ($request['privacy'] == null) ? 0 : $request['privacy'];
-			if($request->date_of_birth){
-				$profile->date_of_birth = $request->date_of_birth;
-			}
-			if($request->gender){
-				$profile->gender = $request->gender;
-			}
+			$profile->date_of_birth = $request->date_of_birth;
+			$profile->gender = $request->gender;
             $profile->avatar = $image_name;
             $profile->current_lat = $request['current_lat'];
             $profile->current_long = $request['current_long'];
