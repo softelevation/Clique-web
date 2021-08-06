@@ -43,11 +43,11 @@ Route::post('putorder', 'Api\Auth\LoginController@putorder');
 
 //G
 Route::post('tempactiveinactive', 'Api\Auth\LoginController@tempactiveinactive');
-Route::post('gettempprofile', 'Api\Auth\LoginController@gettempprofile');
+Route::post('gettempprofile', 'Api\Auth\LoginController@gettempprofile'); // token
 Route::post('tempprofileupdate', 'Api\Auth\LoginController@tempprofileupdate');
 
-Route::post('gettempicone', 'Api\Auth\LoginController@gettempIcone');
-Route::post('makepayment', 'Api\Auth\LoginController@makepayment');
+Route::post('gettempicone', 'Api\Auth\LoginController@gettempIcone'); // token
+Route::post('makepayment', 'Api\Auth\LoginController@makepayment'); // token
 
 Route::post('qrgenerated', 'Api\Auth\LoginController@qrgenerated');
 /************************************************************************************

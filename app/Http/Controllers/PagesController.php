@@ -180,12 +180,7 @@ class PagesController extends Controller
             $id = $request['param'];
         }
 		
-		try {
-			$decrypted = Crypt::decrypt($id);
-		} catch (DecryptException $e) {
-			//
-			$decrypted = $id;
-		}
+		$decrypted = base64_decode($id);
         // $profiles = Profile::find($id);
 		// $id = $profiles->user_id;
         $user = User::find($decrypted);
