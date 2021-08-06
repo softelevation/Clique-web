@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 use App\Countries;
 use App\Orders;
 use App\Contacts;
@@ -178,14 +180,19 @@ class PagesController extends Controller
             $id = $request['param'];
         }
 		
+		try {
+			$decrypted = Crypt::decrypt($id);
+		} catch (DecryptException $e) {
+			//
+			$decrypted = $id;
+		}
         // $profiles = Profile::find($id);
 		// $id = $profiles->user_id;
-        $user = User::find($id);
+        $user = User::find($decrypted);
 		
-        
         if($user->is_temp == 1){
             
-            $company = Company::where('user_id', $id)->first();
+            $company = Company::where('user_id', $user->id)->first();
             // $social_mtype_website = TempSocialNetwork::where('media_type', 'website')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
             // $social_mtype_mail = TempSocialNetwork::where('media_type', 'socialMail')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
             // $social_mtype_instagram = TempSocialNetwork::where('media_type', 'instagram')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
@@ -205,7 +212,7 @@ class PagesController extends Controller
             
         }else{
             
-            $company = Company::where('user_id', $id)->first();
+            $company = Company::where('user_id', $user->id)->first();
             // $social_mtype_website = SocialNetwork::where('media_type', 'website')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
             // $social_mtype_mail = SocialNetwork::where('media_type', 'socialMail')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
             // $social_mtype_instagram = SocialNetwork::where('media_type', 'instagram')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
