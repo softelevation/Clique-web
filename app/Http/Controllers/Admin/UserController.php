@@ -57,7 +57,7 @@ class UserController extends Controller
                     if($row->avatar == '/user/default.png'){
                         $storage_path = asset('media/users/blank.png');
                     }else{
-                        $storage_path = asset('storage/'.$row->avatar);
+                        $storage_path = asset($row->avatar);
                     }
                     $btn = '<div class="d-flex align-items-center">
                                     <div class="symbol symbol-40 symbol-sm flex-shrink-0">
@@ -129,7 +129,7 @@ public function systemadminindex(Request $request)
                 if($row->avatar == '/user/default.png'){
                     $storage_path = asset('media/users/blank.png');
                 }else{
-                    $storage_path = asset('storage/'.$row->avatar);
+                    $storage_path = asset($row->avatar);
                 }
                 $btn = '<div class="d-flex align-items-center">
                                 <div class="symbol symbol-40 symbol-sm flex-shrink-0">
@@ -195,7 +195,7 @@ public function corporateadminindex(Request $request)
                 if($row->avatar == '/user/default.png'){
                     $storage_path = asset('media/users/blank.png');
                 }else{
-                    $storage_path = asset('storage/'.$row->avatar);
+                    $storage_path = asset($row->avatar);
                 }
                 $btn = '<div class="d-flex align-items-center">
                                 <div class="symbol symbol-40 symbol-sm flex-shrink-0">
