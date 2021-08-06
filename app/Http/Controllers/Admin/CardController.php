@@ -66,7 +66,7 @@ class CardController extends Controller
                         if($row->u_avtar == '/user/default.png'){
                             $storage_path = asset('media/users/blank.png');
                         }else{
-                            $storage_path = asset('storage/'.$row->u_avtar);
+                            $storage_path = asset($row->u_avtar);
                         }
                         $btn = '<div class="d-flex align-items-center">
                                         <div class="symbol symbol-40 symbol-sm flex-shrink-0">
