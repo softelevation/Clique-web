@@ -293,6 +293,7 @@ class LoginController extends Controller
 				$profile->avatar = $companylogo;
                 $profile->save();
 				$res3 = array_merge($user->toArray(),$profile->toArray());
+				$res3['custom_id'] = Crypt::encrypt($res3['user_id']);
                         if($request['typeuser'] == 4)
                         {
                                 $res_company = Company::whereuser_id($request['companyid'])->first()->toArray();
@@ -2164,6 +2165,7 @@ class LoginController extends Controller
 					$company_data = $company_data->orderBy('company.id', 'ASC')->get()->toArray();
 					$arr4 = array("company_data" => $company_data);
 					$res3 = array_merge($res2, $arr4);
+					$res3['custom_id'] = Crypt::encrypt($res3['user_id']);
 			
 					
 					
@@ -2265,6 +2267,7 @@ class LoginController extends Controller
 					$company_data = $company_data->orderBy('company.id', 'ASC')->get()->toArray();
 					$arr4 = array("company_data" => $company_data);
 					$res3 = array_merge($res2, $arr4);
+					$res3['custom_id'] = Crypt::encrypt($res3['user_id']);
 					$message = "Login Successfull";
 					$status = true;
 					$data = [
