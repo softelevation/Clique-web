@@ -25,29 +25,25 @@ Route::post('new-register', 'Api\Auth\LoginController@newRegister');
 
 Route::post('ragisterwithotp', 'Api\Auth\LoginController@ragisterwithotp');
 Route::post('profileupdate', 'Api\Auth\LoginController@profileupdate');
-Route::post('userprofileupdate', 'Api\Auth\LoginController@userprofileupdate');
+
 Route::post('loginprofileupdate', 'Api\Auth\LoginController@loginprofileupdate');
 Route::post('emailcheck', 'Api\Auth\LoginController@emailcheck');
-Route::post('nearbyusers', 'Api\Auth\LoginController@nearbyusers');
 Route::post('usersdetails', 'Api\Auth\LoginController@usersdetails');
 Route::post('testapi', 'Api\Auth\LoginController@testapi');
 Route::post('companyadd', 'Api\Auth\LoginController@companyadd');
 Route::post('addcontact', 'Api\Auth\LoginController@addcontact');
 Route::post('addcontactlist', 'Api\Auth\LoginController@addcontactlist');
 Route::post('removecontact', 'Api\Auth\LoginController@removecontact');
-Route::post('writecard', 'Api\Auth\LoginController@writecard');
-Route::post('validatecard', 'Api\Auth\LoginController@validatecard');
+
+
 Route::post('socialdelete', 'Api\Auth\LoginController@socialdelete');
 Route::post('countrylist', 'Api\Auth\LoginController@countrylist');
 Route::post('putorder', 'Api\Auth\LoginController@putorder');
 
 //G
 Route::post('tempactiveinactive', 'Api\Auth\LoginController@tempactiveinactive');
-Route::post('gettempprofile', 'Api\Auth\LoginController@gettempprofile'); // token
-Route::post('tempprofileupdate', 'Api\Auth\LoginController@tempprofileupdate');
 
-Route::post('gettempicone', 'Api\Auth\LoginController@gettempIcone'); // token
-Route::post('makepayment', 'Api\Auth\LoginController@makepayment'); // token
+Route::post('tempprofileupdate', 'Api\Auth\LoginController@tempprofileupdate');
 
 Route::post('qrgenerated', 'Api\Auth\LoginController@qrgenerated');
 /************************************************************************************
@@ -93,6 +89,14 @@ Route::get('testing-api-get', 'Api\Auth\LoginController@testingApiGet')->name('t
 
 
 Route::group(['middleware' => ['jwt.verify']], function() {
+	Route::post('gettempprofile', 'Api\Auth\LoginController@gettempprofile'); // token
+	Route::post('gettempicone', 'Api\Auth\LoginController@gettempIcone'); // token
+	Route::post('makepayment', 'Api\Auth\LoginController@makepayment'); // token
+	Route::post('validatecard', 'Api\Auth\LoginController@validatecard');
+	Route::post('userprofileupdate', 'Api\Auth\LoginController@userprofileupdate');
+	Route::post('writecard', 'Api\Auth\LoginController@writecard');
+	Route::post('nearbyusers', 'Api\Auth\LoginController@nearbyusers');
+
 	Route::post('testing-api', 'Api\Auth\LoginController@testingApi')->name('testing-api');
 });
 
