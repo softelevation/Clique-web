@@ -28,7 +28,6 @@ Route::post('profileupdate', 'Api\Auth\LoginController@profileupdate');
 
 Route::post('loginprofileupdate', 'Api\Auth\LoginController@loginprofileupdate');
 Route::post('emailcheck', 'Api\Auth\LoginController@emailcheck');
-Route::post('usersdetails', 'Api\Auth\LoginController@usersdetails');
 Route::post('testapi', 'Api\Auth\LoginController@testapi');
 Route::post('companyadd', 'Api\Auth\LoginController@companyadd');
 Route::post('addcontact', 'Api\Auth\LoginController@addcontact');
@@ -92,6 +91,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	Route::post('gettempprofile', 'Api\Auth\LoginController@gettempprofile'); // token
 	Route::post('gettempicone', 'Api\Auth\LoginController@gettempIcone'); // token
 	Route::post('makepayment', 'Api\Auth\LoginController@makepayment'); // token
+	Route::post('usersdetails', 'Api\Auth\LoginController@usersdetails');
 	Route::post('validatecard', 'Api\Auth\LoginController@validatecard');
 	Route::post('userprofileupdate', 'Api\Auth\LoginController@userprofileupdate');
 	Route::post('writecard', 'Api\Auth\LoginController@writecard');

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Crypt;
+use Carbon\Carbon;
 
 use App\Traits\PaymentTrait;
 use App\User;
@@ -887,6 +888,7 @@ class LoginController extends Controller
 
         $result1 = User::select("*")->where('id', $user_id)->first()->toArray();
         $result2 = Profile::whereuser_id($user_id)->first()->toArray(); //Profile::find($user_id);
+		DataAnalyst::insert(array('profile_id'=>$result2['id'],'type'=>'is_view','save_date'=>Carbon::today()->format('Y-m-d'),'created_at'=>Carbon::now(),'updated_at'=>Carbon::now()));
         $res = array_merge($result1, $result2);
         
         if($result1['is_temp'] == 1){
@@ -924,10 +926,33 @@ class LoginController extends Controller
     *************************************************************************************/
     public function dataAnalyst(Request $request){
 		$errors = "";
-        $data = array("is_view"=>20,"is_click"=>20,"is_share"=>9);
-		$data['Analyst'] = array('labels'=>['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],'datasets'=>array(array('data'=>[120, 180, 120, 150, 100, 140, 95]))); 
-        $message = "";
+		$message = "";
 		$status = true;
+		$profile_id = JWTAuth::toUser()->profile->id;
+		$db_query = "SELECT (SELECT COUNT(`id`) FROM `data_analysts` WHERE `profile_id` = ".$profile_id." AND `type` = 'is_view') AS 'is_view', (SELECT COUNT(`id`) FROM `data_analysts` WHERE `profile_id` = ".$profile_id." AND `type` = 'is_click') AS 'is_click', (SELECT COUNT(`id`) FROM `data_analysts` WHERE `profile_id` = ".$profile_id." AND `type` = 'is_share') AS 'is_share' FROM `data_analysts` GROUP BY `type` LIMIT 1";
+		$dataAnalyst = DB::select($db_query);
+        $data = array("is_view"=>$dataAnalyst[0]->is_view,"is_click"=>$dataAnalyst[0]->is_click,"is_share"=>$dataAnalyst[0]->is_share);
+		
+		// $date_array = array();
+		// $date_count = array();
+		
+		// $i = 0;
+		// while ($i < 7) {
+			// $today = Carbon::today();
+			// $for_while_date = $today->subDays($i)->format('Y-m-d');
+			// array_push( $date_array, array(
+						// 'for_date'=>$for_while_date,
+						// 'for_day'=>strtolower(date('D',strtotime($for_while_date)))
+					// ));
+			// $i++;
+		// }
+		// if(! empty( $date_array ) ){
+			// foreach($date_array as $date){
+				// $for_day = $date['for_day'];
+				// $date_count[$for_day][] = DataAnalyst::where('save_date',$date['for_date'])->count();
+			// }
+		// }
+		$data['Analyst'] = array('labels'=>['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],'datasets'=>array(array('data'=>[120, 180, 120, 150, 100, 140, 95])));
 		return $this->sendResult($message,$data,$errors,$status);
 	}
 	
