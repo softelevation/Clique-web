@@ -889,6 +889,7 @@ class LoginController extends Controller
         $result1 = User::select("*")->where('id', $user_id)->first()->toArray();
         $result2 = Profile::whereuser_id($user_id)->first()->toArray(); //Profile::find($user_id);
 		DataAnalyst::insert(array('profile_id'=>$result2['id'],'type'=>'is_view','save_date'=>Carbon::today()->format('Y-m-d'),'created_at'=>Carbon::now(),'updated_at'=>Carbon::now()));
+		DataAnalyst::insert(array('profile_id'=>$result2['id'],'type'=>'is_click','save_date'=>Carbon::today()->format('Y-m-d'),'created_at'=>Carbon::now(),'updated_at'=>Carbon::now()));
         $res = array_merge($result1, $result2);
         
         if($result1['is_temp'] == 1){
@@ -933,26 +934,26 @@ class LoginController extends Controller
 		$dataAnalyst = DB::select($db_query);
         $data = array("is_view"=>$dataAnalyst[0]->is_view,"is_click"=>$dataAnalyst[0]->is_click,"is_share"=>$dataAnalyst[0]->is_share);
 		
-		// $date_array = array();
-		// $date_count = array();
+		$date_array = array();
+		$date_count = array();
 		
-		// $i = 0;
-		// while ($i < 7) {
-			// $today = Carbon::today();
-			// $for_while_date = $today->subDays($i)->format('Y-m-d');
-			// array_push( $date_array, array(
-						// 'for_date'=>$for_while_date,
-						// 'for_day'=>strtolower(date('D',strtotime($for_while_date)))
-					// ));
-			// $i++;
-		// }
-		// if(! empty( $date_array ) ){
-			// foreach($date_array as $date){
-				// $for_day = $date['for_day'];
-				// $date_count[$for_day][] = DataAnalyst::where('save_date',$date['for_date'])->count();
-			// }
-		// }
-		$data['Analyst'] = array('labels'=>['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],'datasets'=>array(array('data'=>[120, 180, 120, 150, 100, 140, 95])));
+		$i = 0;
+		while ($i < 7) {
+			$today = Carbon::today();
+			$for_while_date = $today->subDays($i)->format('Y-m-d');
+			array_push( $date_array, array(
+						'for_date'=>$for_while_date,
+						'for_day'=>strtolower(date('D',strtotime($for_while_date)))
+					));
+			$i++;
+		}
+		if(! empty( $date_array ) ){
+			foreach($date_array as $date){
+				$for_day = $date['for_day'];
+				$date_count[$for_day][] = DataAnalyst::where('save_date',$date['for_date'])->count();
+			}
+		}
+		$data['Analyst'] = array('labels'=>['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],'datasets'=>array(array('data'=>[$date_count['mon'][0], $date_count['tue'][0], $date_count['wed'][0], $date_count['thu'][0], $date_count['fri'][0], $date_count['sat'][0], $date_count['sun'][0]])));
 		return $this->sendResult($message,$data,$errors,$status);
 	}
 	
