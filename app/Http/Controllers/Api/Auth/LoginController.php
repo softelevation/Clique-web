@@ -18,6 +18,7 @@ use Crypt;
 use Carbon\Carbon;
 
 use App\Traits\PaymentTrait;
+use App\Traits\PushNotificationTrait;
 use App\User;
 use App\Profile;
 use App\TempProfile;
@@ -43,7 +44,7 @@ use App\Mail\OtpRequest;
 
 class LoginController extends Controller
 {
-	use PaymentTrait;
+	use PaymentTrait, PushNotificationTrait;
     /************************************************************************************
      * Login API
     *************************************************************************************/
@@ -932,11 +933,13 @@ class LoginController extends Controller
 		$profile_id = JWTAuth::toUser()->profile->id;
 		$db_query = "SELECT (SELECT COUNT(`id`) FROM `data_analysts` WHERE `profile_id` = ".$profile_id." AND `type` = 'is_view') AS 'is_view', (SELECT COUNT(`id`) FROM `data_analysts` WHERE `profile_id` = ".$profile_id." AND `type` = 'is_click') AS 'is_click', (SELECT COUNT(`id`) FROM `data_analysts` WHERE `profile_id` = ".$profile_id." AND `type` = 'is_share') AS 'is_share' FROM `data_analysts` GROUP BY `type` LIMIT 1";
 		$dataAnalyst = DB::select($db_query);
-        $data = array("is_view"=>$dataAnalyst[0]->is_view,"is_click"=>$dataAnalyst[0]->is_click,"is_share"=>$dataAnalyst[0]->is_share);
-		
+        $data = array(
+					"is_view"=>$dataAnalyst ? $dataAnalyst[0]->is_view : 0,
+					"is_click"=>$dataAnalyst ? $dataAnalyst[0]->is_click : 0,
+					"is_share"=>$dataAnalyst ? $dataAnalyst[0]->is_share : 0
+			);
 		$date_array = array();
 		$date_count = array();
-		
 		$i = 0;
 		while ($i < 7) {
 			$today = Carbon::today();
@@ -950,7 +953,7 @@ class LoginController extends Controller
 		if(! empty( $date_array ) ){
 			foreach($date_array as $date){
 				$for_day = $date['for_day'];
-				$date_count[$for_day][] = DataAnalyst::where('save_date',$date['for_date'])->count();
+				$date_count[$for_day][] = DataAnalyst::where('profile_id',$profile_id)->where('save_date',$date['for_date'])->count();
 			}
 		}
 		$data['Analyst'] = array('labels'=>['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],'datasets'=>array(array('data'=>[$date_count['mon'][0], $date_count['tue'][0], $date_count['wed'][0], $date_count['thu'][0], $date_count['fri'][0], $date_count['sat'][0], $date_count['sun'][0]])));
