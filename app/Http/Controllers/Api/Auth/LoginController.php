@@ -31,6 +31,7 @@ use App\Countries;
 use App\ProfileIcone;
 use App\Orders;
 use App\Icone;
+use App\DataAnalyst;
 use App\UserPaymentHistory;
 
 use DB;
@@ -924,7 +925,7 @@ class LoginController extends Controller
     public function dataAnalyst(Request $request){
 		$errors = "";
         $data = array("is_view"=>20,"is_click"=>20,"is_share"=>9);
-		$data['Analyst'] = array('label'=>['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],'datasets'=>array(array('data'=>[120, 180, 120, 150, 100, 140, 95]))); 
+		$data['Analyst'] = array('labels'=>['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],'datasets'=>array(array('data'=>[120, 180, 120, 150, 100, 140, 95]))); 
         $message = "";
 		$status = true;
 		return $this->sendResult($message,$data,$errors,$status);
