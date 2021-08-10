@@ -930,7 +930,11 @@ class LoginController extends Controller
 		$errors = "";
 		$message = "";
 		$status = true;
+		// $user_id = JWTAuth::toUser()->id;
 		$profile_id = JWTAuth::toUser()->profile->id;
+		// $user1 = User::find($user_id);
+		// $token = JWTAuth::fromUser($user1);
+		
 		$db_query = "SELECT (SELECT COUNT(`id`) FROM `data_analysts` WHERE `profile_id` = ".$profile_id." AND `type` = 'is_view') AS 'is_view', (SELECT COUNT(`id`) FROM `data_analysts` WHERE `profile_id` = ".$profile_id." AND `type` = 'is_click') AS 'is_click', (SELECT COUNT(`id`) FROM `data_analysts` WHERE `profile_id` = ".$profile_id." AND `type` = 'is_share') AS 'is_share' FROM `data_analysts` GROUP BY `type` LIMIT 1";
 		$dataAnalyst = DB::select($db_query);
         $data = array(
