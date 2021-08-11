@@ -30,9 +30,6 @@ Route::post('loginprofileupdate', 'Api\Auth\LoginController@loginprofileupdate')
 Route::post('emailcheck', 'Api\Auth\LoginController@emailcheck');
 Route::post('testapi', 'Api\Auth\LoginController@testapi');
 Route::post('companyadd', 'Api\Auth\LoginController@companyadd');
-Route::post('addcontact', 'Api\Auth\LoginController@addcontact');
-Route::post('addcontactlist', 'Api\Auth\LoginController@addcontactlist');
-Route::post('removecontact', 'Api\Auth\LoginController@removecontact');
 
 
 Route::post('socialdelete', 'Api\Auth\LoginController@socialdelete');
@@ -100,6 +97,12 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	Route::post('data-analyst', 'Api\Auth\LoginController@dataAnalyst');
 
 	Route::post('testing-api', 'Api\Auth\LoginController@testingApi')->name('testing-api');
+	
+	
+	
+	Route::post('addcontact', 'Api\Auth\LoginController@addcontact');
+	Route::get('addcontactlist', 'Api\Auth\LoginController@addcontactlist');
+	Route::post('removecontact', 'Api\Auth\LoginController@removecontact');
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

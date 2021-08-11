@@ -1067,9 +1067,11 @@ class LoginController extends Controller
     {
         if(!empty($request['contact_id']))
         {
-
-            $user_contact = new Usercontact;
-            $user_contact->user_id = $request['user_id'];
+			$user = JWTAuth::toUser();
+			$checkUsercontact = Usercontact::where('user_id',$user->id)->where('contact_id',$request['contact_id'])->first();
+            if(!$checkUsercontact){
+			$user_contact = new Usercontact;
+            $user_contact->user_id = $user->id;
             $user_contact->contact_id = $request['contact_id'];
             $user_contact->save();
             $message = "Contact added Successfully";
@@ -1077,7 +1079,13 @@ class LoginController extends Controller
                 $status = true;
                 $data = (object)[];
                 return $this->sendResult($message,$data,$errors,$status);
-
+			}else{
+				$message = "This contact is aleardy added";
+				$errors= "";
+				$status = false;
+				$data = (object)[];
+				return $this->sendResult($message,$data,$errors,$status);
+			}
         }
     }
     /************************************************************************************
@@ -1085,40 +1093,34 @@ class LoginController extends Controller
     *************************************************************************************/
     public function addcontactlist(Request $request)
     {
-        if(!empty($request['user_id']))
-        {
-            $result1 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar');
-            $result1->leftJoin('users', 'users.id', '=', 'user_contact.contact_id');
-            $result1->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.contact_id');
-            $result1->where('user_contact.user_id', $request['user_id']);
-            $result1->where('users.id','!=',null);
-            $result1 = $result1->orderBy('user_contact.id', 'ASC')->get()->toArray();
-            foreach ($result1 as $key => $value1) {
-                $data1 = Companyusers::where('user_id','=',$value1['contact_id'])->first();
-                if($data1){
-                    $data1 = $data1->toArray();
-                    $result1[$key]['job_position'] = $data1['job_position'];
-                } else {  $result1[$key]['job_position'] = ''; }
-            }
-
+			$user = JWTAuth::toUser();
+            $result1 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar')
+					   ->leftJoin('users', 'users.id', '=', 'user_contact.contact_id')
+					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.contact_id')
+					   ->where('user_contact.user_id', $user->id)->where('users.id','!=',null);
+			$result2 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar')
+					   ->leftJoin('users', 'users.id', '=', 'user_contact.contact_id')
+					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.contact_id')
+					   ->where('user_contact.user_id', $user->id)->where('users.id','!=',null);
+					   
+			$my_connection = $result1->where('user_contact.status','approve')->orderBy('user_contact.id', 'ASC')->get();
+			$pending_connection = $result2->where('user_contact.status','request')->orderBy('user_contact.id', 'ASC')->get();
             $message = "Contact List Successfully";
             $errors= "";
             $status = true;
-            $data = $result1;
+            $data = array('my_connection'=>$my_connection,'pending_connection'=>$pending_connection);
             return $this->sendResult($message,$data,$errors,$status);
-
-
-        }
     }
      /************************************************************************************
      * Remove contact
     *************************************************************************************/
     public function removecontact(Request $request)
     {
-        if(!empty($request['user_id']) and !empty($request['contact_id']))
+        if($request['contact_id'])
         {
-            $res=Usercontact::where('user_id',$request['user_id'])->where('contact_id',$request['contact_id'])->delete();
-            $message = "Contact Delete Successfully";
+			$user = JWTAuth::toUser();
+            $res=Usercontact::where('user_id',$user->id)->where('contact_id',$request['contact_id'])->delete();
+            $message = "Contact Remove Successfully";
             $errors= "";
             $status = true;
             $data = (object)[];
