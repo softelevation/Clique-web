@@ -1098,17 +1098,11 @@ class LoginController extends Controller
 					   ->leftJoin('users', 'users.id', '=', 'user_contact.contact_id')
 					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.contact_id')
 					   ->where('user_contact.user_id', $user->id)->where('users.id','!=',null);
-			$result2 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar')
-					   ->leftJoin('users', 'users.id', '=', 'user_contact.contact_id')
-					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.contact_id')
-					   ->where('user_contact.user_id', $user->id)->where('users.id','!=',null);
-					   
-			$my_connection = $result1->where('user_contact.status','approve')->orderBy('user_contact.id', 'ASC')->get();
-			$pending_connection = $result2->where('user_contact.status','request')->orderBy('user_contact.id', 'ASC')->get();
+			$my_connection = $result1->orderBy('user_contact.id', 'DESC')->get();
             $message = "Contact List Successfully";
             $errors= "";
             $status = true;
-            $data = array('my_connection'=>$my_connection,'pending_connection'=>$pending_connection);
+            $data = $my_connection;
             return $this->sendResult($message,$data,$errors,$status);
     }
      /************************************************************************************
