@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html class="" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
     <head>
@@ -5,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <meta name="csrf-token" content="p7KDGowVOP0xNuYgpHWxJDVaF8jOUwugYq9EL6Vn" />
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 		<title>Profile | Clique</title>
 		<style>
@@ -48,11 +49,10 @@
 }
 		
 	.download-app-holder {
-		position: absolute;
-		width: 414px;
+		
+		width: 100%;
 		height: 286px;
-		left: 0px;
-		top: 0px;
+		
 		/* Button Gradient */
 		background: linear-gradient(265.69deg, #E866B6 -28.53%, #6961FF 127.79%);
 		box-shadow: 5px 5px 45px rgba(0, 0, 0, 0.15);
@@ -78,7 +78,7 @@
     box-shadow: 0px 0px 20px rgb(0 0 0 / 30%);
     border-radius: 40px;
 }
-	.rounded-circle{width: 100px;}
+	.rounded-circle{width: 80px;}
 		
 	.download-app-body{
 		position: absolute;
@@ -103,7 +103,7 @@
 		width: auto;
 		text-align: center;
 		// max-width: 80%;
-		width: 90%;
+		width: 100%;
 		margin: 0 auto;
 		box-shadow: 0px 0px 20px rgb(0 0 0 / 30%);
 		border-radius: 15px;
@@ -123,10 +123,11 @@
 		margin: 0 auto;
 		color: #707070;
 	}
-	.image-icone{
-		width: 75px;
-	}
-	.row.row-icone-material {margin-top: 15px;margin-left: 5px;}
+.image-icone {
+    width: 100%;
+    margin-bottom: 10px;
+}
+	.row.row-icone-material {margin-top: 15px;}
 	.class-margin {margin-top: 25px;}
 	.rows {position: absolute;}
 	.col-mds-4 {float: left;}
@@ -141,12 +142,22 @@
     /* flex: 1; */
     display: flex;
 		}
-	.join_button{margin-left: 70px;}
+	
 	.main-header {
         background: black;text-align: center;height: 40px;font-size: 24px;}
 	.download-app-body {margin-top: 60px;}
-	.user-info-app{position: absolute;width: 200px;margin-left: 20px;display: inline-block;white-space: nowrap;overflow: hidden !important;text-overflow: ellipsis;}
-	.user-info-app-name{margin-left: 20px;width: 100%;}
+	.user-info-app {
+    position: absolute;
+    width: 261px;
+    padding-left: 20px;
+    display: -webkit-box;
+    overflow: hidden !important;
+    
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    margin-bottom: 0;
+}
+	.user-info-app-name{padding-left: 20px;width: 100%; margin-bottom: 0;}
 	.tap-link-redirect{color: #fff;}
 	@media (max-width: 800px) {
 		.main-header {
@@ -176,12 +187,12 @@
 						<div class="download-app-holder">
 							<div class="main-header"><a class="tap-link-redirect" href="https://cliquesocial.co">Tap here to get your Clique card</a></div>
 							<div class="container">
-								<div class="rowsicone class-margin">
+								<div class="rowsicone ">
 									<div class="col-md-4">
 										
 									</div>
 									<div class="col-md-4">
-										<img src="{{url('/icone.png')}}" class="icone-image">
+										<img src="https://admin.cliquesocial.co/icone.png" class="icone-image">
 									</div>
 									<div class="col-md-4 join_button">
 										
@@ -189,8 +200,8 @@
 									
 								</div>
 								
-								<div class="rows class-margin">
-									<div class="col-mds-4">
+								<div class="rows">
+									<div class="col-mds-4 class-margin">
 										@if($user->profile != null)
 											<img src="{{url($user->profile->avatar)}}" class="rounded-circle">
 										@else
@@ -199,10 +210,10 @@
 									</div>
 									<div class="col-mds-8">
 									  <h5 class="user-info-app-name">{{ ucfirst($user->name) }} 
-										@if($user->profile->is_pro)
-										<img class="pro-icone-img" src="{{url('avatars/check.png')}}" />
-										@endIf
-									  </h5>
+											@if($user->profile->is_pro)
+											<img class="pro-icone-img" src="{{url('avatars/check.png')}}" />
+											@endIf
+									   </h5>
 									  <p class="user-info-app">{{ ucfirst($user->profile->bio) }}</p>
 									</div>
 								</div>
@@ -214,20 +225,20 @@
 								<center>
 									<div class="row">
 										<div class="col-md-12">
-										@if($user->name)
-											<p class="user-contact-email">{{ $user->name.' contacts' }}</p>
-										@else
-											<p class="user-contact-email">{{ $user->email }}</p>
-										@endif
+											@if($user->name)
+												<p class="user-contact-email">{{ $user->name.' contacts' }}</p>
+											@else
+												<p class="user-contact-email">{{ $user->email }}</p>
+											@endif
 										</div>
 										<div class="col-md-12">
-										<a class="add-to-contacts" href="{{url('/add-to-contact/?profile_id='.$user->id) }}">Add to Contacts</a>
+										<a class="add-to-contacts" href="{{url('/add-to-contact?profile_id='.$user->id) }}">Add to Contacts</a>
 										</div>
 									</div>
 									
 									<div class="row row-icone-material">
 										@foreach($icone_socials as $icone_social)
-										<div class="col-mds-3">
+										<div class="col-md-3">
 											<a href="{{$icone_social->link}}" target="_blank"><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
 										</div>
 										@endforeach
