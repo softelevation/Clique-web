@@ -1094,8 +1094,9 @@ class LoginController extends Controller
     public function addcontactlist(Request $request)
     {
 			$user = JWTAuth::toUser();
-			$result1_default = array(array('id'=>2,'name'=>'Tejus V Reddy','user_id'=>404,'contact_id'=>0,'status'=>'approve','created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),'deleted_at'=>'','avatar'=>'/user/img_4041628001365.png','bio'=>null));
-            $result1 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar','users_profile.bio')
+			$result1_default = array(array('id'=>2,'name'=>'Tejus V Reddy','user_id'=>$user->id,'contact_id'=>0,'status'=>'approve','created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),'deleted_at'=>'','avatar'=>'/user/img_4041628001365.png','bio'=>null));
+            
+			$result1 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar','users_profile.bio')
 					   ->leftJoin('users', 'users.id', '=', 'user_contact.contact_id')
 					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.contact_id')
 					   ->where('user_contact.user_id', $user->id)->where('users.id','!=',null);
