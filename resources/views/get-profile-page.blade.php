@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 		<title>Profile | Clique</title>
 		<style>
-        .content-wrapper {
+		.content-wrapper {
 			display: block;
 		}
 		.clique-screen {
@@ -189,15 +189,29 @@
     max-width: 25%;
 }
 .row.header-top .col-md-3.class-margin {    
--ms-flex: 0 0 33.333333%;
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;}
+-ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;}
 .row.header-top  .col-md-9 {     
-	-ms-flex: 0 0 66.666667%;
-    flex: 0 0 66.666667%;
-    max-width: 66.666667%; }
+	-ms-flex: 0 0 75%;
+    flex: 0 0 75%;
+    max-width: 75%; }
 	.user-info-app {
-    width: 100%; }
+    width: 100%; } 
+	.user-info-app-name  , .user-info-app , p.connection{
+    padding-left: 0;
+  
+}
+.rounded-circle {
+    width: 100%;
+}
+.row.header-top .col-md-9 {
+    padding-left: 0;
+}
+
+.class-margin {
+    margin-top: 10px;
+}
 	
 }
 		</style>
