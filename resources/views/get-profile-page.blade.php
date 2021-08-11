@@ -159,6 +159,9 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     margin-bottom: 0;
+} 
+.row.header-top {
+    margin-top: 15px;
 }
 	.user-info-app-name{padding-left: 20px;width: 100%; margin-bottom: 0;}
 	.tap-link-redirect{color: #fff;}
@@ -185,9 +188,18 @@
     flex: 0 0 25%;
     max-width: 25%;
 }
+.row.header-top .col-md-3.class-margin {    
+-ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;}
+.row.header-top  .col-md-9 {     
+	-ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%; }
+	.user-info-app {
+    width: 100%; }
+	
 }
-	
-	
 		</style>
     </head>
     <body>
@@ -212,21 +224,22 @@
 									
 								</div>
 								
-								<div class="rows">
-									<div class="col-mds-4 class-margin">
-										@if($user->profile != null)
+								<div class="row header-top">
+									<div class="col-md-3 class-margin">
+											@if($user->profile != null)
 											<img src="{{url($user->profile->avatar)}}" class="rounded-circle">
 										@else
 											<img src="{{url('/user/default.png')}}" class="rounded-circle">
 										@endif
 									</div>
-									<div class="col-mds-8">
-									  <h5 class="user-info-app-name">{{ ucfirst($user->name) }} 
+									<div class="col-md-9">
+									  <h5 class="user-info-app-name">{{ ucfirst($user->name) }}  
 											@if($user->profile->is_pro)
 											<img class="pro-icone-img" src="{{url('avatars/check.png')}}" />
 											@endIf
-									   </h5>
+									 </h5>
 									  <p class="user-info-app">{{ ucfirst($user->profile->bio) }}</p>
+									<p class="connection"> 1 Connections </p>
 									</div>
 								</div>
 							</div>
