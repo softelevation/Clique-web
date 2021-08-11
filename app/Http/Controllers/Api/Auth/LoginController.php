@@ -1094,7 +1094,6 @@ class LoginController extends Controller
     public function addcontactlist(Request $request)
     {
 			$user = JWTAuth::toUser();
-			
             $result1 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar','users_profile.bio')
 					   ->leftJoin('users', 'users.id', '=', 'user_contact.contact_id')
 					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.contact_id')

@@ -142,13 +142,16 @@
     /* flex: 1; */
     display: flex;
 		}
-	
+	p.connection {
+    padding-left: 20px;
+    font-weight: bold;
+}
 	.main-header {
         background: black;text-align: center;height: 40px;font-size: 24px;}
 	.download-app-body {margin-top: 60px;}
 	.user-info-app {
-    position: absolute;
-    width: 261px;
+       font-size: 15px;
+    width: 244px;
     padding-left: 20px;
     display: -webkit-box;
     overflow: hidden !important;
@@ -174,6 +177,15 @@
 		.join_button {margin-left: 25px;}
 		.image-icone {width: 62px;}
     }
+	
+	
+@media (max-width: 768px){
+.row.row-icone-material .col-md-3{
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+}
 	
 	
 		</style>
