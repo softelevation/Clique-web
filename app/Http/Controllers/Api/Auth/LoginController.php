@@ -1151,10 +1151,10 @@ class LoginController extends Controller
         {
 			$user = JWTAuth::toUser();
 			if($request->action && $request->action == 'approve'){
-				Usercontact::where('id',$user->uid)->update(array('status'=>'approve'));
+				Usercontact::where('id',$request->uid)->update(array('status'=>'approve'));
 				$message = "Contact approved Successfully";
 			}else{
-				$res=Usercontact::where('id',$user->uid)->delete();
+				$res=Usercontact::where('id',$request->uid)->delete();
 				$message = "Contact Remove Successfully";
 			}
             $errors= "";
