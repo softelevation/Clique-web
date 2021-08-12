@@ -909,6 +909,16 @@ class LoginController extends Controller
         $arr4 = array("company_data" => $company_data);
         $res3 = array_merge($res2, $arr4);
 		$profile_icones = ProfileIcone::with('icone')->where('profile_id',$result2['id'])->get();
+		
+		$my_connection_type = ($result2['privacy']) ? $result2['privacy']:'public';
+		$my_connection_status = 'request';
+		$jwt_user_id = JWTAuth::toUser()->id;
+		$my_connection_contact = Usercontact::select('*')->where('user_id',$jwt_user_id)->where('contact_id',$user_id)->first();
+		if($my_connection_contact){
+			$my_connection_status = $my_connection_contact->status;
+		}
+		
+		$res3['my_connection'] = array('type'=>$my_connection_type,'status'=>$my_connection_status);
 		$res3['social'] = $profile_icones;
         $message = "Profile detail Successfully";
         $status = true;
@@ -1073,6 +1083,7 @@ class LoginController extends Controller
 			$user_contact = new Usercontact;
             $user_contact->user_id = $user->id;
             $user_contact->contact_id = $request['contact_id'];
+            $user_contact->status = 'pending';
             $user_contact->save();
             $message = "Contact added Successfully";
                 $errors= "";
@@ -1094,14 +1105,15 @@ class LoginController extends Controller
     public function addcontactlist(Request $request)
     {
 			$user = JWTAuth::toUser();
-			$result1_default = array(array('id'=>2,'name'=>'Tejus V Reddy','user_id'=>$user->id,'contact_id'=>0,'status'=>'approve','created_at'=>Carbon::now(),'updated_at'=>Carbon::now(),'deleted_at'=>'','avatar'=>'/user/img_4041628001365.png','bio'=>null));
+			$private = User::select('*')->join('users_profile','users_profile.user_id','users.id')->where('users_profile.privacy','private')->first();
+			$result1_default = array(array('id'=>$private->user_id,'name'=>$private->name,'user_id'=>$user->id,'contact_id'=>$private->user_id,'status'=>'approve','created_at'=>$private->created_at,'updated_at'=>$private->updated_at,'deleted_at'=>'','avatar'=>$private->avatar,'bio'=>$private->bio));
             
 			$result1 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar','users_profile.bio')
 					   ->leftJoin('users', 'users.id', '=', 'user_contact.contact_id')
 					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.contact_id')
 					   ->where('user_contact.user_id', $user->id)->where('users.id','!=',null);
 			$my_connection = $result1->orderBy('user_contact.id', 'DESC')->get()->toArray();
-			
+
             $message = "Contact List Successfully";
             $errors= "";
             $status = true;
