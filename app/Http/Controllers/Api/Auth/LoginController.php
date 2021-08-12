@@ -1106,9 +1106,9 @@ class LoginController extends Controller
     {
 			$user = JWTAuth::toUser();
 			$private = User::select('*')->join('users_profile','users_profile.user_id','users.id')->where('users_profile.privacy','private')->first();
-			$result1_default = array(array('id'=>$private->user_id,'name'=>$private->name,'user_id'=>$user->id,'contact_id'=>$private->user_id,'status'=>'approve','created_at'=>$private->created_at,'updated_at'=>$private->updated_at,'deleted_at'=>'','avatar'=>$private->avatar,'bio'=>$private->bio));
+			$result1_default = array(array('id'=>$private->user_id,'name'=>$private->name,'user_id'=>$user->id,'uid'=>0,'contact_id'=>$private->user_id,'status'=>'approve','created_at'=>$private->created_at,'updated_at'=>$private->updated_at,'deleted_at'=>'','avatar'=>$private->avatar,'bio'=>$private->bio));
             
-			$result1 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar','users_profile.bio')
+			$result1 = Usercontact::select('users.id','users.name','user_contact.id as uid','user_contact.*','users_profile.avatar','users_profile.bio')
 					   ->leftJoin('users', 'users.id', '=', 'user_contact.contact_id')
 					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.contact_id')
 					   ->where('user_contact.user_id', $user->id)->where('users.id','!=',null);
@@ -1130,7 +1130,7 @@ class LoginController extends Controller
 			// $private = User::select('*')->join('users_profile','users_profile.user_id','users.id')->where('users_profile.privacy','private')->first();
 			// $result1_default = array(array('id'=>$private->user_id,'name'=>$private->name,'user_id'=>$user->id,'contact_id'=>$private->user_id,'status'=>'approve','created_at'=>$private->created_at,'updated_at'=>$private->updated_at,'deleted_at'=>'','avatar'=>$private->avatar,'bio'=>$private->bio));
             
-			$result1 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar','users_profile.bio')
+			$result1 = Usercontact::select('users.id','users.name','user_contact.id as uid','user_contact.*','users_profile.avatar','users_profile.bio')
 					   ->leftJoin('users', 'users.id', '=', 'user_contact.user_id')
 					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.user_id')
 					   ->where('user_contact.contact_id', $user->id)->where('users.id','!=',null);
@@ -1147,14 +1147,14 @@ class LoginController extends Controller
     *************************************************************************************/
     public function removecontact(Request $request)
     {
-        if($request['contact_id'])
+        if($request['uid'])
         {
 			$user = JWTAuth::toUser();
 			if($request->action && $request->action == 'approve'){
-				Usercontact::where('user_id',$user->id)->where('contact_id',$request['contact_id'])->update(array('status'=>'approve'));
+				Usercontact::where('id',$user->uid)->update(array('status'=>'approve'));
 				$message = "Contact approved Successfully";
 			}else{
-				$res=Usercontact::where('user_id',$user->id)->where('contact_id',$request['contact_id'])->delete();
+				$res=Usercontact::where('id',$user->uid)->delete();
 				$message = "Contact Remove Successfully";
 			}
             $errors= "";
