@@ -102,6 +102,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	
 	Route::post('addcontact', 'Api\Auth\LoginController@addcontact');
 	Route::get('addcontactlist', 'Api\Auth\LoginController@addcontactlist');
+	Route::get('mycontactlist', 'Api\Auth\LoginController@mycontactlist');
 	Route::post('removecontact', 'Api\Auth\LoginController@removecontact');
 });
 

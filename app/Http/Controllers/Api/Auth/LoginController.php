@@ -1120,6 +1120,28 @@ class LoginController extends Controller
             $data = array_merge($result1_default,$my_connection);
             return $this->sendResult($message,$data,$errors,$status);
     }
+	
+	/************************************************************************************
+     * Add contact
+    *************************************************************************************/
+    public function mycontactlist(Request $request)
+    {
+			$user = JWTAuth::toUser();
+			$private = User::select('*')->join('users_profile','users_profile.user_id','users.id')->where('users_profile.privacy','private')->first();
+			$result1_default = array(array('id'=>$private->user_id,'name'=>$private->name,'user_id'=>$user->id,'contact_id'=>$private->user_id,'status'=>'approve','created_at'=>$private->created_at,'updated_at'=>$private->updated_at,'deleted_at'=>'','avatar'=>$private->avatar,'bio'=>$private->bio));
+            
+			$result1 = Usercontact::select('users.id','users.name','user_contact.*','users_profile.avatar','users_profile.bio')
+					   ->leftJoin('users', 'users.id', '=', 'user_contact.user_id')
+					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.user_id')
+					   ->where('user_contact.contact_id', $user->id)->where('users.id','!=',null);
+			$my_connection = $result1->orderBy('user_contact.id', 'DESC')->get()->toArray();
+
+            $message = "Contact List Successfully";
+            $errors= "";
+            $status = true;
+            $data = array_merge($result1_default,$my_connection);
+            return $this->sendResult($message,$data,$errors,$status);
+    }
      /************************************************************************************
      * Remove contact
     *************************************************************************************/
