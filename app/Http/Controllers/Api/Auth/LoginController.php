@@ -1133,7 +1133,7 @@ class LoginController extends Controller
 			$result1 = Usercontact::select('users.id','users.name','user_contact.id as uid','user_contact.*','users_profile.avatar','users_profile.bio')
 					   ->leftJoin('users', 'users.id', '=', 'user_contact.user_id')
 					   ->leftJoin('users_profile', 'users_profile.user_id', '=', 'user_contact.user_id')
-					   ->where('user_contact.contact_id', $user->id)->where('users.id','!=',null);
+					   ->where('user_contact.contact_id', $user->id)->where('user_contact.status', 'pending')->where('users.id','!=',null);
 			$my_connection = $result1->orderBy('user_contact.id', 'DESC')->get()->toArray();
 
             $message = "Contact List Successfully";
@@ -1150,10 +1150,13 @@ class LoginController extends Controller
         if($request['uid'])
         {
 			$user = JWTAuth::toUser();
+			$checkUcontact = Usercontact::where('id',$request->uid)->first();
 			if($request->action && $request->action == 'approve'){
+				Usercontact::insert(array('user_id'=>$checkUcontact->contact_id,'contact_id'=>$checkUcontact->user_id,'status'=>'approve','created_at'=>$checkUcontact->created_at,'updated_at'=>$checkUcontact->updated_at));
 				Usercontact::where('id',$request->uid)->update(array('status'=>'approve'));
 				$message = "Contact approved Successfully";
 			}else{
+				Usercontact::where('user_id',$checkUcontact->contact_id)->where('contact_id',$checkUcontact->user_id)->delete();
 				$res=Usercontact::where('id',$request->uid)->delete();
 				$message = "Contact Remove Successfully";
 			}
