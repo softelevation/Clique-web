@@ -1149,13 +1149,16 @@ class LoginController extends Controller
     *************************************************************************************/
     public function removecontact(Request $request)
     {
+		$errors= "";
+		$status = true;
+		$data = (object)[];
         if($request['uid'])
         {
 			$user = JWTAuth::toUser();
 			$checkUcontact = Usercontact::where('id',$request->uid)->first();
 			$profile = Profile::whereuser_id($checkUcontact->user_id)->first();
 			if($request->action && $request->action == 'approve'){
-				$this->send_PushNotificat($profile->device_token,'Request connection','Your request has been accepted.');
+				$data = $this->send_PushNotificat($profile->device_token,'Request connection','Your request has been accepted.');
 				Usercontact::insert(array('user_id'=>$checkUcontact->contact_id,'contact_id'=>$checkUcontact->user_id,'status'=>'approve','created_at'=>$checkUcontact->created_at,'updated_at'=>$checkUcontact->updated_at));
 				Usercontact::where('id',$request->uid)->update(array('status'=>'approve'));
 				$message = "Contact approved Successfully";
@@ -1164,9 +1167,6 @@ class LoginController extends Controller
 				$res=Usercontact::where('id',$request->uid)->delete();
 				$message = "Contact Remove Successfully";
 			}
-            $errors= "";
-            $status = true;
-            $data = (object)[];
             return $this->sendResult($message,$data,$errors,$status);
 
         }
