@@ -11,7 +11,7 @@ trait PushNotificationTrait
 		if($firebaseToken){
 			$SERVER_API_KEY = 'AAAA1Yfqffo:APA91bFZHa2zh1ZWSkCa-e7TsHLx2lBc7awEOrNEsAZfRdjQB-W8Y2YEpuwvky3qz6Hjgz2xmsnbVZM2vkX7n7mHsHrNFwN-N57-gq42bAoCIekmoE9dB2oOCJT5gVRSzn52GkJS1ojx';
 			$data = [
-				"registration_ids" => $firebaseToken,
+				"registration_ids" => array($firebaseToken),
 				"notification" => [
 					"title" => $title,
 					"body" => $body,  
