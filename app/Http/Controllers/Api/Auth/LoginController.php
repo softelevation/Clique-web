@@ -1153,7 +1153,7 @@ class LoginController extends Controller
         {
 			$user = JWTAuth::toUser();
 			$checkUcontact = Usercontact::where('id',$request->uid)->first();
-			$profile = Profile::whereuser_id($checkUcontact->contact_id)->first();
+			$profile = Profile::whereuser_id($checkUcontact->user_id)->first();
 			if($request->action && $request->action == 'approve'){
 				$this->send_PushNotificat($profile->device_token,'Request connection','Your request has been accepted.');
 				Usercontact::insert(array('user_id'=>$checkUcontact->contact_id,'contact_id'=>$checkUcontact->user_id,'status'=>'approve','created_at'=>$checkUcontact->created_at,'updated_at'=>$checkUcontact->updated_at));
