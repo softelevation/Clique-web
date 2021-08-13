@@ -1080,6 +1080,7 @@ class LoginController extends Controller
 			$user = JWTAuth::toUser();
 			$checkUsercontact = Usercontact::where('user_id',$user->id)->where('contact_id',$request['contact_id'])->first();
             if(!$checkUsercontact){
+			$this->send_PushNotificat($user->profile->device_token,'Request for connection','You have received a new connection request.');
 			$user_contact = new Usercontact;
             $user_contact->user_id = $user->id;
             $user_contact->contact_id = $request['contact_id'];
@@ -2159,6 +2160,9 @@ class LoginController extends Controller
                             $profile->user_id = $user_id;
                             $profile->current_lat = $request['current_lat'];
                             $profile->current_long = $request['current_long'];
+							if($request->device_token){
+								$profile->device_token = $request->device_token;
+							}
                             $profile->created_at = date('Y-m-d H:i:s');
                             $profile->save();
                         $token = JWTAuth::fromUser($user);
@@ -2238,6 +2242,9 @@ class LoginController extends Controller
 					$profile = Profile::whereuser_id($user_id)->first();
 					$profile->current_lat = $current_lat;
 					$profile->current_long = $current_long;
+					if($request->device_token){
+						$profile->device_token = $request->device_token;
+					}
 					$profile->save();
 											
 					
@@ -2311,6 +2318,9 @@ class LoginController extends Controller
 				}else if($request->social_type == 'F'){
 					$profile->icone_social = 16;
 				}
+				if($request->device_token){
+						$profile->device_token = $request->device_token;
+					}
 				$profile->save();
 				SocialNetwork::insert(array('user_id'=>$user->id,'media_type'=>'google','media_value'=>$email,'status'=>1));
 			}
@@ -2337,6 +2347,9 @@ class LoginController extends Controller
 					// $profile->icone_social = $icone_social;
 					$profile->current_lat = $current_lat;
 					$profile->current_long = $current_long;
+					if($request->device_token){
+						$profile->device_token = $request->device_token;
+					}
 					$profile->save();
 					
 					// ProfileIcone::insert(array('profile_id'=>$profile->id,'icone_id'=>$icone_social,'link'=>$social_link,'type'=>'social'));
