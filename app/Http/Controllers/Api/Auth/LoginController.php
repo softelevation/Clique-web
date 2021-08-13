@@ -1565,6 +1565,8 @@ class LoginController extends Controller
         $arr4 = array("company_data" => $company_data);
         $res3 = array_merge($res2, $arr4);
 		$res3['custom_id'] = base64_encode($res3['user_id']);
+		$my_connections = Usercontact::where('user_id',$user_id)->count();
+		$res3['my_connections'] = $my_connections + 1;
 		
 		$profile_icones = ProfileIcone::with('icone')->where('profile_id',$result2->id)->get();
 		$social_icone = array();

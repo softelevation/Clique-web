@@ -9,6 +9,7 @@ use App\Countries;
 use App\Orders;
 use App\Contacts;
 use App\User;
+use App\Usercontact;
 use App\Company;
 use App\Icone;
 use App\Profile;
@@ -227,8 +228,9 @@ class PagesController extends Controller
             
         }
 		$icone_socials = ProfileIcone::with('icone')->where('profile_id',$user->profile->id)->get();
-        
-        return view('get-profile-page', compact('id', 'user', 'company', 
+		$my_connections = Usercontact::where('user_id',$user->id)->count() + 1;
+		
+        return view('get-profile-page', compact('id', 'user', 'company', 'my_connections',
 		// 'social_mtype_website',
 		'icone_socials'
         // 'social_mtype_mail',

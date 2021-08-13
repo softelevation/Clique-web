@@ -253,7 +253,7 @@
 											@endIf
 									 </h5>
 									  <p class="user-info-app">{{ ucfirst($user->profile->bio) }}</p>
-									<p class="connection"> 1 Connections </p>
+									<p class="connection"> {{$my_connections}} Connections </p>
 									</div>
 								</div>
 							</div>
