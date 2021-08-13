@@ -1075,28 +1075,28 @@ class LoginController extends Controller
     *************************************************************************************/
     public function addcontact(Request $request)
     {
+		$errors= "";
+		$data = (object)[];
         if(!empty($request['contact_id']))
         {
 			$user = JWTAuth::toUser();
 			$checkUsercontact = Usercontact::where('user_id',$user->id)->where('contact_id',$request['contact_id'])->first();
 			$profile = Profile::whereuser_id($request['contact_id'])->first();
             if(!$checkUsercontact){
-			$this->send_PushNotificat($profile->device_token,'Request for connection','You have received a new connection request.');
+			$data = $this->send_PushNotificat($profile->device_token,'Request for connection','You have received a new connection request.');
 			$user_contact = new Usercontact;
             $user_contact->user_id = $user->id;
             $user_contact->contact_id = $request['contact_id'];
             $user_contact->status = 'pending';
             $user_contact->save();
             $message = "Contact added Successfully";
-                $errors= "";
+                
                 $status = true;
-                $data = (object)[];
+                
                 return $this->sendResult($message,$data,$errors,$status);
 			}else{
 				$message = "This contact is aleardy added";
-				$errors= "";
 				$status = false;
-				$data = (object)[];
 				return $this->sendResult($message,$data,$errors,$status);
 			}
         }
