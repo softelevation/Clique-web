@@ -950,7 +950,10 @@ class LoginController extends Controller
         $data = array(
 					"is_view"=>$dataAnalyst ? $dataAnalyst[0]->is_view : 0,
 					"is_click"=>$dataAnalyst ? $dataAnalyst[0]->is_click : 0,
-					"is_share"=>$dataAnalyst ? $dataAnalyst[0]->is_share : 0
+					"is_share"=>$dataAnalyst ? $dataAnalyst[0]->is_share : 0,
+					"new_connections"=>2,
+					"already_connections"=>2,
+					"total_connections"=>2
 			);
 		$date_array = array();
 		$date_count = array();
