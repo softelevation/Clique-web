@@ -1729,10 +1729,10 @@ class LoginController extends Controller
 						$link_url = 'paypal://'.$request->link;
 					}
 				}else if($request->id == 6){
-					if(substr_count($request->link, 'm.p-y.tm')){
+					if(substr_count($request->link, 'p-y.tm/')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'http://m.p-y.tm/'.$request->link;
+						$link_url = 'https://p-y.tm/'.$request->link;
 					}
 				}else if($request->id == 7){
 					if(substr_count($request->link, 'google.com')){
@@ -1759,10 +1759,10 @@ class LoginController extends Controller
 						$link_url = 'https://youtube.com/'.$request->link;
 					}
 				}else if($request->id == 13){
-					if(substr_count($request->link, 'instagram')){
+					if(substr_count($request->link, 'instagram://')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'instagram://media?id='.$request->link;
+						$link_url = 'instagram://user?username='.$request->link;
 					}
 				}else if($request->id == 14){
 					if(substr_count($request->link, 'linkedin://')){
