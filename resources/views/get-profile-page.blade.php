@@ -240,11 +240,11 @@
 								
 								<div class="row header-top">
 									<div class="col-md-3 class-margin">
-											@if($user->profile != null)
-											<img src="{{url($user->profile->avatar)}}" class="rounded-circle">
-										@else
-											<img src="{{url('/user/default.png')}}" class="rounded-circle">
-										@endif
+											@if($user->profile != null && $user->profile->avatar)
+												<img src="{{url($user->profile->avatar)}}" class="rounded-circle">
+											@else
+												<img src="{{url('/user/default.png')}}" class="rounded-circle">
+											@endif
 									</div>
 									<div class="col-md-9">
 									  <h5 class="user-info-app-name">{{ ucfirst($user->name) }}  
