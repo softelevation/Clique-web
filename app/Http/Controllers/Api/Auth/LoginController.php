@@ -1843,10 +1843,10 @@ class LoginController extends Controller
 						$link_url = 'pcast://'.$request->link;
 					}
 				}else if($request->id == 28){
-					if(substr_count($request->link, 'soundcloud')){
+					if(substr_count($request->link, 'soundcloud.com')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'soundcloud://'.$request->link;
+						$link_url = 'https://soundcloud.com/'.$request->link;
 					}
 				}else if($request->id == 29){
 					if(substr_count($request->link, 'tiktok.com')){
