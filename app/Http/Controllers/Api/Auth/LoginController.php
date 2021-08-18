@@ -1741,10 +1741,10 @@ class LoginController extends Controller
 						$link_url = 'http://google.com/'.$request->link;
 					}
 				}else if($request->id == 8){
-					if(substr_count($request->link, 'player.vimeo.com')){
+					if(substr_count($request->link, 'vimeo.com')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'http://player.vimeo.com/video/'.$request->link;
+						$link_url = 'https://vimeo.com/'.$request->link;
 					}
 				}else if($request->id == 11){
 					if(substr_count($request->link, 'zomato.com')){
@@ -1837,10 +1837,10 @@ class LoginController extends Controller
 						$link_url = 'pinterest://'.$request->link;
 					}
 				}else if($request->id == 27){
-					if(substr_count($request->link, 'pcast')){
+					if(substr_count($request->link, 'podcasts.com')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'pcast://'.$request->link;
+						$link_url = 'https://www.podcasts.com/'.$request->link;
 					}
 				}else if($request->id == 28){
 					if(substr_count($request->link, 'soundcloud.com')){
@@ -1861,10 +1861,10 @@ class LoginController extends Controller
 						$link_url = 'https://'.$request->link;
 					}
 				}else if($request->id == 31){
-					if(substr_count($request->link, 'bitclout')){
+					if(substr_count($request->link, 'bitclout.com')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'bitclout://'.$request->link;
+						$link_url = 'https://bitclout.com/u/'.$request->link;
 					}
 				}else if($request->id == 32){
 					if(substr_count($request->link, 'wa.me')){
