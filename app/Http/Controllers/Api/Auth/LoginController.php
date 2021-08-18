@@ -1804,7 +1804,7 @@ class LoginController extends Controller
 					if(substr_count($request->link, 'joinclubhouse.com')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://www.joinclubhouse.com/'.$request->link;
+						$link_url = 'https://www.joinclubhouse.com/?'.$request->link;
 					}
 				}else if($request->id == 22){
 					if(substr_count($request->link, 'apps.apple.com/us/app/facetime')){
