@@ -1741,10 +1741,10 @@ class LoginController extends Controller
 						$link_url = 'http://google.com/'.$request->link;
 					}
 				}else if($request->id == 8){
-					if(substr_count($request->link, 'vimeo.com')){
+					if(substr_count($request->link, 'venmo.com')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://vimeo.com/'.$request->link;
+						$link_url = 'https://venmo.com/'.$request->link;
 					}
 				}else if($request->id == 11){
 					if(substr_count($request->link, 'zomato.com')){
