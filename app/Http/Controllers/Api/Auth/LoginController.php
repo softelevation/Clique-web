@@ -1750,7 +1750,7 @@ class LoginController extends Controller
 					if(substr_count($request->link, 'zomato.com')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://www.zomato.com/'.$request->link;
+						$link_url = 'https://zoma.to/u/'.$request->link;
 					}
 				}else if($request->id == 12){
 					if(substr_count($request->link, 'https://youtube.com')){
@@ -1780,7 +1780,7 @@ class LoginController extends Controller
 					if(substr_count($request->link, 'fb:')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'fb://'.$request->link;
+						$link_url = 'fb://profile?app_scoped_user_id='.$request->link;
 					}
 				}else if($request->id == 17){
 					if(substr_count($request->link, 'https')){
@@ -1804,13 +1804,13 @@ class LoginController extends Controller
 					if(substr_count($request->link, 'joinclubhouse.com')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://www.joinclubhouse.com/?'.$request->link;
+						$link_url = 'https://www.joinclubhouse.com/@?'.$request->link;
 					}
 				}else if($request->id == 22){
 					if(substr_count($request->link, 'apps.apple.com/us/app/facetime')){
 						$link_url = $request->link;
 					}else{
-						$link_url = 'https://apps.apple.com/us/app/facetime/'.$request->link;
+						$link_url = 'facetime:'.$request->link;
 					}
 				}else if($request->id == 23){
 					if(substr_count($request->link, 'deezer.com')){
