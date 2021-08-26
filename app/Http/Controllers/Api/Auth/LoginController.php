@@ -1823,16 +1823,16 @@ class LoginController extends Controller
 						if(substr_count($request->link, 'joinclubhouse.com')){
 							$link_url = $request->link;
 						}else{
-							$link_url = 'https://www.joinclubhouse.com/@?'.$request->link;
+							$link_url = 'https://www.joinclubhouse.com/@'.$request->link;
 						}
 						$contact_link = $link_url;
 					}else if($request->id == 22){
-						if(substr_count($request->link, 'apps.apple.com/us/app/facetime')){
+						if(substr_count($request->link, 'facetime:')){
 							$link_url = $request->link;
 						}else{
-							$link_url = 'apps.apple.com/us/app/facetime:'.$request->link;
+							$link_url = 'facetime:'.$request->link;
 						}
-						$contact_link = 'https://apps.apple.com/us/app/facetime/'.ltrim($link_url,'apps.apple.com/us/app/facetime:');
+						$contact_link = $link_url;
 					}else if($request->id == 23){
 						if(substr_count($request->link, 'deezer.com')){
 							$link_url = $request->link;
