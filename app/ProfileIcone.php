@@ -10,7 +10,7 @@ class ProfileIcone extends Model
 	protected $table = 'profile_icones';
 	
 	protected $fillable = [
-        'profile_id','icone_id','link','username','type'
+        'profile_id','icone_id','link','username','contact_link','type'
 	];
 
     public function profile(){

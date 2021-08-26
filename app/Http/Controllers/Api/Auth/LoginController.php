@@ -1698,14 +1698,17 @@ class LoginController extends Controller
 				ProfileIcone::find($request->id)->delete();
 			}else{
 				$Profile_icone = ProfileIcone::where('profile_id',$data->profile->id)->where('icone_id',$request->id)->where('type',$request->type)->first();
+				$contact_link = $request->link;
 				if (filter_var($request->link, FILTER_VALIDATE_URL) === FALSE) {
 					if($request->id == 1){
+						$contact_link = $request->link;
 						if(substr_count($request->link, 'tel')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'tel:'.$request->link;
 						}
 					}else if($request->id == 2){
+						$contact_link = $request->link;
 						if(substr_count($request->link, 'mailto')){
 							$link_url = $request->link;
 						}else{
@@ -1717,162 +1720,189 @@ class LoginController extends Controller
 						}else{
 							$link_url = 'https://story.snapchat.com/u/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 4){
 						if(substr_count($request->link, 'primevideo.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://www.primevideo.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 5){
 						if(substr_count($request->link, 'paypal://')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'paypal://'.$request->link;
 						}
+						$contact_link = 'https://www.paypal.com/myaccount/settings/'.ltrim($link_url,'paypal://');
 					}else if($request->id == 6){
 						if(substr_count($request->link, 'p-y.tm/')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://p-y.tm/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 7){
 						if(substr_count($request->link, 'google.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'http://google.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 8){
 						if(substr_count($request->link, 'venmo.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://venmo.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 11){
 						if(substr_count($request->link, 'zomato.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://zoma.to/u/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 12){
 						if(substr_count($request->link, 'https://youtube.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://youtube.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 13){
 						if(substr_count($request->link, 'instagram://')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'instagram://user?username='.$request->link;
 						}
+						$contact_link = 'https://www.instagram.com/'.ltrim($link_url,'instagram://user?username=');
 					}else if($request->id == 14){
 						if(substr_count($request->link, 'linkedin://')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'linkedin://profile/'.$request->link;
 						}
+						$contact_link = 'https://www.linkedin.com/in/'.ltrim($link_url,'linkedin://profile/');
 					}else if($request->id == 15){
 						if(substr_count($request->link, 'spotify')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'spotify:'.$request->link;
 						}
+						$contact_link = 'https://open.spotify.com/playlist/'.ltrim($link_url,'spotify:');
 					}else if($request->id == 16){
 						if(substr_count($request->link, 'fb:')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'fb://profile?app_scoped_user_id='.$request->link;
 						}
+						$contact_link = 'https://www.facebook.com/'.ltrim($link_url,'fb://profile?app_scoped_user_id=');
 					}else if($request->id == 17){
 						if(substr_count($request->link, 'https')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://www.twitter.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 19){
 						if(substr_count($request->link, 'musics')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'musics://'.$request->link;
 						}
+						$contact_link = 'http://musics.com/search_caf.php?src='.ltrim($link_url,'musics://');
 					}else if($request->id == 20){
 						if(substr_count($request->link, 'cash.app/')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'cash.app/'.$request->link;
 						}
+						$contact_link = 'https://cash.app/careers';
 					}else if($request->id == 21){
 						if(substr_count($request->link, 'joinclubhouse.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://www.joinclubhouse.com/@?'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 22){
 						if(substr_count($request->link, 'apps.apple.com/us/app/facetime')){
 							$link_url = $request->link;
 						}else{
-							$link_url = 'facetime:'.$request->link;
+							$link_url = 'apps.apple.com/us/app/facetime:'.$request->link;
 						}
+						$contact_link = 'https://apps.apple.com/us/app/facetime/'.ltrim($link_url,'apps.apple.com/us/app/facetime:');
 					}else if($request->id == 23){
 						if(substr_count($request->link, 'deezer.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://www.deezer.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 24){
 						if(substr_count($request->link, 'deezer.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://www.deezer.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 25){
 						if(substr_count($request->link, 'files.google.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://files.google.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 26){
 						if(substr_count($request->link, 'pinterest')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'pinterest://'.$request->link;
 						}
+						$contact_link = 'https://in.pinterest.com/pin/'.ltrim($link_url,'pinterest://');
 					}else if($request->id == 27){
 						if(substr_count($request->link, 'podcasts.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://www.podcasts.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 28){
 						if(substr_count($request->link, 'soundcloud.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://soundcloud.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 29){
 						if(substr_count($request->link, 'tiktok.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://www.tiktok.com/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 30){
 						if(substr_count($request->link, 'https')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 31){
 						if(substr_count($request->link, 'bitclout.com')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://bitclout.com/u/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 32){
 						if(substr_count($request->link, 'wa.me')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'https://wa.me/'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else{
 						$link_url = $request->link;
 					}
@@ -1881,10 +1911,10 @@ class LoginController extends Controller
 				}
 				if($Profile_icone){
 					$message = "Icon update successfully";
-					$Profile_icone->update(array('link'=>$link_url,'username'=>$request->link));
+					$Profile_icone->update(array('link'=>$link_url,'username'=>$request->link,'contact_link'=>$contact_link));
 				}else{
 					$message = "Icon add successfully";
-					ProfileIcone::insert(array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$link_url,'username'=>$request->link));
+					ProfileIcone::insert(array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$link_url,'username'=>$request->link,'contact_link'=>$contact_link));
 				}
 			}
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type',$request->type)->pluck('icone_id');

@@ -327,8 +327,8 @@ class PagesController extends Controller
 				$vcard->addPhoneNumber(ltrim($icone_socials_tel->link,'tel:'), 'WORK');
 			}
             foreach ($icone_socials as $key => $row) {
-				if($row->link){
-					$web_url = $row->link;
+				if($row->contact_link){
+					$web_url = $row->contact_link;
 					$vcard->addURL($web_url,"TYPE={$row->icone->name}");
 				}
             }
