@@ -1574,6 +1574,7 @@ class LoginController extends Controller
 		$res3['custom_id'] = base64_encode($res3['user_id']);
 		$my_connections = Usercontact::where('user_id',$user_id)->count();
 		$res3['my_connections'] = $my_connections + 1;
+		$res3['is_card_assign'] = Carditems::where('assign_user_id',$user_id)->count();
 		
 		$profile_icones = ProfileIcone::with('icone')->where('profile_id',$result2->id)->get();
 		$social_icone = array();
