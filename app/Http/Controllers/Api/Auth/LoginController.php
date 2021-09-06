@@ -909,6 +909,15 @@ class LoginController extends Controller
         $arr4 = array("company_data" => $company_data);
         $res3 = array_merge($res2, $arr4);
 		$profile_icones = ProfileIcone::with('icone')->where('profile_id',$result2['id'])->get();
+		$social_profile_icones = array();
+		$business_profile_icones = array();
+		foreach($profile_icones as $profile_icone){
+			if($profile_icone->type == 'social'){
+				$social_profile_icones[] = $profile_icone;
+			}else{
+				$business_profile_icones[] = $profile_icone;
+			}
+		}
 		
 		$my_connection_type = ($result2['privacy']) ? $result2['privacy']:'public';
 		$my_connection_status = 'request';
@@ -919,7 +928,10 @@ class LoginController extends Controller
 		}
 		
 		$res3['my_connection'] = array('type'=>$my_connection_type,'status'=>$my_connection_status);
-		$res3['social'] = $profile_icones;
+		$res3['social'] = $social_profile_icones;
+		$res3['business'] = $business_profile_icones;
+		// print_r($res3['social']);
+		// die;
         $message = "Profile detail Successfully";
         $status = true;
             $data = [
@@ -2605,11 +2617,12 @@ class LoginController extends Controller
 			$status = true;
             $errorCode = $status ? 200 : 422;
             $errors = "";
-			$input = JWTAuth::toUser();
+			$idss = base64_encode($request->id);
+			// $input = JWTAuth::toUser();
             $result = [
                 "message" => "testingApi",
                 "status" => true,
-                "input" => $input,
+                "input" => $idss,
                 "errors" => $errors
             ];
             return response()->json($result,$errorCode);

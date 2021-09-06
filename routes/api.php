@@ -82,7 +82,7 @@ Route::post('verify-forget-password', 'Api\Auth\LoginController@verify_forget_pa
 // Route::post('testing-api', 'Api\Auth\LoginController@testingApi')->name('testing-api');
 Route::post('/testing-api-second', 'Api\Auth\LoginController@testingApiSecond')->name('testing-api-second');
 Route::get('testing-api-get', 'Api\Auth\LoginController@testingApiGet')->name('testing-api-get');
-
+Route::post('testing-api', 'Api\Auth\LoginController@testingApi')->name('testing-api');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
 	Route::post('gettempprofile', 'Api\Auth\LoginController@gettempprofile'); // token
@@ -96,7 +96,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	
 	Route::post('data-analyst', 'Api\Auth\LoginController@dataAnalyst');
 
-	Route::post('testing-api', 'Api\Auth\LoginController@testingApi')->name('testing-api');
+	
 	
 	
 	
