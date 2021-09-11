@@ -265,7 +265,7 @@
 									<div class="row">
 										<div class="col-md-12">
 											@if($user->name)
-												<p class="user-contact-email">{{ $user->name.' contacts' }}</p>
+												<p class="user-contact-email">{{ $user->name."'S contacts" }}</p>
 											@else
 												<p class="user-contact-email">{{ $user->email }}</p>
 											@endif
