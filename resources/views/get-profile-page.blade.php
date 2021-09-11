@@ -116,7 +116,7 @@
 		color: #fff;
 		border-radius: 2px;
 		font-weight: bold;
-		font-size: 14px;
+		font-size: 16px;
 		width: auto;
 		text-align: center;
 		max-width: 80%;
@@ -265,7 +265,7 @@
 									<div class="row">
 										<div class="col-md-12">
 											@if($user->name)
-												<p class="user-contact-email">{{ $user->name."'s contacts" }}</p>
+												<p class="user-contact-email">{{ $user->name."'s Contacts" }}</p>
 											@else
 												<p class="user-contact-email">{{ $user->email }}</p>
 											@endif
