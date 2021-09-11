@@ -227,7 +227,7 @@ class PagesController extends Controller
             // $social_mtype_e_link = SocialNetwork::where('media_type', 'externalLink')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();   
             
         }
-		$icone_socials = ProfileIcone::with('icone')->where('profile_id',$user->profile->id)->get();
+		$icone_socials = ProfileIcone::with('icone')->where('profile_id',$user->profile->id)->where('type',$user->profile->account_flag)->get();
 		$my_connections = Usercontact::where('user_id',$user->id)->count() + 1;
 		
         return view('get-profile-page', compact('id', 'user', 'company', 'my_connections',

@@ -868,6 +868,18 @@ class LoginController extends Controller
     /************************************************************************************
      * Near by user API Details
     *************************************************************************************/
+	
+	public function accountFlag(Request $request){
+		// print_r($request->all());
+			$errors= "";
+			$data = (object)[];
+			$user = JWTAuth::toUser();
+			Profile::where('id',$user->profile->id)->update(array('account_flag'=>$request->flag));
+            $message = "Flag change Successfully";
+			$status = true;
+			return $this->sendResult($message,$data,$errors,$status);
+	}
+	
     public function usersdetails(Request $request)
     {
         $errors = "";
