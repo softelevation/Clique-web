@@ -875,7 +875,7 @@ class LoginController extends Controller
 			$data = (object)[];
 			$user = JWTAuth::toUser();
 			Profile::where('id',$user->profile->id)->update(array('account_flag'=>$request->flag));
-            $message = "Flag change Successfully";
+            $message = "Your profile is set to ".$request->flag;
 			$status = true;
 			return $this->sendResult($message,$data,$errors,$status);
 	}
