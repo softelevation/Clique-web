@@ -115,7 +115,7 @@
 		text-decoration: none;
 		color: #fff;
 		border-radius: 2px;
-		font-weight: bold;
+		// font-weight: bold;
 		font-size: 16px;
 		width: auto;
 		text-align: center;
