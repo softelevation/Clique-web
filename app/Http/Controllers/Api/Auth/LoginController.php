@@ -1596,7 +1596,7 @@ class LoginController extends Controller
         $arr4 = array("company_data" => $company_data);
         $res3 = array_merge($res2, $arr4);
 		$res3['custom_id'] = base64_encode($res3['user_id']);
-		$my_connections = Usercontact::where('user_id',$user_id)->count();
+		$my_connections = Usercontact::where('user_id',$user_id)->where('status','approve')->count();
 		$res3['my_connections'] = $my_connections + 1;
 		$res3['is_card_assign'] = Carditems::where('assign_user_id',$user_id)->count();
 		
