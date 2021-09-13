@@ -2358,7 +2358,7 @@ class LoginController extends Controller
 					return response()->json($result,$errorCode);   
 				}
 			}
-		}else if($request['social_type'] == 'F' || $request['social_type'] == 'G'){
+		}else if($request['social_type'] == 'F' || $request['social_type'] == 'G' || $request['social_type'] == 'I'){
 			$user = User::where('email',$email)->first();
 			if(!$user){
 				$role = 2;
