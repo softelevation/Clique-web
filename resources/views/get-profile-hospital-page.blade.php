@@ -59,7 +59,7 @@
             <div class="login-form login-signin">
                 <div class="text-center mb-10 mb-lg-20">
                     <h3 class="font-size-h1">Hospital</h3>
-                    <p class="text-muted font-weight-bold">This is hospital</p>
+                    <!--p class="text-muted font-weight-bold">This is hospital</p-->
                 </div>
 
                 <!--begin::Form-->
