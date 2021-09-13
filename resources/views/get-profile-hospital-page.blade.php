@@ -25,6 +25,9 @@
         <link href="{{ asset('css/themes/layout/aside/dark.css') }}" rel="stylesheet" type="text/css"/>
         <!--end::Layout Themes-->
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
+		<style>
+		.row{margin-top: 2px;}
+		</style>
     </head>
     <!--end::Head-->
     <!--begin::Body-->
