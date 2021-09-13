@@ -32,7 +32,7 @@ class Profile extends Model
         /**
         * The roles that belong to the user.
         */
-        return $this->hasMany('App\ProfileHospital');
+        return $this->hasOne('App\ProfileHospital');
     }
 
 }

@@ -874,8 +874,11 @@ class LoginController extends Controller
 			$errors= "";
 			$data = (object)[];
 			$user = JWTAuth::toUser();
-			// $data = $user->profile->profile_hospital;
-			ProfileHospital::insert(array('profile_id'=>$user->profile->id,'address'=>$request->address,'photo'=>$request->photo));
+			$inputData = $request->all();
+			$inputData['profile_id'] = $user->profile->id;
+			$insertData = ProfileHospital::insertGetId($inputData);
+			$data = $inputData;
+			$data['id'] = $insertData;
             $message = "Hospital flag add successfully";
 			$status = true;
 			return $this->sendResult($message,$data,$errors,$status);

@@ -183,12 +183,17 @@ class PagesController extends Controller
 		$decrypted = base64_decode($id);
         $user = User::find($decrypted);
 		$my_connections = Usercontact::where('user_id',$user->id)->count() + 1;
+		$user_image = '/user/default.png';
+		if($user->profile->avatar){
+			$user_image = $user->profile->avatar;
+		}
 		if($user->profile->account_flag != 'hospital'){
 			$icone_socials = ProfileIcone::with('icone')->where('profile_id',$user->profile->id)->where('type',$user->profile->account_flag)->get();
 			return view('get-profile-page', compact('id', 'user', 'my_connections', 'icone_socials'));
 		}else{
 			$icone_socials = $user->profile->profile_hospital;
-			return view('get-profile-hospital-page', compact('id', 'user', 'my_connections', 'icone_socials'));
+			// echo '<pre>'; print_r($icone_socials->toArray()); die;
+			return view('get-profile-hospital-page', compact('id', 'user', 'my_connections', 'user_image', 'icone_socials'));
 		}
     }
 
