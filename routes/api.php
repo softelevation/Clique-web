@@ -95,12 +95,10 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	Route::post('nearbyusers', 'Api\Auth\LoginController@nearbyusers');
 	Route::post('account-flag', 'Api\Auth\LoginController@accountFlag');
 	
+	Route::post('flag-hospital', 'Api\Auth\LoginController@flagHospital');
+	
 	Route::post('data-analyst', 'Api\Auth\LoginController@dataAnalyst');
 
-	
-	
-	
-	
 	Route::post('addcontact', 'Api\Auth\LoginController@addcontact');
 	Route::get('addcontactlist', 'Api\Auth\LoginController@addcontactlist');
 	Route::get('mycontactlist', 'Api\Auth\LoginController@mycontactlist');

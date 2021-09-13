@@ -180,70 +180,16 @@ class PagesController extends Controller
         if($request->has('param') && $request->filled('param')){
             $id = $request['param'];
         }
-		
 		$decrypted = base64_decode($id);
-        // $profiles = Profile::find($id);
-		// $id = $profiles->user_id;
         $user = User::find($decrypted);
-		
-        if($user->is_temp == 1){
-            
-            $company = Company::where('user_id', $user->id)->first();
-            // $social_mtype_website = TempSocialNetwork::where('media_type', 'website')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_mail = TempSocialNetwork::where('media_type', 'socialMail')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_instagram = TempSocialNetwork::where('media_type', 'instagram')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_facebook = TempSocialNetwork::where('media_type', 'facebook')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_twitter = TempSocialNetwork::where('media_type', 'twitter')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_youtube = TempSocialNetwork::where('media_type', 'youtube')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_linkedin = TempSocialNetwork::where('media_type', 'linkdin')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_contact_number = TempSocialNetwork::where(function($query) {
-                    // $query->orwhere('media_type', 'homeNumber');
-                    // $query->orwhere('media_type', 'workNumber');
-                    // $query->orwhere('media_type', 'otherNumber');
-            // })->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            
-            // $social_mtype_music = TempSocialNetwork::where('media_type', 'music')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_payment = TempSocialNetwork::where('media_type', 'payment')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_e_link = TempSocialNetwork::where('media_type', 'externalLink')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();  
-            
-        }else{
-            
-            $company = Company::where('user_id', $user->id)->first();
-            // $social_mtype_website = SocialNetwork::where('media_type', 'website')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_mail = SocialNetwork::where('media_type', 'socialMail')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_instagram = SocialNetwork::where('media_type', 'instagram')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_facebook = SocialNetwork::where('media_type', 'facebook')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_twitter = SocialNetwork::where('media_type', 'twitter')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_youtube = SocialNetwork::where('media_type', 'youtube')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_linkedin = SocialNetwork::where('media_type', 'linkdin')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_contact_number = SocialNetwork::where(function($query) {
-                    // $query->orwhere('media_type', 'homeNumber');
-                    // $query->orwhere('media_type', 'workNumber');
-                    // $query->orwhere('media_type', 'otherNumber');
-            // })->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            
-            // $social_mtype_music = SocialNetwork::where('media_type', 'music')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_payment = SocialNetwork::where('media_type', 'payment')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();
-            // $social_mtype_e_link = SocialNetwork::where('media_type', 'externalLink')->where('status', 1)->where('media_value', '!=', '')->where('user_id', $id)->get();   
-            
-        }
-		$icone_socials = ProfileIcone::with('icone')->where('profile_id',$user->profile->id)->where('type',$user->profile->account_flag)->get();
 		$my_connections = Usercontact::where('user_id',$user->id)->count() + 1;
-		
-        return view('get-profile-page', compact('id', 'user', 'company', 'my_connections',
-		// 'social_mtype_website',
-		'icone_socials'
-        // 'social_mtype_mail',
-        // 'social_mtype_instagram',
-        // 'social_mtype_facebook',
-        // 'social_mtype_twitter',
-        // 'social_mtype_youtube',
-        // 'social_mtype_linkedin',
-        // 'social_mtype_contact_number',
-        // 'social_mtype_music',  
-        // 'social_mtype_payment',
-        // 'social_mtype_e_link'
-        ));
+		if($user->profile->account_flag != 'hospital'){
+			$icone_socials = ProfileIcone::with('icone')->where('profile_id',$user->profile->id)->where('type',$user->profile->account_flag)->get();
+			return view('get-profile-page', compact('id', 'user', 'my_connections', 'icone_socials'));
+		}else{
+			$icone_socials = $user->profile->profile_hospital;
+			return view('get-profile-hospital-page', compact('id', 'user', 'my_connections', 'icone_socials'));
+		}
     }
 
 

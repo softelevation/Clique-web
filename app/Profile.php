@@ -26,5 +26,13 @@ class Profile extends Model
         */
         return $this->hasMany('App\ProfileIcone');
     }
+	
+	public function profile_hospital()
+    {
+        /**
+        * The roles that belong to the user.
+        */
+        return $this->hasMany('App\ProfileHospital');
+    }
 
 }

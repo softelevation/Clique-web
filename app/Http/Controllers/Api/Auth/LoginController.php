@@ -31,6 +31,7 @@ use App\Usercontact;
 use App\Carditems;
 use App\Countries;
 use App\ProfileIcone;
+use App\ProfileHospital;
 use App\Orders;
 use App\Icone;
 use App\DataAnalyst;
@@ -864,9 +865,24 @@ class LoginController extends Controller
         // dd($udata);
     }
 
-
-    /************************************************************************************
+	
+	 /************************************************************************************
      * Near by user API Details
+    *************************************************************************************/
+	
+	public function flagHospital(Request $request){
+			$errors= "";
+			$data = (object)[];
+			$user = JWTAuth::toUser();
+			// $data = $user->profile->profile_hospital;
+			ProfileHospital::insert(array('profile_id'=>$user->profile->id,'address'=>$request->address,'photo'=>$request->photo));
+            $message = "Hospital flag add successfully";
+			$status = true;
+			return $this->sendResult($message,$data,$errors,$status);
+	}
+	
+    /************************************************************************************
+     * Near by user accountFlag
     *************************************************************************************/
 	
 	public function accountFlag(Request $request){
