@@ -27,6 +27,7 @@
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
 		<style>
 		.row{margin-top: 2px;}
+		.flex-column-fluid.d-flex.flex-column.justify-content-center {margin-left: 25%;}
 		</style>
     </head>
     <!--end::Head-->
