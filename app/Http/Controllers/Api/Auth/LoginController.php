@@ -869,26 +869,32 @@ class LoginController extends Controller
      * Near by user API Details
     *************************************************************************************/
 	
+	public function addMemberUplodFile(Request $request){
+		$errors= "";
+		$data = (object)[];
+		if ($request->hasFile('uplod_file')) {
+			$file = $request->file('uplod_file');
+			// $file = $files[0];
+			$avatarName = 'member'.time().'.'.$file->getClientOriginalExtension();
+			$file->move('member/', $avatarName);
+			$data = array('uplod_file'=>'/member/'.$avatarName);
+			// $inputData['uplod_file'] = ;
+		}
+			
+		$message = "file uplod successfully";
+		$status = true;
+		return $this->sendResult($message,$data,$errors,$status);
+	}
+	
 	public function addMember(Request $request){
 			$errors= "";
 			$data = (object)[];
 			$user = JWTAuth::toUser();
 			$inputData = $request->all();
 			$inputData['profile_id'] = $user->profile->id;
-			
-			// if(!empty($request['uplod_file'])){
-                    // $avatarName = 'member'.time().'.'.request()->uplod_file->getClientOriginalExtension();
-                    // $request->uplod_file->storeAs('resume',$avatarName);
-                    // $profile->uplod_file = '/member/'.$avatarName;
-					// $inputData['uplod_file'] = '/member/'.$avatarName;
-                // }
-				
-			if ($request->hasFile('uplod_file')) {
-				$files = $request->file('uplod_file');
-				$file = $files[0];
-				$avatarName = 'member'.time().'.'.$file->getClientOriginalExtension();
-				$file->move('member/', $avatarName);
-				$inputData['uplod_file'] = '/member/'.$avatarName;
+			if($request->uplod_file){
+				$my_uplod_file = $request->uplod_file;
+				$inputData['uplod_file'] = implode(",",$my_uplod_file);
 			}
 			if(!empty($request['photo'])){
                     $image = $request['photo'];  // your base64 encoded
