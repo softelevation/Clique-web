@@ -880,10 +880,10 @@ class LoginController extends Controller
 			$data = array('uplod_file'=>'/member/'.$avatarName);
 			// $inputData['uplod_file'] = ;
 		}
-			
-		$message = "file uplod successfully";
-		$status = true;
-		return $this->sendResult($message,$data,$errors,$status);
+		return response()->json($data);
+		// $message = "file uplod successfully";
+		// $status = true;
+		// return $this->sendResult($message,$data,$errors,$status);
 	}
 	
 	public function addMember(Request $request){
