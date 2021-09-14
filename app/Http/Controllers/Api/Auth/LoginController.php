@@ -883,6 +883,14 @@ class LoginController extends Controller
 				$file->move('member/', $avatarName);
 				$inputData['uplod_file'] = '/member/'.$avatarName;
 			}
+			
+			if(!empty($request['photo'])){
+                    $image = $request['photo'];  // your base64 encoded
+					$image = substr($image, strpos($image, ',') + 1);
+                    $image_name = '/member_photo/member'.$inputData['profile_id'].time().'.'.'png';
+                    Storage::disk('public')->put($image_name, base64_decode($image));
+					$inputData['photo'] = $image_name;
+                }
 			$insertData = ProfileHospital::insertGetId($inputData);
 			$data = $inputData;
 			$data['id'] = $insertData;
