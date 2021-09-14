@@ -669,7 +669,6 @@ class LoginController extends Controller
         $profile = new Profile;
         $profile = Profile::whereuser_id($user_id)->first();
         if(!empty($request['avatar'])){
-
             $image = $request['avatar'];  // your base64 encoded
             $image = str_replace('data:image/png;base64,', '', $image);
             $image = str_replace(' ', '+', $image);
@@ -876,19 +875,26 @@ class LoginController extends Controller
 			$user = JWTAuth::toUser();
 			$inputData = $request->all();
 			$inputData['profile_id'] = $user->profile->id;
-			if ($request->hasFile('uplod_file')) {
-				$files = $request->file('uplod_file');
-				$file = $files[0];
-				$avatarName = 'member'.time().'.'.$file->getClientOriginalExtension();
-				$file->move('member/', $avatarName);
-				$inputData['uplod_file'] = '/member/'.$avatarName;
-			}
 			
+			if(!empty($request['uplod_file'])){
+                    $avatarName = 'member'.time().'.'.request()->uplod_file->getClientOriginalExtension();
+                    $request->uplod_file->storeAs('resume',$avatarName);
+                    // $profile->uplod_file = '/member/'.$avatarName;
+					$inputData['uplod_file'] = '/member/'.$avatarName;
+                }
+				
+			// if ($request->hasFile('uplod_file')) {
+				// $files = $request->file('uplod_file');
+				// $file = $files[0];
+				// $avatarName = 'member'.time().'.'.$file->getClientOriginalExtension();
+				// $file->move('member/', $avatarName);
+				// $inputData['uplod_file'] = '/member/'.$avatarName;
+			// }
 			if(!empty($request['photo'])){
                     $image = $request['photo'];  // your base64 encoded
 					$image = substr($image, strpos($image, ',') + 1);
-                    $image_name = '/member_photo/member'.$inputData['profile_id'].time().'.'.'png';
-                    Storage::disk('public')->put($image_name, base64_decode($image));
+                    $image_name = 'member_photo/member_'.$inputData['profile_id'].time().'.'.'png';
+					file_put_contents(public_path($image_name), base64_decode($image));
 					$inputData['photo'] = $image_name;
                 }
 			$insertData = ProfileHospital::insertGetId($inputData);
