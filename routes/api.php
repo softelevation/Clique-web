@@ -95,7 +95,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	Route::post('nearbyusers', 'Api\Auth\LoginController@nearbyusers');
 	Route::post('account-flag', 'Api\Auth\LoginController@accountFlag');
 	
-	Route::post('flag-hospital', 'Api\Auth\LoginController@flagHospital');
+	Route::post('add-member', 'Api\Auth\LoginController@addMember');
 	
 	Route::post('data-analyst', 'Api\Auth\LoginController@dataAnalyst');
 

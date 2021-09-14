@@ -870,16 +870,23 @@ class LoginController extends Controller
      * Near by user API Details
     *************************************************************************************/
 	
-	public function flagHospital(Request $request){
+	public function addMember(Request $request){
 			$errors= "";
 			$data = (object)[];
 			$user = JWTAuth::toUser();
 			$inputData = $request->all();
 			$inputData['profile_id'] = $user->profile->id;
+			if ($request->hasFile('uplod_file')) {
+				$files = $request->file('uplod_file');
+				$file = $files[0];
+				$avatarName = 'member'.time().'.'.$file->getClientOriginalExtension();
+				$file->move('member/', $avatarName);
+				$inputData['uplod_file'] = '/member/'.$avatarName;
+			}
 			$insertData = ProfileHospital::insertGetId($inputData);
 			$data = $inputData;
 			$data['id'] = $insertData;
-            $message = "Hospital flag add successfully";
+            $message = "Member flag add successfully";
 			$status = true;
 			return $this->sendResult($message,$data,$errors,$status);
 	}
