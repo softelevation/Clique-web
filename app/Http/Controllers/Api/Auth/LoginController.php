@@ -872,8 +872,8 @@ class LoginController extends Controller
 	public function addMemberUplodFile(Request $request){
 		$errors= "";
 		$data = (object)[];
-		if ($request->hasFile('uplod_file')) {
-			$file = $request->file('uplod_file');
+		if ($request->hasFile('image')) {
+			$file = $request->file('image');
 			// $file = $files[0];
 			$avatarName = 'member'.time().'.'.$file->getClientOriginalExtension();
 			$file->move('member/', $avatarName);
