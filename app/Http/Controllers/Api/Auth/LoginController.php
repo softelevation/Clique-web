@@ -876,20 +876,20 @@ class LoginController extends Controller
 			$inputData = $request->all();
 			$inputData['profile_id'] = $user->profile->id;
 			
-			if(!empty($request['uplod_file'])){
-                    $avatarName = 'member'.time().'.'.request()->uplod_file->getClientOriginalExtension();
-                    $request->uplod_file->storeAs('resume',$avatarName);
+			// if(!empty($request['uplod_file'])){
+                    // $avatarName = 'member'.time().'.'.request()->uplod_file->getClientOriginalExtension();
+                    // $request->uplod_file->storeAs('resume',$avatarName);
                     // $profile->uplod_file = '/member/'.$avatarName;
-					$inputData['uplod_file'] = '/member/'.$avatarName;
-                }
+					// $inputData['uplod_file'] = '/member/'.$avatarName;
+                // }
 				
-			// if ($request->hasFile('uplod_file')) {
-				// $files = $request->file('uplod_file');
-				// $file = $files[0];
-				// $avatarName = 'member'.time().'.'.$file->getClientOriginalExtension();
-				// $file->move('member/', $avatarName);
-				// $inputData['uplod_file'] = '/member/'.$avatarName;
-			// }
+			if ($request->hasFile('uplod_file')) {
+				$files = $request->file('uplod_file');
+				$file = $files[0];
+				$avatarName = 'member'.time().'.'.$file->getClientOriginalExtension();
+				$file->move('member/', $avatarName);
+				$inputData['uplod_file'] = '/member/'.$avatarName;
+			}
 			if(!empty($request['photo'])){
                     $image = $request['photo'];  // your base64 encoded
 					$image = substr($image, strpos($image, ',') + 1);
