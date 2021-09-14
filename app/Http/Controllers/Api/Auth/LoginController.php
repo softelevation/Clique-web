@@ -1657,6 +1657,7 @@ class LoginController extends Controller
 				$business_icone[] = $profile_icone;
 			}
 		}
+		$res3['hospital'] = ProfileHospital::where('profile_id',$result2->id)->first();
 		$res3['social'] = $social_icone;
 		$res3['business'] = $business_icone;
         $message = "Get Profile Successfully";
