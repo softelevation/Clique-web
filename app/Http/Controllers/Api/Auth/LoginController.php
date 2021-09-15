@@ -898,7 +898,9 @@ class LoginController extends Controller
 			}
 			if(!empty($request['photo'])){
                     $image = $request['photo'];  // your base64 encoded
-					$image = substr($image, strpos($image, ',') + 1);
+					// $image = substr($image, strpos($image, ',') + 1);
+					$image = str_replace('data:image/png;base64,', '', $image);
+					$image = str_replace(' ', '+', $image);
                     $image_name = 'member_photo/member_'.$inputData['profile_id'].time().'.'.'png';
 					file_put_contents(public_path($image_name), base64_decode($image));
 					$inputData['photo'] = $image_name;

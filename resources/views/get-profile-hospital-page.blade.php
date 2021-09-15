@@ -28,6 +28,9 @@
 		<style>
 		.row{margin-top: 2px;}
 		.flex-column-fluid.d-flex.flex-column.justify-content-center {margin-left: 25%;}
+		img.hospital-user-image {
+    margin-bottom: 39%;
+}
 		</style>
     </head>
     <!--end::Head-->
@@ -62,88 +65,80 @@
             <!--begin::Signin-->
             <div class="login-form login-signin">
                 <div class="text-center mb-10 mb-lg-20">
-                    <h3 class="font-size-h1">Hospital</h3>
+                    <h3 class="font-size-h1">Hospital Mamber</h3>
                     <!--p class="text-muted font-weight-bold">This is hospital</p-->
                 </div>
 
                 <!--begin::Form-->
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-4">
 							Name: 
 						</div>
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<span class="form-control">{{$icone_socials->start_name.' '.$icone_socials->first_name.' '.$icone_socials->last_name}}</span>
 						</div>
                     </div>
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-4">
 							Mobile no: 
 						</div>
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<span class="form-control">{{$icone_socials->mobile_no}}</span>
 						</div>
                     </div>
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-4">
 							Landline: 
 						</div>
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<span class="form-control">{{$icone_socials->landline}}</span>
 						</div>
                     </div>
 					<div class="row">
-						<div class="col-md-3">
-							Personal id: 
-						</div>
-						<div class="col-md-9">
-							<span class="form-control">{{$icone_socials->personal_id}}</span>
-						</div>
-                    </div>
-					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-4">
 							Age: 
 						</div>
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<span class="form-control">{{$icone_socials->age}}</span>
 						</div>
                     </div>
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-4">
 							Date of birth:
 						</div>
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<span class="form-control">{{$icone_socials->date_of_birth}}</span>
 						</div>
                     </div>
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-4">
 							Sex: 
 						</div>
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<span class="form-control">{{$icone_socials->sex}}</span>
 						</div>
                     </div>
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-4">
 							Marital status: 
 						</div>
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<span class="form-control">{{$icone_socials->marital_status}}</span>
 						</div>
                     </div>
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-4">
 							Email id: 
 						</div>
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<span class="form-control">{{$icone_socials->email_id}}</span>
 						</div>
                     </div>
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-4">
 							Address: 
 						</div>
-						<div class="col-md-9">
+						<div class="col-md-8">
 							<span class="form-control">{{$icone_socials->address}}</span>
 						</div>
                     </div>
