@@ -911,6 +911,21 @@ class LoginController extends Controller
 	}
 	
 	
+	public function updateMember($id, Request $request){
+		$errors= "";
+		$data = (object)[];
+		$user = JWTAuth::toUser();
+		$inputData = $request->all();
+		if($request->uplod_file){
+				$my_uplod_file = $request->uplod_file;
+				$inputData['uplod_file'] = implode(",",$my_uplod_file);
+			}
+		ProfileHospital::where('id',$id)->update($inputData);
+		$message = "Member flag update successfully";
+		$status = true;
+		return $this->sendResult($message,$data,$errors,$status);
+	}
+	
 	public function addMember(Request $request){
 			$errors= "";
 			$data = (object)[];
