@@ -1657,7 +1657,21 @@ class LoginController extends Controller
 				$business_icone[] = $profile_icone;
 			}
 		}
-		$res3['hospital'] = ProfileHospital::where('profile_id',$result2->id)->orderBy('id', 'desc')->get();
+		$myProfileHospitalArray = array();
+		$myProfileHospitaluplod_fileArray = array();
+		$myProfileHospitals = ProfileHospital::where('profile_id',$result2->id)->orderBy('id', 'desc')->get();
+		foreach($myProfileHospitals as $myProfileHospital){
+			$myProfileHospital_s = explode(',',$myProfileHospital->uplod_file);
+			$myProfileHospitaluplod_fileArray = array();
+			foreach($myProfileHospital_s as $myProfileHospital_ss){
+				$myProfileHospitaluplod_fileArray[] = array('name'=>$myProfileHospital_ss);
+			}
+			$myProfileHospital->uplod_file = $myProfileHospitaluplod_fileArray;
+			$myProfileHospitalArray[] = $myProfileHospital;
+		}
+		
+		$res3['hospital'] = $myProfileHospitalArray;
+		
 		$res3['social'] = $social_icone;
 		$res3['business'] = $business_icone;
         $message = "Get Profile Successfully";
