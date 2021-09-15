@@ -1,176 +1,106 @@
-<!DOCTYPE html>
-<html lang="en" >
-<!--begin::Head-->
-    <head>
-        <meta charset="utf-8"/>
-        <title>Clique | Hospital</title>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="description" content="Login page example"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <!--begin::Fonts-->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
-        <!--end::Fonts-->
-        <!--begin::Page Custom Styles(used by this page)-->
-        <link href="{{ asset('css/pages/login/classic/login-1.css') }}" rel="stylesheet" type="text/css"/>
-        <!--end::Page Custom Styles-->
-        <!--begin::Global Theme Styles(used by all pages)-->
-        <link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('css/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
-        <!--end::Global Theme Styles-->
-        <!--begin::Layout Themes(used by all pages)-->
-        <link href="{{ asset('css/themes/layout/header/base/light.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('css/themes/layout/header/menu/light.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('css/themes/layout/brand/dark.css') }}" rel="stylesheet" type="text/css"/>
-        <link href="{{ asset('css/themes/layout/aside/dark.css') }}" rel="stylesheet" type="text/css"/>
-        <!--end::Layout Themes-->
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
-		<style>
-		.row{margin-top: 2px;}
-		.flex-column-fluid.d-flex.flex-column.justify-content-center {margin-left: 25%;}
-		img.hospital-user-image {
-    margin-bottom: 39%;
+<!doctype html>
+                        <html>
+                            <head>
+                                <meta charset='utf-8'>
+                                <meta name='viewport' content='width=device-width, initial-scale=1'>
+                                <title>Clique | Hospital</title>
+                                <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
+                                <link href='' rel='stylesheet'>
+                                <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+                                <style>body {
+    background: linear-gradient(
+265.69deg, #E866B6 -28.53%, #6961FF 127.79%);
 }
-		</style>
-    </head>
-    <!--end::Head-->
-    <!--begin::Body-->
-    <body  id="kt_body"  class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"  >
-    <!--begin::Main-->
-	    <div class="d-flex flex-column flex-root">
-		    <!--begin::Login-->
-            <div class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white" id="kt_login">
-                <!--begin::Aside-->
-                <div class="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10" style="background-image: url({{ asset('media/bg/bg-4.jpg') }});">
-                    <!--begin: Aside Container-->
-                    <div class="d-flex flex-row-fluid flex-column justify-content-between">
-                       
-						<a href="#" class="flex-column-auto text-center">
-				            <img src="{{asset('frontend/images/footer-logo.svg')}}" class="" alt=""/>
-                        </a>
-                        <div class="flex-column-fluid d-flex flex-column justify-content-center">
-                            <img src="{{asset($user_image)}}" class="hospital-user-image" style="width: 310px;height: 230px;border-radius: 20px;" alt=""/>
-                        </div>
-						
-                    <!--end: Aside footer for desktop-->
-                </div>
-                <!--end: Aside Container-->
-            </div>
-            <!--begin::Aside-->
 
-    <!--begin::Content-->
-    <div class="d-flex flex-column flex-row-fluid position-relative p-7 overflow-hidden">
-        <!--begin::Content body-->
-        <div class="d-flex flex-column-fluid flex-center mt-30 mt-lg-0">
-            <!--begin::Signin-->
-            <div class="login-form login-signin">
-                <div class="text-center mb-10 mb-lg-20">
-                    <h3 class="font-size-h1">Hospital Mamber</h3>
-                    <!--p class="text-muted font-weight-bold">This is hospital</p-->
-                </div>
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
 
-                <!--begin::Form-->
-					<div class="row">
-						<div class="col-md-4">
-							Name: 
-						</div>
-						<div class="col-md-8">
-							<span class="form-control">{{$icone_socials->start_name.' '.$icone_socials->first_name.' '.$icone_socials->last_name}}</span>
-						</div>
-                    </div>
-					<div class="row">
-						<div class="col-md-4">
-							Mobile no: 
-						</div>
-						<div class="col-md-8">
-							<span class="form-control">{{$icone_socials->mobile_no}}</span>
-						</div>
-                    </div>
-					<div class="row">
-						<div class="col-md-4">
-							Landline: 
-						</div>
-						<div class="col-md-8">
-							<span class="form-control">{{$icone_socials->landline}}</span>
-						</div>
-                    </div>
-					<div class="row">
-						<div class="col-md-4">
-							Age: 
-						</div>
-						<div class="col-md-8">
-							<span class="form-control">{{$icone_socials->age}}</span>
-						</div>
-                    </div>
-					<div class="row">
-						<div class="col-md-4">
-							Date of birth:
-						</div>
-						<div class="col-md-8">
-							<span class="form-control">{{$icone_socials->date_of_birth}}</span>
-						</div>
-                    </div>
-					<div class="row">
-						<div class="col-md-4">
-							Sex: 
-						</div>
-						<div class="col-md-8">
-							<span class="form-control">{{$icone_socials->sex}}</span>
-						</div>
-                    </div>
-					<div class="row">
-						<div class="col-md-4">
-							Marital status: 
-						</div>
-						<div class="col-md-8">
-							<span class="form-control">{{$icone_socials->marital_status}}</span>
-						</div>
-                    </div>
-					<div class="row">
-						<div class="col-md-4">
-							Email id: 
-						</div>
-						<div class="col-md-8">
-							<span class="form-control">{{$icone_socials->email_id}}</span>
-						</div>
-                    </div>
-					<div class="row">
-						<div class="col-md-4">
-							Address: 
-						</div>
-						<div class="col-md-8">
-							<span class="form-control">{{$icone_socials->address}}</span>
-						</div>
-                    </div>
-                    
-                <!--end::Form-->
-            </div>
-            <!--end::Signin-->
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
 
+.profile-button:hover {
+    background: #682773
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+img.rounded-circle.mt-5 {
+    width: auto;
+    max-width: 180px;
+}
+</style>
+                                </head>
+                                <body oncontextmenu='return false' class='snippet-body'>
+                                <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="{{asset($user_image)}}">
+				<span class="font-weight-bold">{{$user->name}}</span>
+				<span class="text-black-50">{{$user->email}}</span><span> </span>
+			</div>
         </div>
-        <!--end::Content body-->
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Hospital Mamber</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Name</label><span class="form-control">{{$icone_socials->start_name.' '.$icone_socials->first_name.' '.$icone_socials->last_name}}</span></div>
+                    <div class="col-md-6"><label class="labels">Mobile no</label><span class="form-control">{{$icone_socials->mobile_no}}</span></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Landline</label><span class="form-control">{{$icone_socials->landline}}</span></div>
+                    <div class="col-md-12"><label class="labels">Age</label><span class="form-control">{{($icone_socials->age) ? $icone_socials->age:'N/A'}}</span></div>
+                    <div class="col-md-12"><label class="labels">Date of birth</label><span class="form-control">{{$icone_socials->date_of_birth}}</span></div>
+                    <div class="col-md-12"><label class="labels">Sex</label><span class="form-control">{{$icone_socials->sex}}</span></div>
+                    <div class="col-md-12"><label class="labels">Marital status</label><span class="form-control">{{$icone_socials->marital_status}}</span></div>
+                    <div class="col-md-12"><label class="labels">Email id</label><span class="form-control">{{$icone_socials->email_id}}</span></div>
+                    <div class="col-md-12"><label class="labels">Address</label><span class="form-control">{{$icone_socials->address}}</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <!--div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br-->
+                @foreach($icone_socials->uplod_file as $uplod_files)
+				<div class="col-md-12"><label class="super_labels">{{ rtrim(ltrim($uplod_files,'/member/'),'.jpg') }} <a href="{{url($uplod_files)}}" download>Download</a></label></div>
+				@endforeach
+                <!--div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div-->
+            </div>
+        </div>
     </div>
-    <!--end::Content-->
 </div>
-<!--end::Login-->
-	</div>
-<!--end::Main-->
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <!--begin::Global Config(global config for global JS scripts)-->
-        <!--end::Global Config-->
-
-    	<!--begin::Global Theme Bundle(used by all pages)-->
-    	    	   <script src="{{ asset('plugins/global/plugins.bundle.js') }}"></script>
-		    	   <script src="{{ asset('plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
-		    	   <script src="{{ asset('js/scripts.bundle.js') }}"></script>
-				<!--end::Global Theme Bundle-->
-
-
-                    <!--begin::Page Scripts(used by this page)-->
-                            <script src="{{ asset('js/pages/custom/login/login-general.js') }}"></script>
-                        <!--end::Page Scripts-->
-                    <script src="{{ asset('js/custom.js') }}"></script>
-            </body>
-    <!--end::Body-->
-</html>
+</div>
+</div>
+                                <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
+                                <script type='text/javascript'></script>
+                                </body>
+                            </html>
