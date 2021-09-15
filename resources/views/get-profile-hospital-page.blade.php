@@ -73,16 +73,20 @@ img.rounded-circle.mt-5 {
                     <h4 class="text-right">Hospital Member</h4>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Start name</label><span class="form-control">{{$icone_socials->start_name}}</span></div>
-                    <div class="col-md-12"><label class="labels">First name</label><span class="form-control">{{$icone_socials->first_name}}</span></div>
-                    <div class="col-md-12"><label class="labels">Last name</label><span class="form-control">{{$icone_socials->last_name}}</span></div>
-                    <div class="col-md-12"><label class="labels">Mobile no</label><span class="form-control">{{$icone_socials->mobile_no}}</span></div>
+                    <div class="col-md-12"><label class="labels">Title</label><span class="form-control">{{$icone_socials->start_name}}</span></div>
+                    <div class="col-md-12"><label class="labels">First Name</label><span class="form-control">{{$icone_socials->first_name}}</span></div>
+                    <div class="col-md-12"><label class="labels">Last Name</label><span class="form-control">{{$icone_socials->last_name}}</span></div>
+                    <div class="col-md-12"><label class="labels">Mobile number</label><span class="form-control">{{$icone_socials->mobile_no}}</span></div>
+					@if($icone_socials->landline)
+                    <div class="col-md-12"><label class="labels">Landline number</label><span class="form-control">{{$icone_socials->landline}}</span></div>
+					@endIf
                     <div class="col-md-12"><label class="labels">{{$icone_socials->govt_id}}</label><span class="form-control">{{$icone_socials->govt_id_number}}</span></div>
-                    <div class="col-md-12"><label class="labels">Mother tounge</label><span class="form-control">{{$icone_socials->mother_tounge}}</span></div>
+                    <div class="col-md-12"><label class="labels">Mother Tounge</label><span class="form-control">{{$icone_socials->mother_tounge}}</span></div>
                     <div class="col-md-12"><label class="labels">Age</label><span class="form-control">{{$age_datediff.' years'}}</span></div>
-                    <div class="col-md-12"><label class="labels">Date of birth</label><span class="form-control">{{$icone_socials->date_of_birth}}</span></div>
+                    <div class="col-md-12"><label class="labels">Date Of Birth</label><span class="form-control">{{$icone_socials->date_of_birth}}</span></div>
                     <div class="col-md-12"><label class="labels">Sex</label><span class="form-control">{{$icone_socials->sex}}</span></div>
-                    <div class="col-md-12"><label class="labels">Marital status</label><span class="form-control">{{$icone_socials->marital_status}}</span></div>
+                    <div class="col-md-12"><label class="labels">Marital Status</label><span class="form-control">{{$icone_socials->marital_status}}</span></div>
+                    <div class="col-md-12"><label class="labels">Relation</label><span class="form-control">{{$icone_socials->relation}}</span></div>
                     <div class="col-md-12"><label class="labels">Address</label><span class="form-control">{{$icone_socials->address}}</span></div>
                 </div>
             </div>
