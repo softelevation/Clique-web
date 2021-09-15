@@ -956,7 +956,7 @@ class LoginController extends Controller
 					$inputData['photo'] = $image_name;
                 }
 			$checkHospital = ProfileHospital::where('profile_id',$inputData['profile_id'])->first();
-			if($checkHospital){
+			if(!$checkHospital){
 				$inputData['by_default'] = 1;
 			}
 			$insertData = ProfileHospital::insertGetId($inputData);
