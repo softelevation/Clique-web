@@ -93,6 +93,9 @@ img.rounded-circle.mt-5 {
         </div>
         <div class="col-md-4">
             <div class="p-3 py-5">
+				<div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Attachment</h4>
+                </div>
                 <!--div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br-->
                 @foreach($icone_socials->uplod_file as $uplod_files)
 				<div class="col-md-12"><label class="super_labels">{{ rtrim(ltrim($uplod_files,'/member/'),'.jpg') }} <a href="{{url($uplod_files)}}" download>Download</a></label></div>
