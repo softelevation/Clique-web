@@ -895,11 +895,11 @@ class LoginController extends Controller
 			$myProfileHospital = ProfileHospital::where('id',$request->id)->first();
 			if($myProfileHospital->by_default == 1){
 				$by_default = array('by_default'=>0);
-				$message = "Member flag not default successfully";
+				$message = "Member set as successfully";
 			}else{
 				$by_default = array('by_default'=>1);
 				ProfileHospital::where('profile_id',$user->profile->id)->update(array('by_default'=>0));
-				$message = "Member flag default successfully";
+				$message = "Member set as successfully";
 			}
 			ProfileHospital::where('id',$request->id)->update($by_default);
 		}else{
