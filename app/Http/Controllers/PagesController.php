@@ -192,7 +192,7 @@ class PagesController extends Controller
 		}else{
 			$icone_socials = ProfileHospital::where('profile_id',$user->profile->id)->where('by_default',1)->first();
 			$current_date = Carbon::now()->toDateString();
-			$to_date = Carbon::createFromFormat('d/m/Y', $icone_socials->date_of_birth)->toDateString();
+			$to_date = Carbon::createFromFormat('m/d/Y', $icone_socials->date_of_birth)->toDateString();
 			$datediff = strtotime($current_date) - strtotime($to_date);
 			$age_datediff = round(($datediff / (60 * 60 * 24))/365);
 			if($icone_socials){
