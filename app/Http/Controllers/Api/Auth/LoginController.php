@@ -915,11 +915,21 @@ class LoginController extends Controller
 		$errors= "";
 		$data = (object)[];
 		$user = JWTAuth::toUser();
+		$profile_id = $user->profile->id;
 		$inputData = $request->all();
 		if($request->uplod_file){
 				$my_uplod_file = $request->uplod_file;
 				$inputData['uplod_file'] = implode(",",$my_uplod_file);
 			}
+		if($request->photo && !empty($request->photo)){
+			$image = $request->photo;  // your base64 encoded
+			// $image = substr($image, strpos($image, ',') + 1);
+			$image = str_replace('data:image/png;base64,', '', $image);
+			$image = str_replace(' ', '+', $image);
+			$image_name = 'member_photo/member_'.$profile_id.time().'.'.'png';
+			file_put_contents(public_path($image_name), base64_decode($image));
+			$inputData['photo'] = $image_name;
+		}
 		ProfileHospital::where('id',$id)->update($inputData);
 		$message = "Member flag update successfully";
 		$status = true;
@@ -945,6 +955,10 @@ class LoginController extends Controller
 					file_put_contents(public_path($image_name), base64_decode($image));
 					$inputData['photo'] = $image_name;
                 }
+			$checkHospital = ProfileHospital::where('profile_id',$inputData['profile_id'])->first();
+			if($checkHospital){
+				$inputData['by_default'] = 1;
+			}
 			$insertData = ProfileHospital::insertGetId($inputData);
 			$data = $inputData;
 			$data['id'] = $insertData;
