@@ -892,16 +892,16 @@ class LoginController extends Controller
 		$user = JWTAuth::toUser();
 		// $inputData = $request->all();
 		if($request->action && $request->action == 'default'){
-			$myProfileHospital = ProfileHospital::where('id',$request->id)->first();
-			if($myProfileHospital->by_default == 1){
-				$by_default = array('by_default'=>0);
-				$message = "Member set as default";
-			}else{
-				$by_default = array('by_default'=>1);
+			// $myProfileHospital = ProfileHospital::where('id',$request->id)->first();
+			// if($myProfileHospital->by_default == 1){
+				// $by_default = array('by_default'=>0);
+				// $message = "Member set as default";
+			// }else{
+				// $by_default = array('by_default'=>1);
 				ProfileHospital::where('profile_id',$user->profile->id)->update(array('by_default'=>0));
 				$message = "Member set as default";
-			}
-			ProfileHospital::where('id',$request->id)->update($by_default);
+			// }
+			ProfileHospital::where('id',$request->id)->update(array('by_default'=>1));
 		}else{
 			ProfileHospital::where('id',$request->id)->delete();
 			$message = "Member flag delete successfully";
