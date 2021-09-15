@@ -10,7 +10,7 @@ class ProfileHospital extends Model
 	protected $table = 'profile_hospitals';
 	
 	protected $fillable = [
-        'profile_id','start_name','first_name','last_name','mobile_no','landline','personal_id','age','date_of_birth','sex','marital_status','email_id','address','photo'
+        'profile_id','start_name','first_name','last_name','mobile_no','landline','by_default','personal_id','age','date_of_birth','sex','marital_status','email_id','address','photo'
 	];
 
     public function profile(){

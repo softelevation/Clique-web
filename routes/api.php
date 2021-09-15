@@ -98,6 +98,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	Route::post('add-member', 'Api\Auth\LoginController@addMember');
 	Route::post('delete-member', 'Api\Auth\LoginController@deleteMember');
 	Route::post('add-member-uplod-file', 'Api\Auth\LoginController@addMemberUplodFile');
+	Route::post('socialdelete', 'Api\Auth\LoginController@socialdelete');
 	
 	Route::post('data-analyst', 'Api\Auth\LoginController@dataAnalyst');
 

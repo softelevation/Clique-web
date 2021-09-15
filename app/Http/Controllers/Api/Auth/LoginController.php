@@ -891,10 +891,23 @@ class LoginController extends Controller
 		$data = (object)[];
 		$user = JWTAuth::toUser();
 		// $inputData = $request->all();
-		$insertData = ProfileHospital::where('id',$request->id)->delete();
+		if($request->action && $request->action == 'default'){
+			$myProfileHospital = ProfileHospital::where('id',$request->id)->first();
+			if($myProfileHospital->by_default == 1){
+				$by_default = array('by_default'=>0);
+				$message = "Member flag default successfully";
+			}else{
+				$by_default = array('by_default'=>1);
+				$message = "Member flag not default successfully";
+			}
+			ProfileHospital::where('id',$request->id)->update($by_default);
+		}else{
+			ProfileHospital::where('id',$request->id)->delete();
+			$message = "Member flag delete successfully";
+		}
 		// $data = $inputData;
 		// $data['id'] = $insertData;
-		$message = "Member flag delete successfully";
+		// $message = "Member flag delete successfully";
 		$status = true;
 		return $this->sendResult($message,$data,$errors,$status);
 	}
@@ -1401,30 +1414,29 @@ class LoginController extends Controller
     *************************************************************************************/
     public function socialdelete(Request $request)
     {
-        $socialId = $request['social_id'];
-        $user_id = $request['user_id'];
-        SocialNetwork::find($socialId)->delete();
-        $user1 = User::where('id','=',$user_id)->first();
-        $result1 = $user1->toArray();
-        $result2 = Profile::whereuser_id($user_id)->first()->toArray(); //Profile::find($user_id);
-        $res = array_merge($result1, $result2);
-        $result3 = SocialNetwork::whereuser_id($user_id)->get()->toArray();
-        $arr3 = array("social_data" => $result3);
-        $res2 = array_merge($res, $arr3);
-        //$result4 = Company::whereuser_id($user_id)->get()->toArray();
-        $company_data = Company::select('company.*','company_users.job_position');
-        $company_data->leftJoin('company_users', 'company_users.company_id', '=', 'company.id');
-        $company_data->where('company_users.user_id', $user_id);
-        $company_data = $company_data->orderBy('company.id', 'ASC')->get()->toArray();
-        $arr4 = array("company_data" => $company_data);
-        $res3 = array_merge($res2, $arr4);
+        // $socialId = $request['social_id'];
+        // $user_id = $request['user_id'];
+        // SocialNetwork::find($socialId)->delete();
+        // $user1 = User::where('id','=',$user_id)->first();
+        // $result1 = $user1->toArray();
+        // $result2 = Profile::whereuser_id($user_id)->first()->toArray(); //Profile::find($user_id);
+        // $res = array_merge($result1, $result2);
+        // $result3 = SocialNetwork::whereuser_id($user_id)->get()->toArray();
+        // $arr3 = array("social_data" => $result3);
+        // $res2 = array_merge($res, $arr3);
+        // $company_data = Company::select('company.*','company_users.job_position');
+        // $company_data->leftJoin('company_users', 'company_users.company_id', '=', 'company.id');
+        // $company_data->where('company_users.user_id', $user_id);
+        // $company_data = $company_data->orderBy('company.id', 'ASC')->get()->toArray();
+        // $arr4 = array("company_data" => $company_data);
+        // $res3 = array_merge($res2, $arr4);
+		$data = JWTAuth::toUser()->profile->id;
+		ProfileIcone::where('profile_id',$data)->delete();
+		ProfileHospital::where('profile_id',$data)->delete();
         $errors = "";
         $message = "Data has been successfully delete.";
         $status = true;
-        $data = [
-            'asset_url' => url()->to('/public/storage'),
-            'user' => $res3,
-        ];
+        // $data = (object)array();
         return $this->sendResult($message,$data,$errors,$status);
 
     }
