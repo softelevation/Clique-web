@@ -895,19 +895,17 @@ class LoginController extends Controller
 			$myProfileHospital = ProfileHospital::where('id',$request->id)->first();
 			if($myProfileHospital->by_default == 1){
 				$by_default = array('by_default'=>0);
-				$message = "Member flag default successfully";
+				$message = "Member flag not default successfully";
 			}else{
 				$by_default = array('by_default'=>1);
-				$message = "Member flag not default successfully";
+				ProfileHospital::where('profile_id',$user->profile->id)->update(array('by_default'=>0));
+				$message = "Member flag default successfully";
 			}
 			ProfileHospital::where('id',$request->id)->update($by_default);
 		}else{
 			ProfileHospital::where('id',$request->id)->delete();
 			$message = "Member flag delete successfully";
 		}
-		// $data = $inputData;
-		// $data['id'] = $insertData;
-		// $message = "Member flag delete successfully";
 		$status = true;
 		return $this->sendResult($message,$data,$errors,$status);
 	}
