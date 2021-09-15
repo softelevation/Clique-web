@@ -192,7 +192,11 @@ class PagesController extends Controller
 			if($icone_socials){
 				$user_image = $icone_socials->photo;
 			}
-			$icone_socials->uplod_file = explode(',',$icone_socials->uplod_file);
+			if($icone_socials->uplod_file){
+				$icone_socials->uplod_file = explode(',',$icone_socials->uplod_file);
+			}else{
+				$icone_socials->uplod_file = array();
+			}
 			// echo '<pre>'; print_r($icone_socials->toArray()); die;
 			return view('get-profile-hospital-page', compact('id', 'user', 'my_connections', 'user_image', 'icone_socials'));
 		}

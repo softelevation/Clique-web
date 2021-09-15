@@ -1687,7 +1687,11 @@ class LoginController extends Controller
 		$myProfileHospitaluplod_fileArray = array();
 		$myProfileHospitals = ProfileHospital::where('profile_id',$result2->id)->orderBy('id', 'desc')->get();
 		foreach($myProfileHospitals as $myProfileHospital){
-			$myProfileHospital_s = explode(',',$myProfileHospital->uplod_file);
+			if($myProfileHospital->uplod_file){
+				$myProfileHospital_s = explode(',',$myProfileHospital->uplod_file);
+			}else{
+				$myProfileHospital_s = array();
+			}
 			$myProfileHospitaluplod_fileArray = array();
 			foreach($myProfileHospital_s as $myProfileHospital_ss){
 				$myProfileHospitaluplod_fileArray[] = array('name'=>rtrim(ltrim($myProfileHospital_ss,'/member'),'.jpg'),'url'=>$myProfileHospital_ss);
