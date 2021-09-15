@@ -15,6 +15,7 @@ use App\Icone;
 use App\Profile;
 use App\SocialNetwork;
 use App\ProfileIcone;
+use App\ProfileHospital;
 use App\TempSocialNetwork;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\placeorder;
@@ -188,7 +189,7 @@ class PagesController extends Controller
 			$icone_socials = ProfileIcone::with('icone')->where('profile_id',$user->profile->id)->where('type',$user->profile->account_flag)->get();
 			return view('get-profile-page', compact('id', 'user', 'my_connections', 'icone_socials'));
 		}else{
-			$icone_socials = $user->profile->profile_hospital;
+			$icone_socials = ProfileHospital::where('profile_id',$user->profile->id)->where('by_default',1)->first();
 			if($icone_socials){
 				$user_image = $icone_socials->photo;
 			}
