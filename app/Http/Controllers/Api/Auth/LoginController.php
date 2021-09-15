@@ -921,7 +921,7 @@ class LoginController extends Controller
 				$my_uplod_file = $request->uplod_file;
 				$inputData['uplod_file'] = implode(",",$my_uplod_file);
 			}
-		if($request->photo && !empty($request->photo)){
+		if($request->photo && strlen($request->photo) > 80 && !empty($request->photo)){
 			$image = $request->photo;  // your base64 encoded
 			// $image = substr($image, strpos($image, ',') + 1);
 			$image = str_replace('data:image/png;base64,', '', $image);
