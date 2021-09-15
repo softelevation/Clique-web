@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Mail\placeorder;
 use Illuminate\Support\Facades\Mail;
 use JeroenDesloovere\VCard\VCard;
+use Carbon\Carbon;
 
 
 class PagesController extends Controller
@@ -190,6 +191,10 @@ class PagesController extends Controller
 			return view('get-profile-page', compact('id', 'user', 'my_connections', 'icone_socials'));
 		}else{
 			$icone_socials = ProfileHospital::where('profile_id',$user->profile->id)->where('by_default',1)->first();
+			$current_date = Carbon::now()->toDateString();
+			$to_date = Carbon::createFromFormat('d/m/Y', $icone_socials->date_of_birth)->toDateString();
+			$datediff = strtotime($current_date) - strtotime($to_date);
+			$age_datediff = round(($datediff / (60 * 60 * 24))/365);
 			if($icone_socials){
 				$user_image = $icone_socials->photo;
 			}
@@ -199,7 +204,7 @@ class PagesController extends Controller
 				$icone_socials->uplod_file = array();
 			}
 			// echo '<pre>'; print_r($icone_socials->toArray()); die;
-			return view('get-profile-hospital-page', compact('id', 'user', 'my_connections', 'user_image', 'icone_socials'));
+			return view('get-profile-hospital-page', compact('id', 'user', 'my_connections', 'age_datediff', 'user_image', 'icone_socials'));
 		}
     }
 
