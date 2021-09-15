@@ -886,6 +886,20 @@ class LoginController extends Controller
 		// return $this->sendResult($message,$data,$errors,$status);
 	}
 	
+	public function deleteMember(Request $request){
+		$errors= "";
+		$data = (object)[];
+		$user = JWTAuth::toUser();
+		// $inputData = $request->all();
+		$insertData = ProfileHospital::where('id',$request->id)->delete();
+		// $data = $inputData;
+		// $data['id'] = $insertData;
+		$message = "Member flag delete successfully";
+		$status = true;
+		return $this->sendResult($message,$data,$errors,$status);
+	}
+	
+	
 	public function addMember(Request $request){
 			$errors= "";
 			$data = (object)[];
