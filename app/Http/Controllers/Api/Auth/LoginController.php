@@ -873,6 +873,7 @@ class LoginController extends Controller
 		$errors= "";
 		$data = (object)[];
 		if ($request->hasFile('image')) {
+			DB::table('api_response_test')->insert(array('get_values'=>"1"));
 			$file = $request->file('image');
 			// $file = $files[0];
 			$avatarName = 'member'.time().'.'.$file->getClientOriginalExtension();
