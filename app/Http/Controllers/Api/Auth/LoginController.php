@@ -1725,7 +1725,7 @@ class LoginController extends Controller
 			$myProfileHospitaluplod_fileArray = array();
 			foreach($myProfileHospital_s as $myProfileHospital_ss){
 				$myProfileHospital_ss_explode = explode(".",$myProfileHospital_ss);
-				$myProfileHospitaluplod_fileArray[] = array('name'=>rtrim(ltrim($myProfileHospital_ss,'/member'),'.jpg'),'type'=>end($myProfileHospital_ss_explode),'url'=>$myProfileHospital_ss);
+				$myProfileHospitaluplod_fileArray[] = array('name'=>rtrim(ltrim($myProfileHospital_ss,'/member'),'.jpg'),'type'=>strtolower(end($myProfileHospital_ss_explode)),'url'=>$myProfileHospital_ss);
 			}
 			$myProfileHospital->uplod_file = $myProfileHospitaluplod_fileArray;
 			$myProfileHospitalArray[] = $myProfileHospital;
