@@ -873,18 +873,14 @@ class LoginController extends Controller
 		$errors= "";
 		$data = (object)[];
 		if ($request->hasFile('image')) {
-			DB::table('api_response_test')->insert(array('get_values'=>"1"));
+			// DB::table('api_response_test')->insert(array('get_values'=>"1"));
 			$file = $request->file('image');
 			// $file = $files[0];
 			$avatarName = 'member'.time().'.'.$file->getClientOriginalExtension();
 			$file->move('member/', $avatarName);
 			$data = array('uplod_file'=>'/member/'.$avatarName);
-			// $inputData['uplod_file'] = ;
 		}
 		return response()->json($data);
-		// $message = "file uplod successfully";
-		// $status = true;
-		// return $this->sendResult($message,$data,$errors,$status);
 	}
 	
 	public function deleteMember(Request $request){
@@ -2058,10 +2054,18 @@ class LoginController extends Controller
 				}
 				if($Profile_icone){
 					$message = "Icon update successfully";
-					$Profile_icone->update(array('link'=>$link_url,'username'=>$request->link,'contact_link'=>$contact_link));
+					$profile_icone_data = array('link'=>$link_url,'username'=>$request->link,'contact_link'=>$contact_link);
+					if($request->file_path){
+						$profile_icone_data['file_path'] = $request->file_path;
+					}
+					$Profile_icone->update($profile_icone_data);
 				}else{
 					$message = "Icon add successfully";
-					ProfileIcone::insert(array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$link_url,'username'=>$request->link,'contact_link'=>$contact_link));
+					$profile_icone_data = array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$link_url,'username'=>$request->link,'contact_link'=>$contact_link);
+					if($request->file_path){
+						$profile_icone_data['file_path'] = $request->file_path;
+					}
+					ProfileIcone::insert($profile_icone_data);
 				}
 			}
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type',$request->type)->pluck('icone_id');
