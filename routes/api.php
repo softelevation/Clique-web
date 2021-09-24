@@ -85,6 +85,10 @@ Route::get('testing-api-get', 'Api\Auth\LoginController@testingApiGet')->name('t
 Route::post('testing-api', 'Api\Auth\LoginController@testingApi')->name('testing-api');
 
 Route::group(['middleware' => ['jwt.verify']], function() {
+	
+	
+	Route::post('update-password', 'Api\Auth\LoginController@updatePassword'); // token
+	
 	Route::post('gettempprofile', 'Api\Auth\LoginController@gettempprofile'); // token
 	Route::post('gettempicone', 'Api\Auth\LoginController@gettempIcone'); // token
 	Route::post('makepayment', 'Api\Auth\LoginController@makepayment'); // token

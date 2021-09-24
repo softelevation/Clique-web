@@ -1658,6 +1658,31 @@ class LoginController extends Controller
 
         }
     }
+	
+	 /************************************************************************************
+     * get temp profile G
+    *************************************************************************************/
+	
+	public function updatePassword(Request $request){
+			$errors= "";
+            $status = true;
+			$message = "Your password has been change Successfully";
+			$data = $request->all();
+			if($request->new_password == $request->confirm_password){
+				// $data = $request->user()->id;
+				// Profile::whereuser_id($user_id)->first();
+				// Hash::make($request->new_password);
+				$user = $request->user();
+				$user->password = Hash::make($request->new_password);
+				$user->save();
+			}else{
+				$status = false;
+				$message = "Your new_password and confirm_password does not match";
+			}
+            return $this->sendResult($message,$data,$errors,$status);
+	}
+	
+	
     
     /************************************************************************************
      * get temp profile G
