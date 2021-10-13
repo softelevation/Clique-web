@@ -1787,7 +1787,7 @@ class LoginController extends Controller
 					UserPaymentHistory::insert(array(
 										'user_id'=>$user_id,'charge_id'=>$data->id,
 										'amount'=>$data->amount,'status'=>$data->status,
-										'is_refund'=>0
+										'is_refund'=>0,'subscription'=>$request->subscription
 					));
 				}
 			}else if($request->payment_type == 'A'){
@@ -1797,7 +1797,7 @@ class LoginController extends Controller
 					UserPaymentHistory::insert(array(
 										'user_id'=>$user_id,'charge_id'=>$request->transactionId,
 										'amount'=>$request['amount'],'status'=>'succeeded',
-										'is_refund'=>0
+										'is_refund'=>0,'subscription'=>$request->subscription
 					));
 				}else{
 					$status = false;
