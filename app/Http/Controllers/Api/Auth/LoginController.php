@@ -1771,26 +1771,40 @@ class LoginController extends Controller
 		
 		$errors = "";
         $data = [];
-        $message = "";
+		$status = true;
+        $message = "Payment successfully";
 		try{
 			$user_id = $request['user_id'];
 			$userdata = User::find($user_id);
-			$data = $this->createCharge(array(
-								'card_no'=>$request['card_no'],'exp_month'=>$request['exp_month']
-								,'exp_year'=>$request['exp_year'],'cvc'=>$request['cvc'],
-								'name'=>$request['name'],'email'=>$userdata->email,'amount'=>$request['amount'],
+			if($request->payment_type == 'S'){
+				$data = $this->createCharge(array(
+									'card_no'=>$request['card_no'],'exp_month'=>$request['exp_month']
+									,'exp_year'=>$request['exp_year'],'cvc'=>$request['cvc'],
+									'name'=>$request['name'],'email'=>$userdata->email,'amount'=>$request['amount'],
+						));
+				if(isset($data->status) && $data->status == 'succeeded'){
+					Profile::where('user_id',$user_id)->update(array('is_pro'=>'1'));
+					UserPaymentHistory::insert(array(
+										'user_id'=>$user_id,'charge_id'=>$data->id,
+										'amount'=>$data->amount,'status'=>$data->status,
+										'is_refund'=>0
 					));
-			if(isset($data->status) && $data->status == 'succeeded'){
-				Profile::where('user_id',$user_id)->update(array('is_pro'=>'1'));
-				UserPaymentHistory::insert(array(
-									'user_id'=>$user_id,'charge_id'=>$data->id,
-									'amount'=>$data->amount,'status'=>$data->status,
-									'is_refund'=>0
-				));
+				}
+			}else if($request->payment_type == 'A'){
+				$data = $this->subscription_curl($request->transactionReceipt);
+				if($data->status == 21007){
+					Profile::where('user_id',$user_id)->update(array('is_pro'=>'1'));
+					UserPaymentHistory::insert(array(
+										'user_id'=>$user_id,'charge_id'=>$request->transactionId,
+										'amount'=>$request['amount'],'status'=>'succeeded',
+										'is_refund'=>0
+					));
+				}else{
+					$status = false;
+					$message = "Your transaction Receipt is incorrect";
+				}
 			}
-			$message = "Payment successfully";
 			$errors= "";
-			$status = true;
 			return $this->sendResult($message,$data,$errors,$status);
 		}catch(\Exception $e){
 			$status = false;

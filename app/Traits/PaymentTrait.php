@@ -91,4 +91,19 @@ trait PaymentTrait
         // return $charge;
 		return $stripe_charge;
     }
+	
+	public function subscription_curl($receiptbytes){
+		// $applesharedsecret = "applesecretfromyourdevaccount";
+		// $receiptbytes      = "......applereceipt.......";
+		$appleurl          = "https://buy.itunes.apple.com/verifyReceipt"; // for production
+		// use https://sandbox.itunes.apple.com/verifyReceipt for testing with sandbox receipt
+		$request = json_encode(array("receipt-data" => $receiptbytes,"password"=>'0792494bdb014f29b13863640e35111a','exclude-old-transactions'=>true));
+		$ch = curl_init($appleurl);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+		$jsonresult = curl_exec($ch);
+		curl_close($ch);
+		return json_decode($jsonresult);
+	}
 }
