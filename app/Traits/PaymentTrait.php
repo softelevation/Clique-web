@@ -92,6 +92,7 @@ trait PaymentTrait
 		return $stripe_charge;
     }
 	
+	
 	public function subscription_curl($receiptbytes){
 		// $applesharedsecret = "applesecretfromyourdevaccount";
 		// $receiptbytes      = "......applereceipt.......";
