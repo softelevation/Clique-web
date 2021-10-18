@@ -1821,13 +1821,21 @@ class LoginController extends Controller
         $user_id = $request['user_id'];
 		$data = User::where('id','=',$user_id)->first();
 		$data_is_pro = $data->profile->is_pro;
-		if(count($request->all()) == 2){
+		if(count($request->all()) == 3){
 			if($request->type == 'social'){
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','social')->pluck('icone_id');
-				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
+				$data = Icone::whereNotIn('id',$profileIcone->toArray());
+				if($request->deviceType == 'I'){
+					$data = $data->where('is_pro','0');
+				}
+				$data = $data->get();
 			}else{
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','business')->pluck('icone_id');
-				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
+				$data = Icone::whereNotIn('id',$profileIcone->toArray());
+				if($request->deviceType == 'I'){
+					$data = $data->where('is_pro','0');
+				}
+				$data = $data->get();
 			}
 			$data_array = array();
 			$data_array_music['title'] = 'music'; 
