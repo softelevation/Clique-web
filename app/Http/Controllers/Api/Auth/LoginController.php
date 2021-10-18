@@ -1824,18 +1824,10 @@ class LoginController extends Controller
 		if(count($request->all()) == 3){
 			if($request->type == 'social'){
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','social')->pluck('icone_id');
-				$data = Icone::whereNotIn('id',$profileIcone->toArray());
-				if($request->deviceType == 'I'){
-					$data = $data->where('is_pro','0');
-				}
-				$data = $data->get();
+				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
 			}else{
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','business')->pluck('icone_id');
-				$data = Icone::whereNotIn('id',$profileIcone->toArray());
-				if($request->deviceType == 'I'){
-					$data = $data->where('is_pro','0');
-				}
-				$data = $data->get();
+				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
 			}
 			$data_array = array();
 			$data_array_music['title'] = 'music'; 
@@ -1845,7 +1837,7 @@ class LoginController extends Controller
 			$data_array_more['title'] = 'more';
 			
 			foreach($data as $dat){
-				if($data_is_pro){
+				if($data_is_pro || $request->deviceType == 'I'){
 					$dat->is_pro = 0;
 				}
 				if($dat->category == 'social_media'){
