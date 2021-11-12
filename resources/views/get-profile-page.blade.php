@@ -277,9 +277,11 @@
 									
 									<div class="row row-icone-material">
 										@foreach($icone_socials as $icone_social)
-										<div class="col-md-3">
-											<a href="{{$icone_social->link}}" target="_blank"><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
-										</div>
+											@if($icone_social->fade_out)
+												<div class="col-md-3">
+													<a href="{{$icone_social->link}}" target="_blank"><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
+												</div>
+											@endif
 										@endforeach
 									</div>
 								</center>

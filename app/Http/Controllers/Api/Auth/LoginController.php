@@ -1777,19 +1777,18 @@ class LoginController extends Controller
 		try{
 			$input = JWTAuth::toUser();
 			$profileIcone = ProfileIcone::find($request->id);
-			
-			$ProfileIconeCheck = ProfileIcone::where('profile_id',$profileIcone->profile_id)->where('fade_out',0)->first();
-			if($ProfileIconeCheck){
-				if($profileIcone->fade_out){
-					ProfileIcone::where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>1));
+				$ProfileIconeCheck = ProfileIcone::where('profile_id',$profileIcone->profile_id)->where('type',$profileIcone->type)->where('fade_out',0)->first();
+				if($ProfileIconeCheck){
+					if($profileIcone->fade_out){
+						ProfileIcone::where('profile_id',$profileIcone->profile_id)->where('type',$profileIcone->type)->update(array('fade_out'=>1));
+					}else{
+						ProfileIcone::where('id',$request->id)->update(array('fade_out'=>1));
+						ProfileIcone::where('id','!=',$request->id)->where('profile_id',$profileIcone->profile_id)->where('type',$profileIcone->type)->update(array('fade_out'=>0));
+					}
 				}else{
-					ProfileIcone::where('id',$request->id)->update(array('fade_out'=>1));
-					ProfileIcone::where('id','!=',$request->id)->where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>0));
+						ProfileIcone::where('id','!=',$request->id)->where('type',$profileIcone->type)->where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>0));
 				}
-			}else{
-					ProfileIcone::where('id','!=',$request->id)->where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>0));
-			}
-			return $this->sendResult($message,$data,$errors,$status);
+				return $this->sendResult($message,$data,$errors,$status);
 		}catch(\Exception $e){
 			$status = false;
 			$message = $e->getMessage();
@@ -1806,6 +1805,28 @@ class LoginController extends Controller
 		try{
 			$user = JWTAuth::toUser();
 			$data = Carditems::select("*")->where('assign_user_id', $user->id)->get();
+			return $this->sendResult($message,$data,$errors,$status);
+		}catch(\Exception $e){
+			$status = false;
+			$message = $e->getMessage();
+            return $this->sendResult($message,$data,$errors,$status);
+        }
+	}
+	
+	public function activeCard(Request $request){
+		$errors = "";
+        $data = [];
+		$status = true;
+        $message = "Card active successfully";
+		try{
+			$user = JWTAuth::toUser();
+			$myCard = Carditems::find($request->id);
+			if($myCard->active_date){
+				$message = "Card deactive successfully";
+				$myCard->update(array('active_date'=>null));
+			}else{
+				$myCard->update(array('active_date'=>Carbon::now()));
+			}
 			return $this->sendResult($message,$data,$errors,$status);
 		}catch(\Exception $e){
 			$status = false;

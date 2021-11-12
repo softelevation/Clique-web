@@ -101,6 +101,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	
 	Route::post('activeSocialAccount', 'Api\Auth\LoginController@activeSocialAccount');
 	Route::get('assigned-cards', 'Api\Auth\LoginController@assignedCards');
+	Route::post('active-card', 'Api\Auth\LoginController@activeCard');
 	
 	Route::post('add-member', 'Api\Auth\LoginController@addMember');
 	Route::post('update-member/{id}', 'Api\Auth\LoginController@updateMember');
