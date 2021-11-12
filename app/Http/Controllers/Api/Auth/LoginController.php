@@ -1371,17 +1371,17 @@ class LoginController extends Controller
                     //if($carddata['assign_user_id'] == 0 && $carddata['assign_user_id'] == "" && $carddata['order_id'] != null)
                     if($carddata['assign_user_id'] == 0 && $carddata['assign_user_id'] == "")
                     {
-                        $carddatanew = Carditems::select("*")
-                                    ->where('assign_user_id', $request['user_id'])
-                                    ->get();
-                        $wordCount = $carddatanew->count();
-                        if($wordCount > 0){
-                            $errors= "";
-                            $status = false;
-                            $message = "This user already assigned another card Id";
+                        // $carddatanew = Carditems::select("*")
+                                    // ->where('assign_user_id', $request['user_id'])
+                                    // ->get();
+                        // $wordCount = $carddatanew->count();
+                        // if($wordCount > 0){
+                            // $errors= "";
+                            // $status = false;
+                            // $message = "This user already assigned another card Id";
 
-                        }
-                        else{
+                        // }
+                        // else{
                             $current_date = date('Y-m-d H:i:s');
                             $carddata->assign_user_id = $request['user_id'];
                             $carddata->user_id = $request['user_id'];
@@ -1391,7 +1391,7 @@ class LoginController extends Controller
                             $errors= "";
                             $status = true;
                             $message = "Card Assign to User";
-                        }
+                        // }
 
                     }elseif($carddata['assign_user_id'] == $request['user_id']){
 

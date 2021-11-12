@@ -14,6 +14,7 @@ Route::get('order/thank-you/{order_id}','PagesController@orderthankyou');
 
 
 
+Route::get('user/profile/{card_id}/{id}','PagesController@get_profile_with_card');
 Route::get('profile/{id}','PagesController@get_profile')->name('user.main');
 Route::get('profile','PagesController@get_profile')->name('user.main');
 

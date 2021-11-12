@@ -16,6 +16,7 @@ use App\Profile;
 use App\SocialNetwork;
 use App\ProfileIcone;
 use App\ProfileHospital;
+use App\Carditems;
 use App\TempSocialNetwork;
 use Illuminate\Support\Facades\Storage;
 use App\Mail\placeorder;
@@ -175,7 +176,40 @@ class PagesController extends Controller
         'social_mtype_e_link'
         ));
     }
-
+	
+	public function get_profile_with_card($card_id, $id)
+    {
+		$carditem = Carditems::where('card_id',$card_id)->first();
+		if($carditem && $carditem->sell_date){
+			$decrypted = base64_decode($id);
+			$user = User::find($decrypted);
+			$my_connections = Usercontact::where('user_id',$user->id)->count() + 1;
+			$user_image = '/user/default.png';
+			if($user->profile->account_flag != 'hospital'){
+				$icone_socials = ProfileIcone::with('icone')->where('profile_id',$user->profile->id)->where('type',$user->profile->account_flag)->get();
+				return view('get-profile-page', compact('id', 'user', 'my_connections', 'icone_socials'));
+			}else{
+				$icone_socials = ProfileHospital::where('profile_id',$user->profile->id)->where('by_default',1)->first();
+				$current_date = Carbon::now()->toDateString();
+				$to_date = Carbon::createFromFormat('m/d/Y', $icone_socials->date_of_birth)->toDateString();
+				$datediff = strtotime($current_date) - strtotime($to_date);
+				$age_datediff = round(($datediff / (60 * 60 * 24))/365);
+				if($icone_socials){
+					$user_image = $icone_socials->photo;
+				}
+				if($icone_socials->uplod_file){
+					$icone_socials->uplod_file = explode(',',$icone_socials->uplod_file);
+				}else{
+					$icone_socials->uplod_file = array();
+				}
+				return view('get-profile-hospital-page', compact('id', 'user', 'my_connections', 'age_datediff', 'user_image', 'icone_socials'));
+			}
+		}else{
+			print_r("This is invalid request");
+			die;
+		}
+	}
+	
     public function get_profile($id="", Request $request)
     {
         //dd($request);
