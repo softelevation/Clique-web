@@ -180,7 +180,7 @@ class PagesController extends Controller
 	public function get_profile_with_card($card_id, $id)
     {
 		$carditem = Carditems::where('card_id',$card_id)->first();
-		if($carditem && $carditem->sell_date){
+		if($carditem && $carditem->active_date){
 			$decrypted = base64_decode($id);
 			$user = User::find($decrypted);
 			$my_connections = Usercontact::where('user_id',$user->id)->count() + 1;
