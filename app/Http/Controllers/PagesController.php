@@ -205,8 +205,7 @@ class PagesController extends Controller
 				return view('get-profile-hospital-page', compact('id', 'user', 'my_connections', 'age_datediff', 'user_image', 'icone_socials'));
 			}
 		}else{
-			print_r("This is invalid request");
-			die;
+			return abort(404);
 		}
 	}
 	
