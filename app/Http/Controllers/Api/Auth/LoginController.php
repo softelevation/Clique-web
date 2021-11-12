@@ -1723,7 +1723,7 @@ class LoginController extends Controller
 		$res3['my_connections'] = $my_connections + 1;
 		$res3['is_card_assign'] = Carditems::where('assign_user_id',$user_id)->count();
 		
-		$profile_icones = ProfileIcone::with('icone')->where('profile_id',$result2->id)->get();
+		$profile_icones = ProfileIcone::with('icone')->where('profile_id',$result2->id)->orderBy('fade_out', 'desc')->get();
 		$social_icone = array();
 		$business_icone = array();
 		foreach($profile_icones as $profile_icone){
