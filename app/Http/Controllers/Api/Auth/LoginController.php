@@ -1797,7 +1797,7 @@ class LoginController extends Controller
         }
 	}
 	
-	public function getcard(Request $request){
+	public function assignedCards(Request $request){
 		
 		$errors = "";
         $data = [];
