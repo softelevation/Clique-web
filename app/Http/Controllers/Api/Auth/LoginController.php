@@ -1778,12 +1778,13 @@ class LoginController extends Controller
 			$input = JWTAuth::toUser();
 			$profileIcone = ProfileIcone::find($request->id);
 			
-			$ProfileIconeCheck = ProfileIcone::where('profile_id',$profileIcone->profile_id)->where('fade_out',0)->first();
-			if($ProfileIconeCheck){
-				ProfileIcone::where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>1));
-			}else{
+			// $ProfileIconeCheck = ProfileIcone::where('profile_id',$profileIcone->profile_id)->where('fade_out',0)->first();
+			// if($ProfileIconeCheck){
+				// ProfileIcone::where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>1));
+			// }else{
+				ProfileIcone::where('id',$request->id)->update(array('fade_out'=>1));
 				ProfileIcone::where('id','!=',$request->id)->where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>0));
-			}
+			// }
 			return $this->sendResult($message,$data,$errors,$status);
 		}catch(\Exception $e){
 			$status = false;
