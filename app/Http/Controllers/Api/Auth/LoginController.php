@@ -1767,6 +1767,31 @@ class LoginController extends Controller
         return $this->sendResult($message,$data,$errors,$status);
     }
 	
+	
+	public function activeSocialAccount(Request $request){
+		
+		$errors = "";
+        $data = [];
+		$status = true;
+        $message = "Your social account is activated on your social profile";
+		try{
+			$input = JWTAuth::toUser();
+			$profileIcone = ProfileIcone::find($request->id);
+			$ProfileIconeCheck = ProfileIcone::where('profile_id',$profileIcone->profile_id)->where('fade_out',0)->first();
+			if($ProfileIconeCheck){
+				ProfileIcone::where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>1));
+			}else{
+				ProfileIcone::where('id','!=',$request->id)->where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>0));
+			}
+			return $this->sendResult($message,$data,$errors,$status);
+		}catch(\Exception $e){
+			$status = false;
+			$message = $e->getMessage();
+            return $this->sendResult($message,$data,$errors,$status);
+        }
+	}
+	
+	
 	public function makepayment(Request $request){
 		
 		$errors = "";

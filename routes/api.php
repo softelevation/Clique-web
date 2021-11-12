@@ -99,6 +99,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	Route::post('nearbyusers', 'Api\Auth\LoginController@nearbyusers');
 	Route::post('account-flag', 'Api\Auth\LoginController@accountFlag');
 	
+	Route::post('activeSocialAccount', 'Api\Auth\LoginController@activeSocialAccount');
+	
 	Route::post('add-member', 'Api\Auth\LoginController@addMember');
 	Route::post('update-member/{id}', 'Api\Auth\LoginController@updateMember');
 	Route::post('delete-member', 'Api\Auth\LoginController@deleteMember');
