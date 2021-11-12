@@ -1779,9 +1779,6 @@ class LoginController extends Controller
 			$profileIcone = ProfileIcone::find($request->id);
 			
 			$ProfileIconeCheck = ProfileIcone::where('profile_id',$profileIcone->profile_id)->where('fade_out',0)->first();
-			// if($ProfileIconeCheck){
-				// ProfileIcone::where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>1));
-			// }else{
 			if($ProfileIconeCheck){
 				if($profileIcone->fade_out){
 					ProfileIcone::where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>1));
@@ -1792,6 +1789,23 @@ class LoginController extends Controller
 			}else{
 					ProfileIcone::where('id','!=',$request->id)->where('profile_id',$profileIcone->profile_id)->update(array('fade_out'=>0));
 			}
+			return $this->sendResult($message,$data,$errors,$status);
+		}catch(\Exception $e){
+			$status = false;
+			$message = $e->getMessage();
+            return $this->sendResult($message,$data,$errors,$status);
+        }
+	}
+	
+	public function getcard(Request $request){
+		
+		$errors = "";
+        $data = [];
+		$status = true;
+        $message = "My all card";
+		try{
+			$user = JWTAuth::toUser();
+			$data = Carditems::select("*")->where('assign_user_id', $user->id)->get();
 			return $this->sendResult($message,$data,$errors,$status);
 		}catch(\Exception $e){
 			$status = false;
