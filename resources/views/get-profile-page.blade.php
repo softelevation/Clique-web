@@ -279,7 +279,11 @@
 										@foreach($icone_socials as $icone_social)
 											@if($icone_social->fade_out)
 												<div class="col-md-3">
-													<a href="{{$icone_social->link}}" target="_blank"><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
+													@if($icone_social->icone_id == '24')
+														<a href="{{url($icone_social->username)}}" download><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
+														@else
+														<a href="{{$icone_social->link}}" target="_blank"><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
+													@endIf
 												</div>
 											@endif
 										@endforeach
