@@ -1956,7 +1956,11 @@ class LoginController extends Controller
 						if(substr_count($request->link, 'tel')){
 							$link_url = $request->link;
 						}else{
-							$link_url = 'tel:'.$request->link;
+							if(strpos($request->link, '+') !== false){
+								$link_url = 'tel:'.$request->link;
+							}else{
+								$link_url = 'tel:+91'.$request->link;
+							}
 						}
 					}else if($request->id == 2){
 						$contact_link = $request->link;
