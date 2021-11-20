@@ -1945,9 +1945,9 @@ class LoginController extends Controller
 			$message = "Icon list";
 		}else{
 			if($request->action && $request->action == 'delete'){
-				$my_pro_icoe = ProfileIcone::where('profile_id',$data->profile->id)->where('icone_id',$request->id)->first();
-				if($my_pro_icoe){
-					$my_pro_icoe->delete();
+				$check_profileIcone = ProfileIcone::find($request->id);
+				if($check_profileIcone){
+					$check_profileIcone->delete();
 				}
 				$message = "Icon delete successfully";
 			}else{
