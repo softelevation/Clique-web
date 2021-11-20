@@ -1890,7 +1890,7 @@ class LoginController extends Controller
         $user_id = $request['user_id'];
 		$data = User::where('id','=',$user_id)->first();
 		$data_is_pro = $data->profile->is_pro;
-		if(count($request->all()) == 3){
+		if(count($request->all()) == 3 && $request->action != 'delete'){
 			if($request->type == 'social'){
 				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','social')->pluck('icone_id');
 				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
