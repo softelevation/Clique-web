@@ -2315,6 +2315,7 @@ class LoginController extends Controller
                 $carditems->is_purchase = 1;
                 $carditems->is_sell =  0;
                 $carditems->purchase_date = now();
+                $carditems->active_date = now();
                 $carditems->save();
                 
                 $message = "Card added Successfully";
