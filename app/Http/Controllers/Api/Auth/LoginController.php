@@ -2169,13 +2169,14 @@ class LoginController extends Controller
 				}else{
 						$link_url = $request->link;
 				}
-				if($Profile_icone){
+				if($request->action == 'update'){
 					$message = "Icon update successfully";
 					$profile_icone_data = array('link'=>$link_url,'username'=>$request->link,'contact_link'=>$contact_link);
 					if($request->file_path){
 						$profile_icone_data['file_path'] = $request->file_path;
 					}
-					$Profile_icone->update($profile_icone_data);
+					ProfileIcone::where('id',$request->socialId)->update($profile_icone_data);
+					// $Profile_icone->update($profile_icone_data);
 				}else{
 					$message = "Icon add successfully";
 					$profile_icone_data = array('profile_id'=>$data->profile->id,'icone_id'=>$request->id,'type'=>$request->type,'link'=>$link_url,'username'=>$request->link,'contact_link'=>$contact_link);
