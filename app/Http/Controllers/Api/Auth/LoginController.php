@@ -1892,11 +1892,13 @@ class LoginController extends Controller
 		$data_is_pro = $data->profile->is_pro;
 		if(count($request->all()) == 3 && $request->action != 'delete'){
 			if($request->type == 'social'){
-				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','social')->pluck('icone_id');
-				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
+				// $profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','social')->pluck('icone_id');
+				// $data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
+				$data = Icone::all();
 			}else{
-				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','business')->pluck('icone_id');
-				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
+				// $profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type','business')->pluck('icone_id');
+				// $data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
+				$data = Icone::all();
 			}
 			$data_array = array();
 			$data_array_music['title'] = 'music'; 
@@ -2183,8 +2185,9 @@ class LoginController extends Controller
 					ProfileIcone::insert($profile_icone_data);
 				}
 			}
-				$profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type',$request->type)->pluck('icone_id');
-				$data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
+				// $profileIcone = ProfileIcone::where('profile_id',$data->profile->id)->where('type',$request->type)->pluck('icone_id');
+				// $data = Icone::whereNotIn('id',$profileIcone->toArray())->get();
+				$data = Icone::all();
 		}
 		$errors= "";
 		$status = true;
