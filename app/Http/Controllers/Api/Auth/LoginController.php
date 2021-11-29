@@ -1724,6 +1724,7 @@ class LoginController extends Controller
 		$res3['is_card_assign'] = Carditems::where('assign_user_id',$user_id)->count();
 		
 		$profile_icones = ProfileIcone::with('icone')->where('profile_id',$result2->id)->orderBy('fade_out', 'desc')->get();
+		$activeAccount = ProfileIcone::with('icone')->where('profile_id',$result2->id)->where('fade_out',1)->first();
 		$social_icone = array();
 		$business_icone = array();
 		foreach($profile_icones as $profile_icone){
@@ -1756,6 +1757,7 @@ class LoginController extends Controller
 		
 		$res3['social'] = $social_icone;
 		$res3['business'] = $business_icone;
+		$res3['activeAccount'] = $activeAccount;
         $message = "Get Profile Successfully";
         $status = true;
         $data = [
