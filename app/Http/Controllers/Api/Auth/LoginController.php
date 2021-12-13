@@ -1976,12 +1976,12 @@ class LoginController extends Controller
 							}
 						}
 					}else if($request->id == 2){
-						$contact_link = $request->link;
 						if(substr_count($request->link, 'mailto')){
 							$link_url = $request->link;
 						}else{
 							$link_url = 'mailto:'.$request->link;
 						}
+						$contact_link = $link_url;
 					}else if($request->id == 3){
 						if(substr_count($request->link, 'story.snapchat.com')){
 							$link_url = $request->link;
