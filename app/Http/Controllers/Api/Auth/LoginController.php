@@ -1916,9 +1916,9 @@ class LoginController extends Controller
 			$data_array_more['title'] = 'more';
 			
 			foreach($data as $dat){
-				// if($data_is_pro || $request->deviceType == 'I'){
-					// $dat->is_pro = 0;
-				// }
+				if($data_is_pro || $request->deviceType == 'I'){
+					$dat->is_pro = 0;
+				}
 				if($dat->category == 'social_media'){
 					$data_array_social_media['data'][] = $dat;
 				}
