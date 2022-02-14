@@ -1387,6 +1387,7 @@ class LoginController extends Controller
                             $carddata->user_id = $request['user_id'];
                             $carddata->is_sell = 1;
                             $carddata->sell_date = $current_date;
+							$carddata->active_date = Carbon::now();
                             $carddata->save();
                             $errors= "";
                             $status = true;
