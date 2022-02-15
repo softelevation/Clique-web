@@ -1915,6 +1915,7 @@ class LoginController extends Controller
 			$data_array_social_media['title'] = 'social media'; 
 			$data_array_contact['title'] = 'contact'; 
 			$data_array_payment['title'] = 'payment'; 
+			$data_array_nft['title'] = "crypto currency's and nft";
 			$data_array_more['title'] = 'more';
 			
 			foreach($data as $dat){
@@ -1932,6 +1933,9 @@ class LoginController extends Controller
 				}
 				if($dat->category == 'payment'){
 					$data_array_payment['data'][] = $dat;
+				}
+				if($dat->category == 'nft'){
+					$data_array_nft['data'][] = $dat;
 				}
 				if($dat->category == 'more'){
 					$data_array_more['data'][] = $dat;
@@ -1951,6 +1955,9 @@ class LoginController extends Controller
 			}
 			if(isset($data_array_more['data'])){
 				array_push($data_array,$data_array_more);
+			}
+			if(isset($data_array_nft['data'])){
+				array_push($data_array,$data_array_nft);
 			}
 			$data = $data_array;
 			
