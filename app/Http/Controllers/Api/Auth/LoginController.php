@@ -1789,10 +1789,10 @@ class LoginController extends Controller
 				// $ProfileIconeCheck = ProfileIcone::where('profile_id',$profileIcone->profile_id)->where('type',$profileIcone->type)->where('fade_out',0)->first();
 				// if($ProfileIconeCheck){
 					if($profileIcone->fade_out){
-						ProfileIcone::where('profile_id',$profileIcone->profile_id)->where('type',$profileIcone->type)->update(array('fade_out'=>0,'opacity'=>1));
+						ProfileIcone::where('profile_id',$profileIcone->profile_id)->where('type',$profileIcone->type)->update(array('fade_out'=>0));
 					}else{
-						ProfileIcone::where('id',$request->id)->update(array('fade_out'=>1,'opacity'=>1));
-						ProfileIcone::where('id','!=',$request->id)->where('profile_id',$profileIcone->profile_id)->where('type',$profileIcone->type)->update(array('fade_out'=>0,'opacity'=>0));
+						ProfileIcone::where('id',$request->id)->update(array('fade_out'=>1));
+						ProfileIcone::where('id','!=',$request->id)->where('profile_id',$profileIcone->profile_id)->where('type',$profileIcone->type)->update(array('fade_out'=>0));
 					}
 					
 				// }else{
