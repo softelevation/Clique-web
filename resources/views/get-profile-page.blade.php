@@ -44,7 +44,7 @@
     max-width: 414px;
     margin: 0 auto;
     z-index: 999;
-	height: 660px;
+	height: 100%;
     overflow: scroll;
 }
 		
