@@ -175,6 +175,9 @@
 		.join_button {margin-left: 25px;}
 		.image-icone {width: 62px;}
     }
+	.rounded-circle {
+		width: 100%;
+	}
 	
 	
 @media (max-width: 768px){
@@ -193,10 +196,7 @@
     max-width: 75%; }
 	.user-info-app {
     width: 100%; } 
-	
-.rounded-circle {
-    width: 100% !important;
-}
+
 .row.header-top .col-md-9 {
     padding-left: 0;
 }
