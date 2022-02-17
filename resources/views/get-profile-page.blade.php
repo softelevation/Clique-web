@@ -123,6 +123,7 @@
 .image-icone {
     width: 100%;
     margin-bottom: 10px;
+	border-radius: 15px;
 }
 	.row.row-icone-material {margin-top: 15px;}
 	.rows {position: absolute;}
@@ -194,7 +195,7 @@
     width: 100%; } 
 	
 .rounded-circle {
-    width: 100%;
+    width: 100% !important;
 }
 .row.header-top .col-md-9 {
     padding-left: 0;
