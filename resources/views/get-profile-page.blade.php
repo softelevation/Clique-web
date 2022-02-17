@@ -161,6 +161,7 @@
 } 
 .row.header-top {
     margin-top: 15px;
+	align-items: center;
 }
 	.user-info-app-name{width: 100%; margin-bottom: 0;}
 	.tap-link-redirect{color: #fff;}
