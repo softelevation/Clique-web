@@ -2068,14 +2068,12 @@ class LoginController extends Controller
 						}
 						$contact_link = 'https://open.spotify.com/playlist/'.ltrim($link_url,'spotify:');
 					}else if($request->id == 16){
-						if(substr_count($request->link, 'facebook.com')){
+						if(substr_count($request->link, 'fb:')){
 							$link_url = $request->link;
-							$link_urls = 'fb://profile?app_scoped_user_id='.$request->link;
 						}else{
-							$link_url = 'https://www.facebook.com/'.$request->link;
-							$link_urls = 'fb://profile?app_scoped_user_id='.$request->link;
+							$link_url = 'fb://profile/'.$request->link;
 						}
-						$contact_link = 'https://www.facebook.com/'.ltrim($link_urls,'fb://profile?app_scoped_user_id=');
+						$contact_link = 'https://www.facebook.com/'.ltrim($link_url,'fb://profile/');
 					}else if($request->id == 17){
 						if(substr_count($request->link, 'https')){
 							$link_url = $request->link;
