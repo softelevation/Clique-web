@@ -121,9 +121,9 @@
 		color: #707070;
 	}
 .image-icone {
-    width: 100%;
-    margin-bottom: 10px;
-	border-radius: 15px;
+    margin-bottom: 17px;
+    border-radius: 15px;
+    height: 80px;
 }
 	.row.row-icone-material {margin-top: 15px;}
 	.rows {position: absolute;}
