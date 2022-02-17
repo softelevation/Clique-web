@@ -2071,9 +2071,9 @@ class LoginController extends Controller
 						if(substr_count($request->link, 'fb:')){
 							$link_url = $request->link;
 						}else{
-							$link_url = 'fb://profile/'.$request->link;
+							$link_url = 'fb://profile?app_scoped_user_id='.$request->link;
 						}
-						$contact_link = 'https://www.facebook.com/'.ltrim($link_url,'fb://profile/');
+						$contact_link = 'https://www.facebook.com/'.ltrim($link_url,'fb://profile?app_scoped_user_id=');
 					}else if($request->id == 17){
 						if(substr_count($request->link, 'https')){
 							$link_url = $request->link;
