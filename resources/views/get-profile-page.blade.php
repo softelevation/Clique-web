@@ -142,7 +142,7 @@
     display: flex;
 		}
 	p.connection {
-    padding-left: 20px;
+	margin-top: 8px;
     font-weight: bold;
 }
 	.main-header {
@@ -156,12 +156,13 @@
 		overflow: hidden !important;
 		-webkit-box-orient: vertical;
 		-webkit-line-clamp: 3;
+		margin-top: 8px;
 		margin-bottom: 0;
 } 
 .row.header-top {
     margin-top: 15px;
 }
-	.user-info-app-name{padding-left: 20px;width: 100%; margin-bottom: 0;}
+	.user-info-app-name{width: 100%; margin-bottom: 0;}
 	.tap-link-redirect{color: #fff;}
 	@media (max-width: 800px) {
 		.main-header {
@@ -193,10 +194,7 @@
     max-width: 75%; }
 	.user-info-app {
     width: 100%; } 
-	.user-info-app-name  , .user-info-app , p.connection{
-    padding-left: 0;
-  
-}
+	
 .rounded-circle {
     width: 100%;
 }
