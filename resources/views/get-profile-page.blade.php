@@ -51,11 +51,10 @@
 	.download-app-holder {
 		
 		width: 100%;
-		height: 286px;
 		
 		/* Button Gradient */
 		background: linear-gradient(265.69deg, #E866B6 -28.53%, #6961FF 127.79%);
-		box-shadow: 5px 5px 45px rgba(0, 0, 0, 0.15);
+		// box-shadow: 5px 5px 45px rgba(0, 0, 0, 0.15);
 	}
 .download-app-link {
     /* background: rgba(255,255,255,0.4); */
@@ -88,7 +87,7 @@
 		left: 0px;
 		// top: 203px;
 		background: #F3EEFA;
-		box-shadow: 0px -8px 12px rgba(86, 40, 164, 0.3);
+		// box-shadow: 0px -8px 12px rgba(86, 40, 164, 0.3);
 		border-radius: 40px 40px 0px 0px;
 	}
 	.add-to-contacts{
@@ -148,7 +147,7 @@
 }
 	.main-header {
         background: black;text-align: center;height: 40px;font-size: 24px;}
-	.download-app-body {margin-top: 60px;}
+	// .download-app-body {margin-top: 60px;}
 	.user-info-app {
        font-size: 14px;
 		// width: 244px;
