@@ -173,7 +173,6 @@
 		}
 		
 		.join_button {margin-left: 25px;}
-		.image-icone {width: 62px;}
     }
 	.rounded-circle {
 		width: 100%;
