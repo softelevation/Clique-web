@@ -86,7 +86,7 @@
 		width: 100%;
 		height: 693px;
 		left: 0px;
-		top: 203px;
+		// top: 203px;
 		background: #F3EEFA;
 		box-shadow: 0px -8px 12px rgba(86, 40, 164, 0.3);
 		border-radius: 40px 40px 0px 0px;
@@ -150,15 +150,14 @@
         background: black;text-align: center;height: 40px;font-size: 24px;}
 	.download-app-body {margin-top: 60px;}
 	.user-info-app {
-       font-size: 15px;
-    width: 244px;
-    padding-left: 20px;
-    display: -webkit-box;
-    overflow: hidden !important;
-    
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    margin-bottom: 0;
+       font-size: 14px;
+		// width: 244px;
+		// padding-left: 20px;
+		// display: -webkit-box;
+		overflow: hidden !important;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+		margin-bottom: 0;
 } 
 .row.header-top {
     margin-top: 15px;
@@ -174,9 +173,6 @@
 			padding: 7px 0px;
 		}
 		
-		.user-info-app {
-			font-size: 15px;
-		}
 		.join_button {margin-left: 25px;}
 		.image-icone {width: 62px;}
     }
