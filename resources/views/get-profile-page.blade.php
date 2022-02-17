@@ -293,20 +293,27 @@
 <script>
 
 	
-	const myFunc = () => {
-		console.log('xxxxxxxxxxx);
-		   window.open('https://google.com');
-		}
+	// const myFunc = () => {
+		// console.log('xxxxxxxxxxx);
+		   // window.open('https://google.com');
+		// }
 	// function myWebOpen(url){
 	  // var win = window.open('https://google.com');
 	  // win.onerror = function () {
 		// win.RunCallbackFunction = myFunc(url);
 	// }
-	const myWebOpen = (url) => {
-		var win = window.open(url);
-		win.onerror = function () {
-			win.RunCallbackFunction = myFunc;
-		};
+	// const myWebOpen = (url) => {
+		// var win = window.open(url);
+		// win.onerror = function () {
+			// win.RunCallbackFunction = myFunc;
+		// };
+	// }
+	
+	function myWebOpen (url) {
+		var appWindow = window.open(url,"_blank");
+		setTimeout( function () {if (appWindow) {
+			appWindow.location ="https://google.com";
+		}},1000);
 	}
 
 $(document).ready(function(){
