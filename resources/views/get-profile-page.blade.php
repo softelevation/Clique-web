@@ -270,7 +270,7 @@
 													@if($icone_social->icone_id == '24')
 														<a href="{{url($icone_social->username)}}" download><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
 														@else
-														<a href="javascipt::void(0)" onClick="myWebOpen('{{$icone_social->link}}')"><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
+														<a href="javascipt::void(0)" onClick="myWebOpen('{{$icone_social->link}}','{{$icone_social->contact_link}}')"><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
 													@endIf
 												</div>
 											@endif
@@ -309,10 +309,10 @@
 		// };
 	// }
 	
-	function myWebOpen (url) {
+	function myWebOpen (url,contact_link) {
 		var appWindow = window.open(url,"_blank");
 		setTimeout( function () {if (appWindow) {
-			appWindow.location ="https://google.com";
+			appWindow.location =contact_link;
 		}},1000);
 	}
 
