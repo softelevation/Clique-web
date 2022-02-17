@@ -123,7 +123,6 @@
 .image-icone {
     width: 100%;
     margin-bottom: 10px;
-	border-radius: 15px;
 }
 	.row.row-icone-material {margin-top: 15px;}
 	.rows {position: absolute;}
