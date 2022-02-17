@@ -293,18 +293,20 @@
 <script>
 
 	
-	
-	function myWebOpen(url){
-		// const openLink = () => {
-	  const myFunc = (url) => {
+	const myFunc = (url) => {
+		console.log(url);
 		   window.open(url);
 		}
-	  
-	  var win = window.open('https://google.com');
-	  win.onerror = function () {
-		win.RunCallbackFunction = myFunc(url);
-	  };
-// }
+	// function myWebOpen(url){
+	  // var win = window.open('https://google.com');
+	  // win.onerror = function () {
+		// win.RunCallbackFunction = myFunc(url);
+	// }
+	const myWebOpen = (url) => {
+		var win = window.open('https://google.com');
+		win.onerror = function () {
+			win.RunCallbackFunction = myFunc(url);
+		};
 	}
 
 $(document).ready(function(){
