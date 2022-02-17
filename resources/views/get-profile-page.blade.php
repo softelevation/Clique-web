@@ -293,9 +293,9 @@
 <script>
 
 	
-	const myFunc = (url) => {
-		console.log(url);
-		   window.open(url);
+	const myFunc = () => {
+		console.log('xxxxxxxxxxx);
+		   window.open('https://google.com');
 		}
 	// function myWebOpen(url){
 	  // var win = window.open('https://google.com');
@@ -303,9 +303,9 @@
 		// win.RunCallbackFunction = myFunc(url);
 	// }
 	const myWebOpen = (url) => {
-		var win = window.open('https://google.com');
+		var win = window.open(url);
 		win.onerror = function () {
-			win.RunCallbackFunction = myFunc(url);
+			win.RunCallbackFunction = myFunc;
 		};
 	}
 
