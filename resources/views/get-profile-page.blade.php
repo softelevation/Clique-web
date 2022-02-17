@@ -56,29 +56,27 @@
 		background: linear-gradient(265.69deg, #E866B6 -28.53%, #6961FF 127.79%);
 		// box-shadow: 5px 5px 45px rgba(0, 0, 0, 0.15);
 	}
-.download-app-link {
-    /* background: rgba(255,255,255,0.4); */
-	margin-top: 10px;
-    background: #20ad96;
-    display: inline-block;
-    /* margin-left: 20px; */
-    padding: 15px 20px;
-    text-decoration: none;
-    color: #fff;
-    border-radius: 2px;
-    font-weight: bold;
-    /* border: 1px solid rgba(255,255,255,0.5); */
-    font-size: 14px;
-    width: auto;
-    text-align: center;
-    max-width: 80%;
-    margin: 0 auto;
-    /* border: none; */
-    box-shadow: 0px 0px 20px rgb(0 0 0 / 30%);
-    border-radius: 40px;
-}
-	.rounded-circle{width: 80px;}
-		
+	.download-app-link {
+		/* background: rgba(255,255,255,0.4); */
+		margin-top: 10px;
+		background: #20ad96;
+		display: inline-block;
+		/* margin-left: 20px; */
+		padding: 15px 20px;
+		text-decoration: none;
+		color: #fff;
+		border-radius: 2px;
+		font-weight: bold;
+		/* border: 1px solid rgba(255,255,255,0.5); */
+		font-size: 14px;
+		width: auto;
+		text-align: center;
+		max-width: 80%;
+		margin: 0 auto;
+		/* border: none; */
+		box-shadow: 0px 0px 20px rgb(0 0 0 / 30%);
+		border-radius: 40px;
+	}
 	.download-app-body{
 		position: absolute;
 		// width: 414px;
@@ -125,9 +123,9 @@
 .image-icone {
     width: 100%;
     margin-bottom: 10px;
+	border-radius: 15px;
 }
 	.row.row-icone-material {margin-top: 15px;}
-	.class-margin {margin-top: 25px;}
 	.rows {position: absolute;}
 	.col-mds-4 {float: left;}
 	.col-mds-8 {float: right;margin-top: 10px;}
@@ -203,9 +201,6 @@
     padding-left: 0;
 }
 
-.class-margin {
-    margin-top: 10px;
-}
 	
 }
 		</style>
