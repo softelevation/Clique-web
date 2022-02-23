@@ -270,7 +270,7 @@
 													@if($icone_social->icone_id == '24')
 														<a href="{{url($icone_social->username)}}" download><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
 														@else
-														<a href="javascipt::void(0)" onClick="myWebOpen('{{$icone_social->link}}','{{$icone_social->contact_link}}')"><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
+														<a href="javascipt::void(0)" onClick="myWebOpen('{{$icone_social->link}}','{{$icone_social->contact_link}}','{{$icone_social->icone_id}}')"><img class="image-icone" src="{{ url($icone_social->icone->url) }}" /></a>
 													@endIf
 												</div>
 											@endif
@@ -293,27 +293,15 @@
 <script>
 
 	
-	// const myFunc = () => {
-		// console.log('xxxxxxxxxxx);
-		   // window.open('https://google.com');
-		// }
-	// function myWebOpen(url){
-	  // var win = window.open('https://google.com');
-	  // win.onerror = function () {
-		// win.RunCallbackFunction = myFunc(url);
-	// }
-	// const myWebOpen = (url) => {
-		// var win = window.open(url);
-		// win.onerror = function () {
-			// win.RunCallbackFunction = myFunc;
-		// };
-	// }
-	
-	function myWebOpen (url,contact_link) {
-		var appWindow = window.open(url,"_blank");
-		setTimeout( function () {if (appWindow) {
-			appWindow.location =contact_link;
-		}},1000);
+	function myWebOpen (url,contact_link,icone_id) {
+		if(icone_id === "1"){
+			window.open(url,"_self")
+		}else{
+			var appWindow = window.open(url,"_blank");
+			setTimeout( function () {if (appWindow) {
+				appWindow.location =contact_link;
+			}},1000);
+		}
 	}
 
 $(document).ready(function(){
